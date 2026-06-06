@@ -150,7 +150,8 @@ services:
       - STORAGE_DIR=/growfoundry-storage
     volumes:
       - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+      - ./pnpm-workspace.yaml:/app/pnpm-workspace.yaml
       - ./turbo.json:/app/turbo.json
       - ./backend:/app/backend
       - ./frontend:/app/frontend
@@ -163,7 +164,7 @@ services:
       - ui_node_modules:/app/packages/ui/node_modules
       - shared-logs:/growfoundry-logs
       - storage-data:/growfoundry-storage
-    command: sh -c 'npm install && npx turbo run build --filter=@growfoundry/shared-schemas --filter=@growfoundry/ui --filter=@growfoundry/dashboard && cd backend && npm run migrate:up && cd .. && npx concurrently -n backend,frontend -c cyan,magenta "npm run dev:backend" "npm run dev:frontend"'
+    command: sh -c 'pnpm install && pnpm exec turbo run build --filter=@growfoundry/shared-schemas --filter=@growfoundry/ui --filter=@growfoundry/dashboard && cd backend && pnpm run migrate:up && cd .. && pnpm exec concurrently -n backend,frontend -c cyan,magenta "pnpm run dev:backend" "pnpm run dev:frontend"'
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true

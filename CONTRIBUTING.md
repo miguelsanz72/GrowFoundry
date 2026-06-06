@@ -93,11 +93,11 @@ We follow an **issue-first workflow**: open or find an issue, get it assigned to
 3. Add tests for your changes (see test README for guidelines)
 4. Run the test suite:
    ```bash
-   npm run test:e2e
+   pnpm run test:e2e
    ```
 5. Run linter:
    ```bash
-   npm run lint
+   pnpm run lint
    ```
 6. Ensure all tests pass and the code is properly formatted
 7. Commit your changes with a descriptive message following the Conventional Commits format:

@@ -12,7 +12,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@growfoundry/dashboard": "*",
+    "@growfoundry/dashboard": "workspace:*",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   },

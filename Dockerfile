@@ -8,7 +8,7 @@
 ARG DENO_VERSION=2.0.6
 FROM denoland/deno:alpine-${DENO_VERSION} AS deno-bin
 
-FROM node:20-alpine AS package-prep
+FROM node:22-alpine AS package-prep
 
 RUN apk add --no-cache jq
 
@@ -22,15 +22,18 @@ RUN mkdir -p /out && \
 # ============================================================
 # Stage 2: deps — ALL dependencies (dev + prod) for building
 # ============================================================
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 
 WORKDIR /app
 
 # Root package.json comes from package-prep (version stripped).
 # COPY --from uses content-based cache: if output is identical,
 # this layer and npm install below stay cached across releases.
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable
+
 COPY --from=package-prep /out/package.json ./package.json
-COPY package-lock.json ./package-lock.json
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
 
 COPY backend/package.json     ./backend/package.json
 COPY frontend/package.json    ./frontend/package.json
@@ -46,7 +49,7 @@ RUN apk add --no-cache jq && \
       packages/shared-schemas/package.json > packages/shared-schemas/package.json.tmp && \
     mv packages/shared-schemas/package.json.tmp packages/shared-schemas/package.json
 
-RUN npm ci && npm cache clean --force
+RUN pnpm install --frozen-lockfile
 
 
 # ============================================================
@@ -61,18 +64,21 @@ ARG VITE_API_BASE_URL
 ARG VITE_PUBLIC_POSTHOG_KEY
 
 # Build order: shared packages → backend → frontend
-RUN npm run build
+RUN pnpm run build
 
 
 # ============================================================
 # Stage 4: prod-deps — production dependencies only
 # ============================================================
-FROM node:20-alpine AS prod-deps
+FROM node:22-alpine AS prod-deps
 
 WORKDIR /app
 
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable
+
 COPY --from=package-prep /out/package.json ./package.json
-COPY package-lock.json ./package-lock.json
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
 
 COPY backend/package.json     ./backend/package.json
 COPY frontend/package.json    ./frontend/package.json
@@ -88,18 +94,21 @@ RUN apk add --no-cache jq && \
       packages/shared-schemas/package.json > packages/shared-schemas/package.json.tmp && \
     mv packages/shared-schemas/package.json.tmp packages/shared-schemas/package.json
 
-RUN npm ci --omit=dev && npm cache clean --force
+RUN pnpm install --prod --frozen-lockfile
 
 
 # ============================================================
 # Stage 5: runner — minimal production image
 # ============================================================
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 
 # tini: proper PID 1 for signal forwarding and zombie reaping
 RUN apk add --no-cache tini
 
 WORKDIR /app
+
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable
 
 # Run as non-root using the built-in node user (uid 1000)
 # /data: database dir (matches DatabaseManager default)
@@ -151,18 +160,21 @@ USER node
 EXPOSE 7130 7131
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["sh", "-c", "cd backend && npm run migrate:up && cd .. && exec npm start"]
+CMD ["sh", "-c", "cd backend && pnpm run migrate:up && exec pnpm start"]
 
 
 # ============================================================
 # Stage: dev — development image (used by docker-compose)
 # ============================================================
 # Source code is mounted via volumes, only needs Node.js + Deno.
-FROM node:20-alpine AS dev
+FROM node:22-alpine AS dev
 
 COPY --from=deno-bin /bin/deno /usr/local/bin/deno
 
 WORKDIR /app
+
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable
 
 # Default mount points (same as runner stage — see comments there)
 ENV STORAGE_DIR=/growfoundry-storage

@@ -9,25 +9,26 @@
     "packages/*"
   ],
   "scripts": {
+    "preinstall": "npx --yes only-allow pnpm",
     "dev": "turbo run dev",
-    "dev:debug": "concurrently -n \"backend,frontend\" -c \"cyan,magenta\" \"npm run dev:backend:debug\" \"npm run dev:frontend:debug\"",
-    "dev:backend": "cd backend && npm run dev",
-    "dev:backend:debug": "cd backend && cross-env DEBUG_MODE=true npm run dev",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:frontend:debug": "cd frontend && cross-env VITE_DEBUG_MODE=true npm run dev",
+    "dev:debug": "concurrently -n \"backend,frontend\" -c \"cyan,magenta\" \"pnpm run dev:backend:debug\" \"pnpm run dev:frontend:debug\"",
+    "dev:backend": "pnpm --filter growfoundry-backend dev",
+    "dev:backend:debug": "cross-env DEBUG_MODE=true pnpm --filter growfoundry-backend dev",
+    "dev:frontend": "pnpm --filter growfoundry-dashboard dev",
+    "dev:frontend:debug": "cross-env VITE_DEBUG_MODE=true pnpm --filter growfoundry-dashboard dev",
     "build": "turbo run build",
-    "start": "cd backend && npm run start",
-    "start:prod": "npm run build && npm run start",
+    "start": "pnpm --filter growfoundry-backend start",
+    "start:prod": "pnpm run build && pnpm run start",
     "test": "turbo run test",
-    "test:backend": "cd backend && npm test",
-    "test:e2e": "cd backend && npm run test:e2e",
+    "test:backend": "pnpm --filter growfoundry-backend test",
+    "test:e2e": "pnpm --filter growfoundry-backend test:e2e",
     "lint": "turbo run lint",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "turbo run typecheck",
     "clean": "turbo run clean",
-    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+    "install:all": "pnpm install"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
@@ -57,24 +58,9 @@
   ],
   "author": "GrowFoundry",
   "license": "Apache-2.0",
-  "overrides": {
-    "express": "^4.22.0",
-    "undici": "^6.24.0",
-    "fast-xml-parser": "^5.7.0",
-    "handlebars": "^4.7.9",
-    "path-to-regexp": "0.1.13",
-    "lodash": "^4.18.1",
-    "protobufjs": "^7.6.2",
-    "postcss": "^8.5.10",
-    "dompurify": "^3.4.0",
-    "follow-redirects": "^1.16.0",
-    "uuid": "^14.0.0",
-    "axios": "^1.16.1",
-    "ws": "^8.21.0",
-    "qs": "^6.15.2",
-    "minimatch@10": {
-      "brace-expansion": "^5.0.6"
-    }
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=11"
   },
-  "packageManager": "npm@11.3.0"
+  "packageManager": "pnpm@11.5.2"
 }

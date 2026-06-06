@@ -46,7 +46,7 @@ jobs:
         run: docker compose exec -T growfoundry apk add --no-cache bash curl jq postgresql-client
 
       - name: Run E2E tests
-        run: docker compose exec -T growfoundry npm run test:e2e
+        run: docker compose exec -T growfoundry pnpm run test:e2e
 
       - name: Show container logs on failure
         if: failure()

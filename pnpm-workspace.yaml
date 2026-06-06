@@ -1,0 +1,36 @@
+packages:
+  - 'backend'
+  - 'frontend'
+  - 'packages/*'
+
+# Flat, npm-style node_modules. This monorepo was built around npm's hoisting
+# (packages rely on hoisted type deps like @types/react, and the Dockerfile
+# copies a single node_modules across build stages).
+nodeLinker: hoisted
+
+# Link workspace packages locally regardless of the declared version range.
+linkWorkspacePackages: true
+
+# Per-dependency build-script policy (pnpm blocks install scripts by default).
+# - esbuild: needs its script to fetch the platform binary (vite + tsup)
+# - core-js: postinstall only prints a donation notice; intentionally disabled
+allowBuilds:
+  esbuild: true
+  core-js: false
+
+overrides:
+  express: ^4.22.0
+  undici: ^6.24.0
+  fast-xml-parser: ^5.7.0
+  handlebars: ^4.7.9
+  path-to-regexp: 0.1.13
+  lodash: ^4.18.1
+  protobufjs: ^7.6.2
+  postcss: ^8.5.10
+  dompurify: ^3.4.0
+  follow-redirects: ^1.16.0
+  uuid: ^14.0.0
+  axios: ^1.16.1
+  ws: ^8.21.0
+  qs: ^6.15.2
+  minimatch@10>brace-expansion: ^5.0.6

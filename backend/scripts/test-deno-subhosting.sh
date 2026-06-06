@@ -52,7 +52,7 @@ log_info "Checking prerequisites..."
 # Check if API is reachable
 if ! curl -s "$API_URL/api/health" > /dev/null 2>&1; then
   log_fail "API not reachable at $API_URL"
-  echo "Make sure the backend is running: cd backend && npm run dev"
+  echo "Make sure the backend is running: cd backend && pnpm run dev"
   exit 1
 fi
 log_pass "API reachable at $API_URL"

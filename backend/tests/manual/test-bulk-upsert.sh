@@ -162,7 +162,7 @@ login_admin() {
     if ! curl -s "$API_BASE/health" > /dev/null 2>&1; then
         echo "❌ Backend server is not running!"
         echo "   Please start the backend first:"
-        echo "   cd backend && npm run dev"
+        echo "   cd backend && pnpm run dev"
         exit 1
     fi
     

@@ -7,7 +7,7 @@ print_setup_help() {
     echo "  docker compose -f docker-compose.prod.yml up"
     echo ""
     echo "Then rerun:"
-    echo "  npm run test:e2e"
+    echo "  pnpm run test:e2e"
     echo ""
     echo "If your backend runs elsewhere, set:"
     echo "  export TEST_API_BASE=http://localhost:7130/api"
