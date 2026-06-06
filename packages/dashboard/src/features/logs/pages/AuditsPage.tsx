@@ -4,10 +4,10 @@ import { LogsDataGrid, type LogsColumnDef } from '#features/logs/components';
 import { formatTime, cn } from '#lib/utils/utils';
 import { useConfirm } from '#lib/hooks/useConfirm';
 import { usePageSize } from '#lib/hooks/usePageSize';
-import { Button, ConfirmDialog } from '@insforge/ui';
+import { Button, ConfirmDialog } from '@growfoundry/ui';
 import { DataGridEmptyState, TableHeader } from '#components';
 import { useAuditLogs, useClearAuditLogs } from '#features/logs/hooks/useAuditLogs';
-import type { GetAuditLogsRequest } from '@insforge/shared-schemas';
+import type { GetAuditLogsRequest } from '@growfoundry/shared-schemas';
 
 function ModuleBadge({ module }: { module?: string | null }) {
   return (

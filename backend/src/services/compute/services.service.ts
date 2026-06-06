@@ -13,7 +13,7 @@ import {
   errorCodeSchema,
   type ErrorCode,
   type ServiceSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { NEXT_ACTIONS } from '../../utils/next-actions.js';
 
 export interface CreateServiceInput {
@@ -223,7 +223,7 @@ export function selectComputeProvider(): ComputeProvider {
   const fly = FlyProvider.getInstance();
   if (fly.isConfigured()) {
     if (!appConfig.fly.org) {
-      // FLY_ORG used to default to "insforge" — our internal org. Operators
+      // FLY_ORG used to default to "growfoundry" — our internal org. Operators
       // who copied .env.example verbatim got opaque "unauthorized" errors
       // from Fly. Warn loudly at provider selection time instead.
       logger.warn(
@@ -244,7 +244,7 @@ export function selectComputeProvider(): ComputeProvider {
     503,
     ERROR_CODES.COMPUTE_NOT_CONFIGURED,
     'Set FLY_API_TOKEN and FLY_ORG in your .env, then restart the container. ' +
-      'See https://docs.insforge.dev/core-concepts/compute/architecture for setup details.'
+      'See https://docs.growfoundry.dev/core-concepts/compute/architecture for setup details.'
   );
 }
 

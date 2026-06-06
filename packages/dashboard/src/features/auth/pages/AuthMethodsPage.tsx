@@ -17,8 +17,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   ConfirmDialog,
-} from '@insforge/ui';
-import type { OAuthProvidersSchema, CustomOAuthConfigSchema } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { OAuthProvidersSchema, CustomOAuthConfigSchema } from '@growfoundry/shared-schemas';
 import { oauthProviders, type OAuthProviderInfo } from '#features/auth/helpers';
 
 export default function AuthMethodsPage() {

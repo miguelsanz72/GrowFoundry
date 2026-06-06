@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { CreateBackupDialog } from '#features/database/components/CreateBackupDialog';
 import { ConfirmRestoreDialog } from '#features/database/components/ConfirmRestoreDialog';
 import { DatabaseEmptyState } from '#features/database/components/DatabaseEmptyState';

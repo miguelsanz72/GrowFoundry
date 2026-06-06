@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Ship `/storage/v1/s3` — an AWS SigV4-verifying HTTP gateway on top of the existing `S3StorageProvider` so that `aws-cli`, `rclone`, and AWS SDKs can read and write InsForge buckets with no code changes. Objects uploaded via S3 protocol are visible in the Dashboard and REST API immediately, via the shared `storage.buckets` / `storage.objects` tables.
+**Goal:** Ship `/storage/v1/s3` — an AWS SigV4-verifying HTTP gateway on top of the existing `S3StorageProvider` so that `aws-cli`, `rclone`, and AWS SDKs can read and write GrowFoundry buckets with no code changes. Objects uploaded via S3 protocol are visible in the Dashboard and REST API immediately, via the shared `storage.buckets` / `storage.objects` tables.
 
 **Architecture:** New `/storage/v1/s3` router mounted **before** `express.json()`. SigV4 middleware verifies signatures against `storage.s3_access_keys` (encrypted-reversible secrets via `EncryptionManager`, 50-key cap, LRU-cached). A dispatcher routes by `(method, path shape, query)` to per-op handlers; handlers delegate physical IO to an extended `S3StorageProvider` interface (new streaming / multipart / head / copy methods) and metadata read/write to `StorageService`. Streaming uploads (`STREAMING-AWS4-HMAC-SHA256-PAYLOAD`) go through a chunk-signature-verifying `Transform` that pipes verified bytes directly to the S3 SDK without buffering.
 
@@ -72,12 +72,12 @@ packages/shared-schemas/src/index.ts             (export new schema)
 - [ ] **Step 1: Create a worktree and feature branch for implementation**
 
 ```bash
-git worktree add ../insforge-s3-gateway feat/s3-gateway-impl
-cd ../insforge-s3-gateway
+git worktree add ../growfoundry-s3-gateway feat/s3-gateway-impl
+cd ../growfoundry-s3-gateway
 git merge feat/s3-gateway-design --no-edit  # pull in the spec/plan for reference
 ```
 
-Expected: new directory `../insforge-s3-gateway` at branch `feat/s3-gateway-impl`.
+Expected: new directory `../growfoundry-s3-gateway` at branch `feat/s3-gateway-impl`.
 
 - [ ] **Step 2: Verify baseline typecheck + test pass**
 
@@ -389,7 +389,7 @@ import {
   type S3AccessKeySchema,
   type S3AccessKeyWithSecretSchema,
   type CreateS3AccessKeyRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const ACCESS_KEY_ID_CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 const ACCESS_KEY_ID_RANDOM_LEN = 16;
@@ -666,7 +666,7 @@ Append to the existing `router` export in `backend/src/api/routes/storage/index.
 
 ```ts
 import { S3AccessKeyService } from '@/services/storage/s3-access-key.service.js';
-import { createS3AccessKeyRequestSchema } from '@insforge/shared-schemas';
+import { createS3AccessKeyRequestSchema } from '@growfoundry/shared-schemas';
 
 const s3AccessKeyService = S3AccessKeyService.getInstance();
 
@@ -1447,7 +1447,7 @@ Replace the file with:
 
 ```ts
 import { Readable } from 'stream';
-import { UploadStrategyResponse, DownloadStrategyResponse } from '@insforge/shared-schemas';
+import { UploadStrategyResponse, DownloadStrategyResponse } from '@growfoundry/shared-schemas';
 
 export interface ObjectMetadata {
   size: number;
@@ -1551,7 +1551,7 @@ At the bottom of the `LocalStorageProvider` class, add:
 ```ts
 import { Readable } from 'stream';
 import { AppError } from '@/api/middlewares/error.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import { ObjectMetadata, GetObjectResult } from './base.provider.js';
 
   private notImplemented(op: string): never {
@@ -2545,7 +2545,7 @@ export async function handle(req: S3AuthenticatedRequest, res: Response): Promis
   const xml = toXml({
     ListAllMyBucketsResult: {
       $: { xmlns: 'http://s3.amazonaws.com/doc/2006-03-01/' },
-      Owner: { ID: 'insforge', DisplayName: 'insforge' },
+      Owner: { ID: 'growfoundry', DisplayName: 'growfoundry' },
       Buckets: {
         Bucket: buckets.map((b) => ({
           Name: b.name, CreationDate: b.createdAt.toISOString(),
@@ -3701,7 +3701,7 @@ services:
       - -c
       - |
         until (/usr/bin/mc alias set local http://minio:9000 minio miniosecret) do sleep 1; done;
-        /usr/bin/mc mb -p local/insforge-storage;
+        /usr/bin/mc mb -p local/growfoundry-storage;
         exit 0
 volumes:
   minio-data:
@@ -3713,14 +3713,14 @@ volumes:
 cd backend/tests/local && docker-compose -f docker-compose.minio.yml up -d
 ```
 
-Expected: MinIO reachable at `http://localhost:9000`; bucket `insforge-storage` created.
+Expected: MinIO reachable at `http://localhost:9000`; bucket `growfoundry-storage` created.
 
 - [ ] **Step 3: Configure backend env for MinIO**
 
 In the backend `.env` used for integration runs:
 
 ```
-AWS_S3_BUCKET=insforge-storage
+AWS_S3_BUCKET=growfoundry-storage
 S3_ENDPOINT_URL=http://localhost:9000
 S3_ACCESS_KEY_ID=minio
 S3_SECRET_ACCESS_KEY=miniosecret
@@ -4022,7 +4022,7 @@ Expected: every step prints `OK` or equivalent.
 
 ```bash
 # ~/.config/rclone/rclone.conf
-# [insforge]
+# [growfoundry]
 # type = s3
 # provider = Other
 # access_key_id = <ak>
@@ -4031,11 +4031,11 @@ Expected: every step prints `OK` or equivalent.
 # region = us-east-2
 # force_path_style = true
 
-rclone mkdir insforge:rclone-test
-rclone copyto /tmp/e2e-small.txt insforge:rclone-test/hello.txt
-rclone ls insforge:rclone-test
-rclone delete insforge:rclone-test/hello.txt
-rclone rmdir insforge:rclone-test
+rclone mkdir growfoundry:rclone-test
+rclone copyto /tmp/e2e-small.txt growfoundry:rclone-test/hello.txt
+rclone ls growfoundry:rclone-test
+rclone delete growfoundry:rclone-test/hello.txt
+rclone rmdir growfoundry:rclone-test
 ```
 
 Expected: every command succeeds.

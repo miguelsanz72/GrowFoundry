@@ -1,4 +1,4 @@
-import { CopyButton } from '@insforge/ui';
+import { CopyButton } from '@growfoundry/ui';
 
 interface QuickStartPromptCardProps {
   /** Subtitle shown under the "Setup with Prompt" title. */

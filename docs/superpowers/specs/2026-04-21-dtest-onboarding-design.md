@@ -3,7 +3,7 @@
 **Status:** Implemented
 **Owner:** @CarmenDou
 **Date:** 2026-04-21 (originally) · Updated 2026-04-25
-**Branch:** `feat/support-dtest-onboarding` · **PR:** [#1142](https://github.com/InsForge/insforge-cloud-backend/pull/1142)
+**Branch:** `feat/support-dtest-onboarding` · **PR:** [#1142](https://github.com/GrowFoundry/growfoundry-cloud-backend/pull/1142)
 
 ## Context
 
@@ -14,10 +14,10 @@ Dashboard home is gated by a single PostHog feature flag `dashboard-v4-experimen
 
 (An earlier `c_test` variant was retired during d_test development; the `CTestDashboardPage` and `ConnectDialogV2` files were deleted, with the prompt stepper carried forward into the d_test connected dashboard.)
 
-D test ships a reworked "Install InsForge" client picker as the pre-connection view, and a connected dashboard (header + 4 metric cards + prompt stepper). On d_test the top-nav Connect button does **not** open any dialog — it switches the page back to the Install view so users can re-visit setup at any time. When dashboard runs inside the InsForge cloud control plane (`insforge.dev`) iframe, the parent's Connect button mirrors this behaviour through a `D_TEST_VIEW_CHANGED` postMessage.
+D test ships a reworked "Install GrowFoundry" client picker as the pre-connection view, and a connected dashboard (header + 4 metric cards + prompt stepper). On d_test the top-nav Connect button does **not** open any dialog — it switches the page back to the Install view so users can re-visit setup at any time. When dashboard runs inside the GrowFoundry cloud control plane (`growfoundry.dev`) iframe, the parent's Connect button mirrors this behaviour through a `D_TEST_VIEW_CHANGED` postMessage.
 
 Figma references:
-- Install InsForge (client picker): `2194:75236`
+- Install GrowFoundry (client picker): `2194:75236`
 - Client detail page (Claude Code example): `2226:78350`
 - Connection String detail: `2226:79152`
 - Connected dashboard: `2380:89947`
@@ -27,7 +27,7 @@ Figma references:
 1. Let users connect any coding agent (OpenClaw, Claude Code, Codex, Antigravity, Cursor, OpenCode, Copilot, Cline, "Other") or connect directly via DB connection string / API keys, from a single discoverable page.
 2. On the connected dashboard show: project header + 4 metric cards (User / Database / Storage / Edge Functions) + a "Your Agent can now do the work for you" prompt stepper to guide further exploration.
 3. Use d_test–owned install components (`DTestCLISection`, `DTestMCPSection`, `QuickStartPromptCard`) that can iterate independently of the legacy connect UI; keep the shared `ConnectionStringSectionV2` / `APIKeysSectionV2` for direct-connect tiles.
-4. Allow users to toggle between Install view and Dashboard view freely after first connection, including from the InsForge cloud control plane's top-bar Connect button (cross-frame postMessage).
+4. Allow users to toggle between Install view and Dashboard view freely after first connection, including from the GrowFoundry cloud control plane's top-bar Connect button (cross-frame postMessage).
 
 ## Non-Goals
 
@@ -56,7 +56,7 @@ hasCompletedOnboarding ? 'dashboard' : 'install'
 Thereafter, the view only changes on three events:
 
 1. **Onboarding completes** (`hasCompletedOnboarding` flips false → true): auto-switch to `'dashboard'`. This is the "MCP call succeeds → jump to dashboard" UX.
-2. **Connect clicked** (in d_test) — either our top-nav Connect button (`AppHeader`) when the dashboard renders standalone, or the **InsForge cloud control plane's** top-bar Connect button via `SHOW_CONNECT_OVERLAY` / `SHOW_ONBOARDING_OVERLAY` postMessage (the iframe scenario). Both route to `setView('install')`. While view is `'install'`, the Connect button is rendered as **disabled** so the user doesn't loop on it.
+2. **Connect clicked** (in d_test) — either our top-nav Connect button (`AppHeader`) when the dashboard renders standalone, or the **GrowFoundry cloud control plane's** top-bar Connect button via `SHOW_CONNECT_OVERLAY` / `SHOW_ONBOARDING_OVERLAY` postMessage (the iframe scenario). Both route to `setView('install')`. While view is `'install'`, the Connect button is rendered as **disabled** so the user doesn't loop on it.
 3. **`[X]` clicked on Install page**: switch to `'dashboard'`.
 
 On refresh the session state resets. The initial-view rule re-runs, so a connected user lands back on dashboard and an unconnected user lands on install — both are the correct defaults. The transient "I just clicked Connect to peek at install" intent is not persisted; if the user wants Install again, they click Connect again.
@@ -65,7 +65,7 @@ Within the Install view there is a sub-state `selectedClient`:
 
 ```text
 view = 'install'
-   ├── selectedClient === null   →  InstallInsForgePage (All Clients)
+   ├── selectedClient === null   →  InstallGrowFoundryPage (All Clients)
    └── selectedClient !== null   →  ClientDetailPage for that client
 ```
 
@@ -75,7 +75,7 @@ view = 'install'
 
 ```text
 ┌────────────────────────────┐                     ┌────────────────────────────┐
-│   InstallInsForgePage      │  [X] close          │   DTestConnectedDashboard  │
+│   InstallGrowFoundryPage      │  [X] close          │   DTestConnectedDashboard  │
 │   (All Clients)            │────────────────────▶│   (header + 4 metrics)     │
 │                            │                     │                            │
 │                            │◀────────────────────│                            │
@@ -98,7 +98,7 @@ view = 'install'
 
 Three stacked sections, max-width 640 px, top-padding 64 px, centered:
 
-1. **"Setup In OpenClaw"** — single tile for OpenClaw with `Install` button. (OpenClaw is a distinct agent, not a Figma typo for Claude Code; it is registered as its own `MCPAgent` with `id='openclaw'`, uses `@insforge/install --client openclaw`, and is the `FEATURED_OPENCLAW_ID` in `clientRegistry.tsx`.)
+1. **"Setup In OpenClaw"** — single tile for OpenClaw with `Install` button. (OpenClaw is a distinct agent, not a Figma typo for Claude Code; it is registered as its own `MCPAgent` with `id='openclaw'`, uses `@growfoundry/install --client openclaw`, and is the `FEATURED_OPENCLAW_ID` in `clientRegistry.tsx`.)
 2. **"Install in Coding Agent"** — 2-column × 4-row grid of tiles. Tiles in display order:
    1. Claude Code  &nbsp;|&nbsp; Codex
    2. Antigravity  &nbsp;|&nbsp; Cursor
@@ -108,7 +108,7 @@ Three stacked sections, max-width 640 px, top-padding 64 px, centered:
 
 Top-right of the page header row (same row as the title, within the max-w-640 column): `[X]` close button → switches view to `'dashboard'` (clears `?view` param) and sets `installDismissed = true` in localStorage.
 
-Title text: "Install InsForge".
+Title text: "Install GrowFoundry".
 
 ## Client Detail Page Layout
 
@@ -179,8 +179,8 @@ A 5-step "Start building" stepper rendered below the metric cards. Self-containe
   - `storage` → `storage.buckets.length > 0` (any bucket exists)
   - `ai` → `aiUsageSummary.totalRequests > 0`
   - `deployment` → `currentDeploymentId` exists
-- **Sticky completion**: once a step is detected complete, it stays complete in localStorage (`insforge-ctest-step-<key>-done-<projectId>`) even if the agent later removes the source data (e.g. via newly added RLS policies). Key prefix is `insforge-ctest-` for backwards compatibility with users who progressed through c_test.
-- **Dismiss**: persists `insforge-prompt-stepper-dismissed-<projectId>` in localStorage. Once dismissed for a project, the stepper never shows for that project again.
+- **Sticky completion**: once a step is detected complete, it stays complete in localStorage (`growfoundry-ctest-step-<key>-done-<projectId>`) even if the agent later removes the source data (e.g. via newly added RLS policies). Key prefix is `growfoundry-ctest-` for backwards compatibility with users who progressed through c_test.
+- **Dismiss**: persists `growfoundry-prompt-stepper-dismissed-<projectId>` in localStorage. Once dismissed for a project, the stepper never shows for that project again.
 
 ## File Plan
 
@@ -192,7 +192,7 @@ packages/dashboard/src/features/dashboard/
 │   └── DTestDashboardPage.tsx              # entry; reads view state, dispatches
 └── components/
     └── dtest/
-        ├── InstallInsForgePage.tsx          # All Clients view (3 sections)
+        ├── InstallGrowFoundryPage.tsx          # All Clients view (3 sections)
         ├── ClientDetailPage.tsx             # detail shell: back + title + slot
         ├── ClientTile.tsx                   # reusable tile for agents & direct-connect
         ├── DTestConnectedDashboard.tsx      # header + 4 metric cards + prompt stepper
@@ -230,7 +230,7 @@ packages/dashboard/src/features/dashboard/components/
 - `packages/dashboard/src/layout/AppSidebar.tsx`
   - Don't highlight the Dashboard nav item while the user is on the d_test Install view.
 - `packages/dashboard/src/lib/config/DashboardHostContext.tsx`
-  - Add `onRequestUserApiKey?: () => Promise<string>` to the host contract, plumbed through `InsforgeDashboard` props.
+  - Add `onRequestUserApiKey?: () => Promise<string>` to the host contract, plumbed through `GrowfoundryDashboard` props.
 - `packages/dashboard/src/lib/analytics/posthog.tsx`
   - Restore `session_recording: { recordCrossOriginIframes: true }` so PostHog session replay doesn't choke on the cross-origin iframe boundary (was dropped in an earlier refactor).
 - `packages/dashboard/src/lib/contexts/SocketContext.tsx`
@@ -239,7 +239,7 @@ packages/dashboard/src/features/dashboard/components/
 #### Frontend bridge (`frontend/src/cloud-hosting/`)
 
 - `useCloudHosting.ts`: adds `requestUserApiKey()` (REQUEST_USER_API_KEY postMessage with USER_API_KEY / USER_API_KEY_ERROR response).
-- `CloudHostingDashboard.tsx`: passes `onRequestUserApiKey={requestUserApiKey}` through to `InsForgeDashboard`.
+- `CloudHostingDashboard.tsx`: passes `onRequestUserApiKey={requestUserApiKey}` through to `GrowFoundryDashboard`.
 
 ### Deleted files
 
@@ -331,7 +331,7 @@ Key points:
 
 ## Cross-frame postMessage protocol
 
-When the dashboard runs inside the InsForge cloud control plane (`insforge.dev`) via iframe, it coordinates with the parent through several postMessage events:
+When the dashboard runs inside the GrowFoundry cloud control plane (`growfoundry.dev`) via iframe, it coordinates with the parent through several postMessage events:
 
 | Direction | Type | Purpose |
 |---|---|---|
@@ -340,7 +340,7 @@ When the dashboard runs inside the InsForge cloud control plane (`insforge.dev`)
 | iframe → Parent | `REQUEST_USER_API_KEY` | Iframe wants a fresh `uak_…` PAT for the CLI install prompt. |
 | Parent → iframe | `USER_API_KEY { apiKey }` / `USER_API_KEY_ERROR { error }` | Response to the above. Parent's `userApiKeyService` calls `POST /account/v1/api-keys` with a 90-day TTL. |
 
-The `useCloudHosting` hook (in `frontend/src/cloud-hosting/`) owns the iframe-side request/response bookkeeping; the parent side lives in `insforge-cloud/src/app/dashboard/project/[projectId]/page.tsx` (existing handler) and `insforge-cloud/src/features/project/components/ConnectButton.tsx` (new disable-state subscriber).
+The `useCloudHosting` hook (in `frontend/src/cloud-hosting/`) owns the iframe-side request/response bookkeeping; the parent side lives in `growfoundry-cloud/src/app/dashboard/project/[projectId]/page.tsx` (existing handler) and `growfoundry-cloud/src/features/project/components/ConnectButton.tsx` (new disable-state subscriber).
 
 ## Feature Flag
 
@@ -374,7 +374,7 @@ This is a UI-only change; verification is primarily manual through the dev serve
   - MCP tool succeeds while on Install → view auto-flips to dashboard.
   - Cursor / Qoder "Paste Prompt to" button opens deeplink (URL bar shows `cursor://` or `qoder://`); for other agents, copies to clipboard.
 - D-test-specific flows (cloud iframe — staging):
-  - Connect button in InsForge cloud's top-bar disables while iframe view = `'install'`.
+  - Connect button in GrowFoundry cloud's top-bar disables while iframe view = `'install'`.
   - CLI install prompt embeds a real `uak_…` key (each tab mount mints a new one).
   - DTestConnectTip overlay appears in cloud-hosting on dashboard view; dismiss persists per project.
   - Sidebar Dashboard nav item not highlighted while on Install view.
@@ -397,7 +397,7 @@ Display conditions (all must be true):
 - `host.mode === 'cloud-hosting'`
 - `dashboardVariant === 'd_test'`
 - Current view = `'dashboard'`
-- Not dismissed (per-project localStorage flag `insforge-dtest-connect-tip-dismissed-<projectId>`)
+- Not dismissed (per-project localStorage flag `growfoundry-dtest-connect-tip-dismissed-<projectId>`)
 
 Position: `fixed right-4`. Top offset depends on `host.showNavbar`: `top-2` when our AppHeader is hidden (cloud-hosting iframe — sits just below the parent's top bar) or `top-14` when it shows (self-hosted preview — clears our 48px AppHeader). Dismissed state persists per-project; once dismissed, the tip never reappears for that project.
 

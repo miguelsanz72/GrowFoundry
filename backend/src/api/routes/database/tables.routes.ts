@@ -8,7 +8,7 @@ import {
   ERROR_CODES,
   createTableRequestSchema,
   updateTableSchemaRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { AuditService } from '@/services/logs/audit.service.js';
 import { normalizeDatabaseSchemaName } from '@/services/database/helpers.js';
 

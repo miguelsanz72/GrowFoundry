@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), svgr()],
   resolve: {
     alias: {
-      '@insforge/dashboard': dashboardSrcPath,
+      '@growfoundry/dashboard': dashboardSrcPath,
       '#app': path.resolve(dashboardSrcPath, 'app'),
       '#assets': path.resolve(dashboardSrcPath, 'assets'),
       '#components': path.resolve(dashboardSrcPath, 'components'),
@@ -21,8 +21,8 @@ export default defineConfig({
       '#navigation': path.resolve(dashboardSrcPath, 'navigation'),
       '#router': path.resolve(dashboardSrcPath, 'router'),
       '#types': path.resolve(dashboardSrcPath, 'types'),
-      '@insforge/shared-schemas': path.resolve(__dirname, '../packages/shared-schemas/src'),
-      '@insforge/ui': path.resolve(__dirname, '../packages/ui/src'),
+      '@growfoundry/shared-schemas': path.resolve(__dirname, '../packages/shared-schemas/src'),
+      '@growfoundry/ui': path.resolve(__dirname, '../packages/ui/src'),
     },
   },
   server: {

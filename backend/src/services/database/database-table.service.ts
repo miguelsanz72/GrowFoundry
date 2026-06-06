@@ -20,7 +20,7 @@ import {
   OnDeleteActionSchema,
   OnUpdateActionSchema,
   ForeignKeySchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { validateIdentifier, validateSchemaName } from '@/utils/validations.js';
 import { convertSqlTypeToColumnType } from '@/utils/utils.js';
 import {

@@ -3,7 +3,7 @@ import {
   StorageFileSchema,
   StorageBucketSchema,
   ListObjectsResponseSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export interface ListObjectsParams {
   prefix?: string;

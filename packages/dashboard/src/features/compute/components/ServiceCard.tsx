@@ -5,8 +5,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from '@insforge/ui';
-import type { ServiceSchema } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { ServiceSchema } from '@growfoundry/shared-schemas';
 import { statusColors, getReachableUrl } from '#features/compute/constants';
 import { useServiceHealth } from '#features/compute/hooks/useComputeServices';
 

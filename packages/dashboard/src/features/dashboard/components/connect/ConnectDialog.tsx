@@ -11,7 +11,7 @@ import {
   DialogFooter,
   DialogTitle,
   TooltipProvider,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { MCPSection } from './MCPSection';
 import { APIKeysSection } from './APIKeysSection';
 import { ConnectionStringSection } from './ConnectionStringSection';
@@ -19,7 +19,7 @@ import { CLISection } from './CLISection';
 import { useApiKey } from '#lib/hooks/useMetadata';
 import { useAnonToken } from '#features/auth/hooks/useAnonToken';
 import { useIsCloudHostingMode } from '#lib/config/DashboardHostContext';
-import { cn, getBackendUrl, isInsForgeCloudProject } from '#lib/utils/utils';
+import { cn, getBackendUrl, isGrowFoundryCloudProject } from '#lib/utils/utils';
 import { JoinDiscordCta } from '#features/dashboard/components/JoinDiscordCta';
 
 type ConnectTabId = 'cli' | 'mcp' | 'connection-string' | 'api-keys';
@@ -45,7 +45,7 @@ interface ConnectDialogProps {
 
 export function ConnectDialog({ open, onOpenChange }: ConnectDialogProps) {
   const isCloudHostingMode = useIsCloudHostingMode();
-  const isCloudProject = isInsForgeCloudProject();
+  const isCloudProject = isGrowFoundryCloudProject();
   const canShowCli = isCloudProject && isCloudHostingMode;
   const [activeTab, setActiveTab] = useState<ConnectTabId>(canShowCli ? 'cli' : 'mcp');
 
@@ -88,7 +88,7 @@ export function ConnectDialog({ open, onOpenChange }: ConnectDialogProps) {
               <div className="flex-1">
                 <DialogTitle>Connect Project</DialogTitle>
                 <DialogDescription className="sr-only">
-                  Connect your project to the InsForge platform
+                  Connect your project to the GrowFoundry platform
                 </DialogDescription>
                 <div className="mt-3 flex items-start gap-6 overflow-x-auto">
                   {visibleTabs.map((tab) => {

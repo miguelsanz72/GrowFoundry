@@ -46,7 +46,7 @@ import {
   type ResetPasswordResponse,
   type UserSchema,
   type VerifyEmailResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 /**
  * Simplified JWT-based auth service
@@ -915,7 +915,7 @@ export class AuthService {
   /**
    * Admin auth metadata for /api/metadata (gated behind verifyAdmin).
    * Includes allowedRedirectUrls and smtpConfig so the CLI can render
-   * insforge.toml and probe backend capability for declarative config.
+   * growfoundry.toml and probe backend capability for declarative config.
    *
    * smtpConfig.hasPassword is the only credential signal — the actual
    * password is never returned by the SmtpConfigService.

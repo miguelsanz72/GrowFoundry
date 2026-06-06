@@ -5,7 +5,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { useShareToken } from '#features/analytics/hooks/useShareToken';
 
 interface Props {

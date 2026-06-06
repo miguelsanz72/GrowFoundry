@@ -9,7 +9,7 @@ import {
   updateScheduleRequestSchema,
   getSchedulesConfigResponseSchema,
   updateSchedulesConfigRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const router = Router();
 const scheduleService = ScheduleService.getInstance();

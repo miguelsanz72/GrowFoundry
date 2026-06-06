@@ -12,7 +12,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { CodeEditor, Skeleton, TableHeader } from '#components';
 import { useConfirm } from '#lib/hooks/useConfirm';
 

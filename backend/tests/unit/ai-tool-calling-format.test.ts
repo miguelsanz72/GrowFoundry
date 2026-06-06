@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { ChatMessageSchema } from '@insforge/shared-schemas';
+import type { ChatMessageSchema } from '@growfoundry/shared-schemas';
 
 // Mock dependencies before importing the service
 vi.mock('../../src/providers/ai/openrouter.provider.js', () => ({

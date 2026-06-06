@@ -1,4 +1,4 @@
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { DatabaseTemplate } from '#features/database/templates';
 import { SchemaVisualizer } from '#features/visualizer/components/SchemaVisualizer';
 import { useRawSQL } from '#features/database/hooks/useRawSQL';

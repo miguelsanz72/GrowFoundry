@@ -4,7 +4,7 @@ import {
   posthogTimeframeSchema,
   posthogBreakdownSchema,
   posthogMetricSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { verifyUser, verifyAdmin, AuthRequest } from '@/api/middlewares/auth.js';
 import { AppError } from '@/utils/errors.js';
 import { AnalyticsService } from '@/services/analytics/analytics.service.js';

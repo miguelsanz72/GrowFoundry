@@ -8,7 +8,7 @@ import {
   ERROR_CODES,
   DownloadStrategyResponse,
   UploadStrategyResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 /**
  * Local filesystem storage implementation

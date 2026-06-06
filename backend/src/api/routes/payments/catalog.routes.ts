@@ -14,7 +14,7 @@ import {
   paymentProductParamsSchema,
   updatePaymentPriceBodySchema,
   updatePaymentProductBodySchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const router = Router({ mergeParams: true });
 const paymentService = PaymentService.getInstance();

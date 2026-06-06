@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AlertCircle, ChevronDown, ChevronRight } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
-import type { StripePrice, StripeProduct } from '@insforge/shared-schemas';
+import type { StripePrice, StripeProduct } from '@growfoundry/shared-schemas';
 import {
   Alert,
   AlertDescription,

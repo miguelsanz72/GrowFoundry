@@ -37,7 +37,7 @@ import {
   type GetPaymentsConfigResponse,
   type GetPaymentsStatusResponse,
   type StripeConnection,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export interface ManagedStripeWebhookSetup {
   endpointId: string;
@@ -640,9 +640,9 @@ export class PaymentConfigService {
       enabledEvents: [...MANAGED_WEBHOOK_EVENTS],
       metadata: {
         ...MANAGED_WEBHOOK_METADATA,
-        insforge_environment: environment,
-        insforge_endpoint_path: `/api/webhooks/stripe/${environment}`,
-        insforge_endpoint_url: endpointUrl,
+        growfoundry_environment: environment,
+        growfoundry_endpoint_path: `/api/webhooks/stripe/${environment}`,
+        growfoundry_endpoint_url: endpointUrl,
       },
     });
 
@@ -674,7 +674,7 @@ export class PaymentConfigService {
       try {
         await provider.deleteWebhookEndpoint(endpoint.id);
       } catch (error) {
-        logger.warn('Failed to delete existing InsForge-managed Stripe webhook endpoint', {
+        logger.warn('Failed to delete existing GrowFoundry-managed Stripe webhook endpoint', {
           environment,
           webhookEndpointId: endpoint.id,
           error: error instanceof Error ? error.message : String(error),
@@ -689,8 +689,8 @@ export class PaymentConfigService {
   ): boolean {
     return (
       endpoint.metadata?.managed_by === MANAGED_WEBHOOK_METADATA.managed_by &&
-      endpoint.metadata?.insforge_webhook === MANAGED_WEBHOOK_METADATA.insforge_webhook &&
-      endpoint.metadata?.insforge_environment === environment
+      endpoint.metadata?.growfoundry_webhook === MANAGED_WEBHOOK_METADATA.growfoundry_webhook &&
+      endpoint.metadata?.growfoundry_environment === environment
     );
   }
 

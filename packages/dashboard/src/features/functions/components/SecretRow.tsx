@@ -1,6 +1,6 @@
 import { Eye, EyeOff, Loader2, Trash2 } from 'lucide-react';
-import { Button, CopyButton } from '@insforge/ui';
-import { SecretSchema } from '@insforge/shared-schemas';
+import { Button, CopyButton } from '@growfoundry/ui';
+import { SecretSchema } from '@growfoundry/shared-schemas';
 import { cn } from '#lib/utils/utils';
 import { formatDistance } from 'date-fns';
 import { useSecretValue } from '#features/functions/hooks/useSecrets';

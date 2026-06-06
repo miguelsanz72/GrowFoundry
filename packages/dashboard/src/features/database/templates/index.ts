@@ -1,4 +1,4 @@
-import { GetTableSchemaResponse } from '@insforge/shared-schemas';
+import { GetTableSchemaResponse } from '@growfoundry/shared-schemas';
 import { crmSystemTemplate } from './crm-system';
 import { aiChatbotTemplate } from './ai-chatbot';
 import { ecommercePlatformTemplate } from './ecommerce-platform';

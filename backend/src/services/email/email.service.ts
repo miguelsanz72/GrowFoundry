@@ -5,7 +5,7 @@ import { SmtpConfigService, RawSmtpConfig } from '@/services/email/smtp-config.s
 import { AppError } from '@/utils/errors.js';
 import { EmailTemplate } from '@/types/email.js';
 import logger from '@/utils/logger.js';
-import { ERROR_CODES, SendRawEmailRequest } from '@insforge/shared-schemas';
+import { ERROR_CODES, SendRawEmailRequest } from '@growfoundry/shared-schemas';
 
 /**
  * Email service — resolves provider per-call so SMTP config changes take effect without restart

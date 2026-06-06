@@ -15,7 +15,7 @@ export default defineConfig({
   // Docker runner only ships the hoisted root node_modules/, so Node can't
   // resolve it at runtime. Inline it into the bundle instead of teaching
   // the Dockerfile to merge nested module layers.
-  noExternal: [/@insforge\/shared-schemas/, 'lru-cache'],
+  noExternal: [/@growfoundry\/shared-schemas/, 'lru-cache'],
   esbuildOptions(options) {
     options.alias = {
       '@': './src',

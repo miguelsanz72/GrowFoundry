@@ -1,6 +1,6 @@
-# InsForge Deployment Guides
+# GrowFoundry Deployment Guides
 
-This directory contains deployment guides for self-hosting InsForge on various platforms.
+This directory contains deployment guides for self-hosting GrowFoundry on various platforms.
 
 ## 📚 Available Guides
 
@@ -16,29 +16,29 @@ This directory contains deployment guides for self-hosting InsForge on various p
 
 > Note: the cloud-provider walkthroughs (AWS, Azure, GCP) are community-maintained and can lag the current release.
 
-- **[AWS EC2](./deploy-to-aws-ec2.md)** - Deploy InsForge on Amazon EC2 with Docker Compose
+- **[AWS EC2](./deploy-to-aws-ec2.md)** - Deploy GrowFoundry on Amazon EC2 with Docker Compose
   - Instance setup and configuration
   - Docker Compose deployment
   - Domain and SSL configuration
   - Production best practices
 
-- **[Google Cloud Compute Engine](./deploy-to-google-cloud-compute-engine.md)** - Deploy InsForge on Google Cloud Compute Engine with Docker Compose
+- **[Google Cloud Compute Engine](./deploy-to-google-cloud-compute-engine.md)** - Deploy GrowFoundry on Google Cloud Compute Engine with Docker Compose
   - VM instance setup and configuration
   - Docker Compose deployment
   - Domain and SSL configuration
   - Production best practices
 
-- **[Azure Virtual Machines](./deploy-to-azure-virtual-machines.md)** - Deploy InsForge on an Azure VM with Docker Compose
+- **[Azure Virtual Machines](./deploy-to-azure-virtual-machines.md)** - Deploy GrowFoundry on an Azure VM with Docker Compose
   - VM instance setup and configuration
   - Docker Compose deployment
   - Domain and SSL configuration
   - Production best practices
 
-- **[Containarium](./deploy-to-containarium.md)** - Deploy InsForge on a self-hosted Containarium host (LXC + MCP-native control plane)
+- **[Containarium](./deploy-to-containarium.md)** - Deploy GrowFoundry on a self-hosted Containarium host (LXC + MCP-native control plane)
   - One-command box provisioning with Docker pre-installed
   - Built-in TLS-on-a-hostname via Caddy + ACME
   - Compose-autostart survives host reboots
-  - Multi-tenant: many isolated InsForge projects per host
+  - Multi-tenant: many isolated GrowFoundry projects per host
   - Optional agent-driven deploy via MCP
 
 ### Coming Soon
@@ -79,16 +79,16 @@ All deployment methods require:
 
 ## 🔧 Architecture Overview
 
-InsForge consists of 4 main services:
+GrowFoundry consists of 4 main services:
 
 1. **PostgreSQL** - Database (port 5432)
 2. **PostgREST** - Auto-generated REST API (port 5430)
-3. **InsForge Backend** - Node.js API server, also serves the dashboard (port 7130)
+3. **GrowFoundry Backend** - Node.js API server, also serves the dashboard (port 7130)
 4. **Deno Runtime** - Serverless functions (port 7133)
 
 ## 🤝 Contributing
 
-Have experience deploying InsForge on a platform not listed here? We'd love your contribution!
+Have experience deploying GrowFoundry on a platform not listed here? We'd love your contribution!
 
 1. Fork the repository
 2. Create a deployment guide following the AWS EC2 template
@@ -98,6 +98,6 @@ See [CONTRIBUTING.md](../../CONTRIBUTING.md) for more details.
 
 ## 🆘 Need Help?
 
-- **Documentation**: [https://docs.insforge.dev](https://docs.insforge.dev)
+- **Documentation**: [https://docs.growfoundry.dev](https://docs.growfoundry.dev)
 - **Discord Community**: [https://discord.com/invite/MPxwj5xVvW](https://discord.com/invite/MPxwj5xVvW)
-- **GitHub Issues**: [https://github.com/insforge/insforge/issues](https://github.com/insforge/insforge/issues)
+- **GitHub Issues**: [https://github.com/growfoundry/growfoundry/issues](https://github.com/growfoundry/growfoundry/issues)

@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { appConfig } from '@/infra/config/app.config.js';
 import { AppError } from '@/utils/errors.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import type {
   ComputeProvider,
   LaunchMachineParams,

@@ -11,12 +11,12 @@ export const WEBHOOK_SECRET_BY_ENVIRONMENT: Record<StripeEnvironment, string> = 
 };
 
 export const SUBJECT_METADATA_KEYS = {
-  type: 'insforge_subject_type',
-  id: 'insforge_subject_id',
+  type: 'growfoundry_subject_type',
+  id: 'growfoundry_subject_id',
 } as const;
 
-export const CHECKOUT_MODE_METADATA_KEY = 'insforge_checkout_mode';
-export const CHECKOUT_SESSION_METADATA_KEY = 'insforge_checkout_session_id';
+export const CHECKOUT_MODE_METADATA_KEY = 'growfoundry_checkout_mode';
+export const CHECKOUT_SESSION_METADATA_KEY = 'growfoundry_checkout_session_id';
 
 export const MANAGED_WEBHOOK_EVENTS = [
   'customer.created',
@@ -42,6 +42,6 @@ export const MANAGED_WEBHOOK_EVENTS = [
 ] as const;
 
 export const MANAGED_WEBHOOK_METADATA = {
-  managed_by: 'insforge',
-  insforge_webhook: 'stripe_payments',
+  managed_by: 'growfoundry',
+  growfoundry_webhook: 'stripe_payments',
 } as const;

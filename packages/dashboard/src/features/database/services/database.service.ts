@@ -6,7 +6,7 @@ import type {
   DatabasePoliciesResponse,
   DatabaseSchemasResponse,
   DatabaseTriggersResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class DatabaseService {
   async getSchemas(): Promise<DatabaseSchemasResponse> {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Settings } from 'lucide-react';
-import type { PosthogConnection } from '@insforge/shared-schemas';
+import type { PosthogConnection } from '@growfoundry/shared-schemas';
 import {
   FeatureSidebar,
   type FeatureSidebarHeaderButton,

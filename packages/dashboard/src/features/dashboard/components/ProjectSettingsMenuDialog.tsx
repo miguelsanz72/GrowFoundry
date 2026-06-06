@@ -22,8 +22,8 @@ import {
   MenuDialogBody,
   MenuDialogFooter,
   MenuDialogCloseButton,
-} from '@insforge/ui';
-import type { InstanceInfoEvent } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { InstanceInfoEvent } from '@growfoundry/shared-schemas';
 import { useApiKey } from '#lib/hooks/useMetadata';
 import { useDashboardHost, useIsCloudHostingMode } from '#lib/config/DashboardHostContext';
 import { useHealth } from '#lib/hooks/useHealth';
@@ -34,7 +34,7 @@ import {
 } from '#lib/hooks/useCloudProjectInfo';
 import { useConfirm } from '#lib/hooks/useConfirm';
 import { useToast } from '#lib/hooks/useToast';
-import { cn, compareVersions, getBackendUrl, isInsForgeCloudProject } from '#lib/utils/utils';
+import { cn, compareVersions, getBackendUrl, isGrowFoundryCloudProject } from '#lib/utils/utils';
 import { MCPSection, CLISection, ConnectionStringSection } from './connect';
 import { metadataService } from '#lib/services/metadata.service';
 
@@ -78,7 +78,7 @@ export default function ProjectSettingsMenuDialog({
   const { showToast } = useToast();
   const queryClient = useQueryClient();
 
-  const isCloud = isInsForgeCloudProject();
+  const isCloud = isGrowFoundryCloudProject();
   const canUseCloudHost = isCloud && isCloudHostingMode;
   const projectUrl = useMemo(() => `${getBackendUrl().replace(/\/$/, '')}/`, []);
 
@@ -589,7 +589,7 @@ export default function ProjectSettingsMenuDialog({
                         <div className="w-[200px] shrink-0">
                           <p className="py-1.5 text-sm leading-5 text-foreground">CLI</p>
                           <p className="pb-2 text-[13px] leading-[18px] text-muted-foreground">
-                            Link this cloud project with InsForge CLI and verify the connection.
+                            Link this cloud project with GrowFoundry CLI and verify the connection.
                           </p>
                         </div>
                         <div className="flex min-w-0 flex-1 items-start gap-1.5">

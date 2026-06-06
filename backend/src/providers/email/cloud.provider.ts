@@ -5,10 +5,10 @@ import logger from '@/utils/logger.js';
 import { AppError } from '@/utils/errors.js';
 import { EmailTemplate } from '@/types/email.js';
 import { EmailProvider } from './base.provider.js';
-import { ERROR_CODES, SendRawEmailRequest } from '@insforge/shared-schemas';
+import { ERROR_CODES, SendRawEmailRequest } from '@growfoundry/shared-schemas';
 
 /**
- * Cloud email provider for sending emails via Insforge cloud backend
+ * Cloud email provider for sending emails via Growfoundry cloud backend
  */
 export class CloudEmailProvider implements EmailProvider {
   /**

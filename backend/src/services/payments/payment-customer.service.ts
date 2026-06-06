@@ -18,7 +18,7 @@ import type {
   ListPaymentCustomersResponse,
   PaymentCustomerListItem,
   StripeCustomer as SharedStripeCustomer,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 type StripeCustomerLike =
   | StripeCustomer

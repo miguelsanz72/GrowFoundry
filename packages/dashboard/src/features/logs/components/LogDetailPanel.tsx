@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import type { LogSchema } from '@insforge/shared-schemas';
+import type { LogSchema } from '@growfoundry/shared-schemas';
 
 interface LogDetailPanelProps {
   log: LogSchema | null;

@@ -1,5 +1,5 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@insforge/ui';
-import type { DatabaseSchemaInfo } from '@insforge/shared-schemas';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@growfoundry/ui';
+import type { DatabaseSchemaInfo } from '@growfoundry/shared-schemas';
 import { cn } from '#lib/utils/utils';
 
 interface DatabaseSchemaSelectProps {

@@ -88,7 +88,7 @@ describe('FunctionService Code Validation (Public API)', () => {
       const code = `
         // Standalone Deno apps often use Deno.serve(() => {}).
         export default async function(req: Request) {
-          const docs = "Deno.serve(() => {}) is not used by InsForge functions";
+          const docs = "Deno.serve(() => {}) is not used by GrowFoundry functions";
           return new Response(docs);
         }
       `;
@@ -158,7 +158,7 @@ describe('FunctionService Code Validation (Public API)', () => {
     it('should not reject dynamic imports or CommonJS-shaped code at the API layer', async () => {
       const code = `
         export default async function(req: Request) {
-          const dependency = await import('npm:@insforge/sdk');
+          const dependency = await import('npm:@growfoundry/sdk');
           const maybeRequire = 'require("fs") appears only as text here';
           return new Response(JSON.stringify({ dependency: !!dependency, maybeRequire }));
         }
@@ -170,7 +170,7 @@ describe('FunctionService Code Validation (Public API)', () => {
 
     it('should allow semicolon-free static import statements', async () => {
       const code = `
-        import { createClient } from 'npm:@insforge/sdk'
+        import { createClient } from 'npm:@growfoundry/sdk'
         export default async function(req: Request) {
           return new Response(String(Boolean(createClient)))
         }

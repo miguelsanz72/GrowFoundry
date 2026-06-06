@@ -10,8 +10,8 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
-import type { AIOverviewMetricPoint } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { AIOverviewMetricPoint } from '@growfoundry/shared-schemas';
 import { CodeEditor } from '#components';
 import { useAIModelCredits } from '#features/ai/hooks/useAIModelCredits';
 import { useAIOverview } from '#features/ai/hooks/useAIOverview';

@@ -1,10 +1,10 @@
 blank_issues_enabled: false
 contact_links:
   - name: 📚 Documentation
-    url: https://docs.insforge.dev
+    url: https://docs.growfoundry.dev
     about: Check our documentation for common questions and setup guides
   - name: 💬 Discussions
-    url: https://github.com/InsForge/InsForge/discussions
+    url: https://github.com/GrowFoundry/GrowFoundry/discussions
     about: Ask questions and discuss ideas with the community
   - name: 🆘 Discord Support
     url: https://discord.com/invite/MPxwj5xVvW

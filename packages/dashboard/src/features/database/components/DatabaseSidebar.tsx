@@ -11,9 +11,9 @@ import {
 import { ScrollArea } from '#components/radix/ScrollArea';
 import { useIsCloudHostingMode } from '#lib/config/DashboardHostContext';
 import { cn } from '#lib/utils/utils';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { DatabaseSchemaSelect } from '#features/database/components/DatabaseSchemaSelect';
-import type { DatabaseSchemaInfo } from '@insforge/shared-schemas';
+import type { DatabaseSchemaInfo } from '@growfoundry/shared-schemas';
 
 const DATABASE_STUDIO_SIDEBAR_BASE_ITEMS: Array<{
   id: string;

@@ -1,6 +1,6 @@
 ---
 title: Email SDK Reference
-description: Send custom transactional emails with the InsForge SDK
+description: Send custom transactional emails with the GrowFoundry SDK
 ---
 
 import Installation from '/snippets/sdk-installation.mdx';
@@ -37,7 +37,7 @@ When [Custom SMTP](/core-concepts/messaging/custom-smtp) is enabled for your pro
 ### Example
 
 ```javascript
-const { data, error } = await insforge.emails.send({
+const { data, error } = await growfoundry.emails.send({
   to: ['user1@example.com', 'user2@example.com'],
   cc: 'manager@example.com',
   from: 'Acme Support Team',

@@ -1,4 +1,4 @@
-import { InsForgeDashboard } from '@insforge/dashboard';
+import { GrowFoundryDashboard } from '@growfoundry/dashboard';
 import { isInIframe } from '../helpers';
 import { useCloudHosting } from './useCloudHosting';
 
@@ -31,7 +31,7 @@ export function CloudHostingDashboard() {
   } = useCloudHosting();
 
   return (
-    <InsForgeDashboard
+    <GrowFoundryDashboard
       mode="cloud-hosting"
       showNavbar={!isInIframe()}
       getAuthorizationCode={getAuthorizationCode}

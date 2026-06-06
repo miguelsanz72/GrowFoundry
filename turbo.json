@@ -6,20 +6,20 @@
       "inputs": ["src/**", "tsconfig*.json", "package.json", "vite.config.*", "tsup.config.*"],
       "env": ["VITE_*"]
     },
-    "@insforge/backend#build": {
+    "@growfoundry/backend#build": {
       "outputs": ["../dist/server.js", "../dist/server.js.map"]
     },
     "frontend#build": {
       "dependsOn": [],
       "outputs": ["../dist/frontend/**"]
     },
-    "@insforge/ui#build": {
+    "@growfoundry/ui#build": {
       "outputs": ["dist/**"]
     },
-    "@insforge/dashboard#build": {
+    "@growfoundry/dashboard#build": {
       "outputs": ["dist/**"]
     },
-    "@insforge/shared-schemas#build": {
+    "@growfoundry/shared-schemas#build": {
       "outputs": ["dist/**"]
     },
     "typecheck": {

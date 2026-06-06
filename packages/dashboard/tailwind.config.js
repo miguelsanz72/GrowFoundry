@@ -1,11 +1,11 @@
-import insforgeTailwindPreset from '@insforge/ui/tailwind-preset';
+import growfoundryTailwindPreset from '@growfoundry/ui/tailwind-preset';
 
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
   content: ['./src/**/*.{js,ts,jsx,tsx}', '../ui/src/**/*.{ts,tsx}'],
   prefix: '',
-  presets: [insforgeTailwindPreset],
+  presets: [growfoundryTailwindPreset],
   theme: {
     container: {
       center: true,

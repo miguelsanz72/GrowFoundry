@@ -19,15 +19,15 @@ import {
   MenuDialogSideNavHeader,
   MenuDialogSideNavTitle,
   MenuDialogTitle,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import {
   updateStorageConfigRequestSchema,
   type StorageConfigSchema,
   type UpdateStorageConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { useStorageConfig } from '#features/storage/hooks/useStorageConfig';
 import { S3SettingsPanel } from './S3SettingsPanel';
-import { isInsForgeCloudProject } from '#lib/utils/utils';
+import { isGrowFoundryCloudProject } from '#lib/utils/utils';
 
 type StorageSettingsTab = 'general' | 's3';
 
@@ -81,7 +81,7 @@ export function StorageSettingsMenuDialog({ open, onOpenChange }: StorageSetting
   // S3 gateway is a cloud-only feature — self-hosted deployments don't have
   // VITE_API_BASE_URL / APP_KEY set, so the tab is hidden entirely there.
   // Same detection as AppSidebar and BucketFormDialog.
-  const isCloud = isInsForgeCloudProject();
+  const isCloud = isGrowFoundryCloudProject();
   const [activeTab, setActiveTab] = useState<StorageSettingsTab>('general');
 
   const form = useForm<UpdateStorageConfigRequest>({

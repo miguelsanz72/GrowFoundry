@@ -7,7 +7,7 @@ import {
   type CreateScheduleRequest,
   type UpdateScheduleRequest,
   type ScheduleSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { CronExpressionParser } from 'cron-parser';
 import { randomUUID } from 'crypto';
 

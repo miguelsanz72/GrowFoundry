@@ -2,7 +2,7 @@ import type { Pool } from 'pg';
 import { DatabaseManager } from '@/infra/database/database.manager.js';
 import { getStripeObjectId, toISOString, toISOStringOrNull } from '@/services/payments/helpers.js';
 import type { StripeEnvironment, StripeEvent, StripeWebhookEventRow } from '@/types/payments.js';
-import type { StripeWebhookEvent } from '@insforge/shared-schemas';
+import type { StripeWebhookEvent } from '@growfoundry/shared-schemas';
 
 const WEBHOOK_PENDING_RECLAIM_WINDOW_MS = 5 * 60 * 1000;
 

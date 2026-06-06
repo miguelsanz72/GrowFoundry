@@ -15,9 +15,9 @@ import {
   DialogTitle,
   Input,
   Switch,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { Label, Textarea } from '#components';
-import { type CreateChannelRequest, type UpdateChannelRequest } from '@insforge/shared-schemas';
+import { type CreateChannelRequest, type UpdateChannelRequest } from '@growfoundry/shared-schemas';
 import type { RealtimeChannel } from '#features/realtime/services/realtime.service';
 
 // ── Shared form state ──────────────────────────────────────────────────────────

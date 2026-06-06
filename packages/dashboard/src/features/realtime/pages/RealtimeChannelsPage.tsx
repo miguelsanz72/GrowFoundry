@@ -8,7 +8,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { Skeleton, TableHeader } from '#components';
 import { useConfirm } from '#lib/hooks/useConfirm';
 import { useRealtimeChannels } from '#features/realtime/hooks/useRealtimeChannels';
@@ -16,7 +16,7 @@ import { ChannelRow } from '#features/realtime/components/ChannelRow';
 import { ChannelFormDialog } from '#features/realtime/components/ChannelFormDialog';
 import RealtimeEmptyState from '#features/realtime/components/RealtimeEmptyState';
 import type { RealtimeChannel } from '#features/realtime/services/realtime.service';
-import type { CreateChannelRequest, UpdateChannelRequest } from '@insforge/shared-schemas';
+import type { CreateChannelRequest, UpdateChannelRequest } from '@growfoundry/shared-schemas';
 
 export default function RealtimeChannelsPage() {
   const [isRefreshing, setIsRefreshing] = useState(false);

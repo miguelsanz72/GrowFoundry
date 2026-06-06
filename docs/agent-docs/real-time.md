@@ -1,4 +1,4 @@
-# InsForge Realtime - Agent Documentation
+# GrowFoundry Realtime - Agent Documentation
 
 ## Use Realtime For
 
@@ -115,26 +115,26 @@ Use `realtime.channel_name()` in subscribe policies because `realtime.channels` 
 ## Frontend SDK Pattern
 
 ```typescript
-import { createClient } from '@insforge/sdk';
+import { createClient } from '@growfoundry/sdk';
 
-const insforge = createClient({
-  baseUrl: 'https://your-project.insforge.app',
+const growfoundry = createClient({
+  baseUrl: 'https://your-project.growfoundry.app',
   anonKey: 'your-anon-key'
 });
 
-insforge.realtime.on('error', ({ channel, code, message }) => {
+growfoundry.realtime.on('error', ({ channel, code, message }) => {
   console.error(channel, code, message);
 });
 
-await insforge.realtime.connect();
+await growfoundry.realtime.connect();
 
-const response = await insforge.realtime.subscribe(`order:${orderId}`);
+const response = await growfoundry.realtime.subscribe(`order:${orderId}`);
 
 if (!response.ok) {
   throw new Error(response.error.message);
 }
 
-insforge.realtime.on('status_changed', (payload) => {
+growfoundry.realtime.on('status_changed', (payload) => {
   console.log(payload.status);
   console.log(payload.meta.messageId);
 });
@@ -144,15 +144,15 @@ insforge.realtime.on('status_changed', (payload) => {
 
 | Task | Method |
 |------|--------|
-| Connect | `await insforge.realtime.connect()` |
-| Subscribe | `await insforge.realtime.subscribe(channel)` |
-| Publish | `await insforge.realtime.publish(channel, event, payload)` |
-| Listen | `insforge.realtime.on(event, callback)` |
-| Listen once | `insforge.realtime.once(event, callback)` |
-| Remove listener | `insforge.realtime.off(event, callback)` |
-| Unsubscribe | `insforge.realtime.unsubscribe(channel)` |
-| Disconnect | `insforge.realtime.disconnect()` |
-| List local subscriptions | `insforge.realtime.getSubscribedChannels()` |
+| Connect | `await growfoundry.realtime.connect()` |
+| Subscribe | `await growfoundry.realtime.subscribe(channel)` |
+| Publish | `await growfoundry.realtime.publish(channel, event, payload)` |
+| Listen | `growfoundry.realtime.on(event, callback)` |
+| Listen once | `growfoundry.realtime.once(event, callback)` |
+| Remove listener | `growfoundry.realtime.off(event, callback)` |
+| Unsubscribe | `growfoundry.realtime.unsubscribe(channel)` |
+| Disconnect | `growfoundry.realtime.disconnect()` |
+| List local subscriptions | `growfoundry.realtime.getSubscribedChannels()` |
 
 Client publish requires a successful subscription to the same channel first.
 
@@ -163,7 +163,7 @@ Use this only when the SDK is not available.
 ```typescript
 import { io } from 'socket.io-client';
 
-const socket = io('https://your-project.insforge.app', {
+const socket = io('https://your-project.growfoundry.app', {
   auth: {
     token: '<user-jwt-or-anon-token>'
   }
@@ -228,9 +228,9 @@ Headers:
 
 | Header | Meaning |
 |--------|---------|
-| `X-InsForge-Event` | Event name |
-| `X-InsForge-Channel` | Resolved channel name |
-| `X-InsForge-Message-Id` | Message UUID |
+| `X-GrowFoundry-Event` | Event name |
+| `X-GrowFoundry-Channel` | Resolved channel name |
+| `X-GrowFoundry-Message-Id` | Message UUID |
 
 Webhook delivery counts appear in message history as `whAudienceCount` and `whDeliveredCount`.
 

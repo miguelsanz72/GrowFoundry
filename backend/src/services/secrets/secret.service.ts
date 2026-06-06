@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import { DatabaseManager } from '@/infra/database/database.manager.js';
 import logger from '@/utils/logger.js';
 import { EncryptionManager } from '@/infra/security/encryption.manager.js';
-import { SecretSchema, CreateSecretRequest } from '@insforge/shared-schemas';
+import { SecretSchema, CreateSecretRequest } from '@growfoundry/shared-schemas';
 import { appConfig } from '@/infra/config/app.config.js';
 
 export interface CreateSecretInput extends CreateSecretRequest {
@@ -429,7 +429,7 @@ export class SecretService {
   }
 
   /**
-   * Generate a new API key with 'ik_' prefix (Insforge Key)
+   * Generate a new API key with 'ik_' prefix (Growfoundry Key)
    */
   generateApiKey(): string {
     return 'ik_' + crypto.randomBytes(32).toString('hex');

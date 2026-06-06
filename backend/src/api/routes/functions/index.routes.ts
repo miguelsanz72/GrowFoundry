@@ -9,7 +9,7 @@ import {
   ERROR_CODES,
   uploadFunctionRequestSchema,
   updateFunctionRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { SocketManager } from '@/infra/socket/socket.manager.js';
 import { DataUpdateResourceType, ServerEvents } from '@/types/socket.js';
 import { successResponse } from '@/utils/response.js';

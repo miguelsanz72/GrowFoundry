@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { ConnectionStringSectionV2 } from '#features/dashboard/components/connect/ConnectionStringSectionV2';
 import { APIKeysSectionV2 } from '#features/dashboard/components/connect/APIKeysSectionV2';
 import { DTestMCPSection } from './DTestMCPSection';
@@ -51,7 +51,7 @@ export function ClientDetailPage({ clientId, onBack }: ClientDetailPageProps) {
   const connectionUrlWithPassword = dbPassword
     ? connectionUrl.replace('********', dbPassword)
     : connectionUrl;
-  const connectionStringPrompt = `I'm using InsForge as my backend. Here's my database connection string:\n\n${connectionUrlWithPassword || '<connection string>'}\n\nPlease connect to my database.`;
+  const connectionStringPrompt = `I'm using GrowFoundry as my backend. Here's my database connection string:\n\n${connectionUrlWithPassword || '<connection string>'}\n\nPlease connect to my database.`;
 
   return (
     <main className="h-full min-h-0 min-w-0 overflow-y-auto bg-semantic-1">

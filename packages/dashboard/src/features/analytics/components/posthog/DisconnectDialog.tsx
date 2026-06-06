@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { analyticsService } from '#features/analytics/services/analytics.service';
 import { useToast } from '#lib/hooks/useToast';
 
@@ -37,7 +37,7 @@ export function DisconnectDialog({ open, onClose }: { open: boolean; onClose: ()
         </DialogHeader>
         <DialogBody>
           <p className="text-sm text-foreground">
-            Insforge will stop using your PostHog credentials. Your PostHog project itself will not
+            Growfoundry will stop using your PostHog credentials. Your PostHog project itself will not
             be deleted; you can reconnect anytime.
           </p>
         </DialogBody>

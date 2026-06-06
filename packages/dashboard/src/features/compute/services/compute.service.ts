@@ -3,7 +3,7 @@ import type {
   ServiceSchema,
   CreateServiceRequest,
   UpdateServiceRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 interface ListServicesResponse {
   services: ServiceSchema[];

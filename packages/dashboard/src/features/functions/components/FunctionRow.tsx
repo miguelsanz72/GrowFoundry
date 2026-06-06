@@ -1,5 +1,5 @@
-import { CopyButton } from '@insforge/ui';
-import { FunctionSchema } from '@insforge/shared-schemas';
+import { CopyButton } from '@growfoundry/ui';
+import { FunctionSchema } from '@growfoundry/shared-schemas';
 import { cn, getBackendUrl } from '#lib/utils/utils';
 import { format, formatDistance } from 'date-fns';
 interface FunctionRowProps {

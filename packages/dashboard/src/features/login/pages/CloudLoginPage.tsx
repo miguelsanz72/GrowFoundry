@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Lock } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { useDashboardHost, useDashboardProject } from '#lib/config/DashboardHostContext';
 import { useAuth } from '#lib/contexts/AuthContext';
 import { getFeatureFlag } from '#lib/analytics/posthog';

@@ -7,7 +7,7 @@ import {
   ERROR_CODES,
   listMessagesRequestSchema,
   messageStatsRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const router = Router();
 const messageService = RealtimeMessageService.getInstance();

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { CopyButton } from '@insforge/ui';
+import { CopyButton } from '@growfoundry/ui';
 import { useProjectId } from '#lib/hooks/useMetadata';
 import { useDashboardHost } from '#lib/config/DashboardHostContext';
 import { cn } from '#lib/utils/utils';
@@ -11,17 +11,17 @@ interface DTestCLISectionProps {
 
 function buildCliPrompt(projectId: string | null | undefined, apiKey: string | null) {
   const id = projectId || '<project id>';
-  const loginLine = apiKey ? `npx @insforge/cli login --user-api-key ${apiKey}` : '<placeholder>';
+  const loginLine = apiKey ? `npx @growfoundry/cli login --user-api-key ${apiKey}` : '<placeholder>';
   return [
-    "I'm using InsForge as my backend. Login through:",
+    "I'm using GrowFoundry as my backend. Login through:",
     '',
     loginLine,
     '',
-    'Then install the InsForge CLI and skills for this project, and link it with:',
+    'Then install the GrowFoundry CLI and skills for this project, and link it with:',
     '',
-    `npx @insforge/cli link --project-id ${id}`,
+    `npx @growfoundry/cli link --project-id ${id}`,
     '',
-    'Use the InsForge CLI and skills for backend tasks.',
+    'Use the GrowFoundry CLI and skills for backend tasks.',
   ].join('\n');
 }
 
@@ -77,7 +77,7 @@ export function DTestCLISection({ className, agentName }: DTestCLISectionProps) 
       <div className="flex flex-col gap-1">
         <p className="text-base font-medium leading-7 text-foreground">Copy the setup prompt</p>
         <p className="text-sm leading-5 text-muted-foreground">
-          Paste this into {agentName || 'your agent'} to install InsForge CLI and skills.
+          Paste this into {agentName || 'your agent'} to install GrowFoundry CLI and skills.
         </p>
       </div>
 

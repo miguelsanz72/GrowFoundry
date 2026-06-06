@@ -16,12 +16,12 @@ import {
   MenuDialogSideNavHeader,
   MenuDialogSideNavTitle,
   MenuDialogTitle,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import type {
   StripeConnection,
   StripeEnvironment,
   StripeKeyConfig,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { usePaymentsConfig } from '#features/payments/hooks/usePaymentsConfig';
 import { usePaymentsSync } from '#features/payments/hooks/usePaymentsSync';
 import { usePaymentsWebhook } from '#features/payments/hooks/usePaymentsWebhook';
@@ -170,7 +170,7 @@ function EnvironmentKeySection({
               ) : config?.hasKey ? (
                 <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                   <CheckCircle2 className="h-3 w-3" />
-                  Configured in InsForge secret store
+                  Configured in GrowFoundry secret store
                 </span>
               ) : null}
             </div>
@@ -466,7 +466,7 @@ function WebhookEnvironmentSection({
       label={environmentLabel}
       description={
         isKeyConfigured
-          ? 'InsForge creates and stores a Stripe webhook signing secret for this environment.'
+          ? 'GrowFoundry creates and stores a Stripe webhook signing secret for this environment.'
           : `Configure ${keyName} before creating the webhook.`
       }
     >
@@ -497,7 +497,7 @@ function WebhookEnvironmentSection({
               </div>
               <div className="grid grid-cols-[96px_minmax(0,1fr)] gap-3">
                 <span className="text-muted-foreground">Secret</span>
-                <span className="text-foreground">Stored in InsForge secret store</span>
+                <span className="text-foreground">Stored in GrowFoundry secret store</span>
               </div>
             </div>
           ) : (

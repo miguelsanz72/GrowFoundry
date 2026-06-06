@@ -4,7 +4,7 @@ import { computeWriteLimiter } from '@/api/middlewares/rate-limiters.js';
 import { ComputeServicesService } from '@/services/compute/services.service.js';
 import { successResponse } from '@/utils/response.js';
 import { AppError } from '@/utils/errors.js';
-import { ERROR_CODES, createServiceSchema, updateServiceSchema } from '@insforge/shared-schemas';
+import { ERROR_CODES, createServiceSchema, updateServiceSchema } from '@growfoundry/shared-schemas';
 import { AuditService } from '@/services/logs/audit.service.js';
 import { SocketManager } from '@/infra/socket/socket.manager.js';
 import { DataUpdateResourceType, ServerEvents } from '@/types/socket.js';

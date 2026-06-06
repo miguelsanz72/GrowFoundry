@@ -4,7 +4,7 @@ import {
   createMigrationRequestSchema,
   type CreateMigrationResponse,
   type DatabaseMigrationsResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { verifyAdmin, AuthRequest } from '@/api/middlewares/auth.js';
 import { AppError } from '@/utils/errors.js';
 import { DatabaseMigrationService } from '@/services/database/database-migration.service.js';

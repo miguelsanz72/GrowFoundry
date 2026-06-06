@@ -19,7 +19,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import {
   Alert,
   AlertDescription,

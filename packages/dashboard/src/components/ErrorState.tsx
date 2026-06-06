@@ -1,5 +1,5 @@
 import { AlertCircle } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { Alert, AlertTitle, AlertDescription } from './';
 import { cn } from '#lib/utils/utils';
 

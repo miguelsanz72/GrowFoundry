@@ -13,7 +13,7 @@ import {
   SelectValue,
   Badge,
   Input,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { PaginationControls, Skeleton } from '#components';
 import { useDeployments } from '#features/deployments/hooks/useDeployments';
 import type { DeploymentSchema } from '#features/deployments/services/deployments.service';

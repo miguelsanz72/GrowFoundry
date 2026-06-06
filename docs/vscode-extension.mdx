@@ -1,49 +1,49 @@
 ---
 title: "VS Code Extension"
-description: "Connect your InsForge projects to AI coding assistants and install MCP with one click."
+description: "Connect your GrowFoundry projects to AI coding assistants and install MCP with one click."
 ---
 
 ## Overview
 
-The InsForge VS Code extension:
+The GrowFoundry VS Code extension:
 
-- Logs you in to InsForge (OAuth + PKCE)
+- Logs you in to GrowFoundry (OAuth + PKCE)
 - Lets you pick an org/project
-- Installs InsForge MCP for your AI client
+- Installs GrowFoundry MCP for your AI client
 
-It launches the MCP installer (`npx @insforge/install`) with your project’s API key and API base URL.
+It launches the MCP installer (`npx @growfoundry/install`) with your project’s API key and API base URL.
 
 ## Links
 
-- [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=InsForge.insforge)
-- [Open VSX](https://open-vsx.org/extension/InsForge/insforge)
+- [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=GrowFoundry.growfoundry)
+- [Open VSX](https://open-vsx.org/extension/GrowFoundry/growfoundry)
 
 ## Install
 
 1. Open VS Code
 2. Go to **Extensions**
-3. Search for **InsForge**
-4. Install the extension published by **insforge**
+3. Search for **GrowFoundry**
+4. Install the extension published by **growfoundry**
 
 ## Use the extension
 
 <Steps>
-  <Step title="Open the InsForge panel">
-    Click the **InsForge** icon in the Activity Bar (left sidebar).
+  <Step title="Open the GrowFoundry panel">
+    Click the **GrowFoundry** icon in the Activity Bar (left sidebar).
   </Step>
 
   <Step title="Login">
-    Click **Login with InsForge** and complete the login flow in your browser.
+    Click **Login with GrowFoundry** and complete the login flow in your browser.
 
     <Note>The callback is <code>http://127.0.0.1:54321/callback</code>.</Note>
   </Step>
 
   <Step title="Select a project">
-    Pick an organization and project from the InsForge tree view, or run <code>InsForge: Select Project</code> from the Command Palette.
+    Pick an organization and project from the GrowFoundry tree view, or run <code>GrowFoundry: Select Project</code> from the Command Palette.
   </Step>
 
   <Step title="Install MCP">
-    Run <code>InsForge: Install MCP</code> (or right-click a project and choose **Install MCP**), then pick the AI client you want to configure.
+    Run <code>GrowFoundry: Install MCP</code> (or right-click a project and choose **Install MCP**), then pick the AI client you want to configure.
 
     The installer runs in a VS Code terminal.
   </Step>
@@ -51,7 +51,7 @@ It launches the MCP installer (`npx @insforge/install`) with your project’s AP
 
 ## Supported AI clients
 
-The extension supports the following MCP “clients” (the value passed to `@insforge/install`):
+The extension supports the following MCP “clients” (the value passed to `@growfoundry/install`):
 
 | Client | Typical config location |
 |---|---|

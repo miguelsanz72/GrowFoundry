@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { TokenManager } from '@/infra/security/token.manager.js';
 import { AppError } from '@/utils/errors.js';
-import { ERROR_CODES, type RoleSchema } from '@insforge/shared-schemas';
+import { ERROR_CODES, type RoleSchema } from '@growfoundry/shared-schemas';
 import { NEXT_ACTIONS } from '../../utils/next-actions.js';
 import { SecretService } from '@/services/secrets/secret.service.js';
 
@@ -205,7 +205,7 @@ export function verifyToken(req: AuthRequest, _res: Response, next: NextFunction
 }
 
 /**
- * Verifies JWT token from cloud backend (api.insforge.dev)
+ * Verifies JWT token from cloud backend (api.growfoundry.dev)
  * Validates signature using JWKS and checks project_id claim
  */
 export async function verifyCloudBackend(req: AuthRequest, _res: Response, next: NextFunction) {

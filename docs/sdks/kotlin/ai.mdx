@@ -1,13 +1,13 @@
 ---
 title: Model Gateway
-description: Build AI features from Kotlin with the OpenRouter key provisioned by InsForge
+description: Build AI features from Kotlin with the OpenRouter key provisioned by GrowFoundry
 ---
 
 ## Overview
 
-InsForge provisions an OpenRouter API key for Model Gateway projects. New Kotlin applications should call OpenRouter from trusted server-side code, a backend API, or another secure boundary. Do not embed the OpenRouter key in Android or desktop client binaries.
+GrowFoundry provisions an OpenRouter API key for Model Gateway projects. New Kotlin applications should call OpenRouter from trusted server-side code, a backend API, or another secure boundary. Do not embed the OpenRouter key in Android or desktop client binaries.
 
-The previous InsForge Kotlin AI SDK methods are deprecated compatibility wrappers. Use the InsForge SDK for database, auth, storage, functions, and realtime; use OpenRouter for model calls.
+The previous GrowFoundry Kotlin AI SDK methods are deprecated compatibility wrappers. Use the GrowFoundry SDK for database, auth, storage, functions, and realtime; use OpenRouter for model calls.
 
 ## Recommended Architecture
 
@@ -78,7 +78,7 @@ suspend fun sendPrompt(prompt: String, sessionToken: String): ChatResponse {
 
 Use an app session token or another user-scoped credential for your backend route. Never send the OpenRouter key from a Kotlin client.
 
-## Legacy InsForge AI Methods
+## Legacy GrowFoundry AI Methods
 
 These Kotlin SDK methods are deprecated for new AI integrations:
 
@@ -88,4 +88,4 @@ These Kotlin SDK methods are deprecated for new AI integrations:
 - `client.ai.generateEmbeddings(...)`
 - `client.ai.generateImage(...)`
 
-They target the deprecated InsForge AI proxy. New integrations should use the OpenRouter key from the dashboard and follow OpenRouter's current API docs for model parameters and capabilities.
+They target the deprecated GrowFoundry AI proxy. New integrations should use the OpenRouter key from the dashboard and follow OpenRouter's current API docs for model parameters and capabilities.

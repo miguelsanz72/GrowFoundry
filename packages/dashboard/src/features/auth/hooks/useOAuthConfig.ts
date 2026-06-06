@@ -6,7 +6,7 @@ import {
   UpdateOAuthConfigRequest,
   ListOAuthConfigsResponse,
   OAuthProvidersSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { oAuthConfigService } from '#features/auth/services/oauth-config.service';
 import { useToast } from '#lib/hooks/useToast';
 

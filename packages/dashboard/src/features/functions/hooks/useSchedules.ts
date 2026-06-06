@@ -6,7 +6,7 @@ import type {
   CreateScheduleResponse,
   UpdateScheduleRequest,
   UpdateScheduleResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { scheduleService } from '#features/functions/services/schedule.service';
 import { useToast } from '#lib/hooks/useToast';
 

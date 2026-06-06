@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { createHash } from 'crypto';
 import { isCloudEnvironment } from '@/utils/environment.js';
 import { AppError, UpstreamError } from '@/utils/errors.js';
-import { ERROR_CODES, type AIOverview } from '@insforge/shared-schemas';
+import { ERROR_CODES, type AIOverview } from '@growfoundry/shared-schemas';
 import logger from '@/utils/logger.js';
 
 interface CloudCredentialsResponse {
@@ -107,15 +107,15 @@ export class OpenRouterProvider {
       baseURL: 'https://openrouter.ai/api/v1',
       apiKey,
       defaultHeaders: {
-        'HTTP-Referer': 'https://insforge.dev',
-        'X-Title': 'InsForge',
+        'HTTP-Referer': 'https://growfoundry.dev',
+        'X-Title': 'GrowFoundry',
       },
     });
   }
 
   /**
    * Resolve the API key and its source in one call.
-   * Cloud projects use InsForge Cloud-managed credentials; self-hosting uses OPENROUTER_API_KEY.
+   * Cloud projects use GrowFoundry Cloud-managed credentials; self-hosting uses OPENROUTER_API_KEY.
    * Use this instead of getApiKey() when downstream logic depends on the source.
    */
   async getApiKeyWithSource(): Promise<ResolvedApiKey> {
@@ -140,7 +140,7 @@ export class OpenRouterProvider {
 
   /**
    * Get OpenRouter API key with priority order:
-   * 1. InsForge Cloud-managed key (cloud environment only)
+   * 1. GrowFoundry Cloud-managed key (cloud environment only)
    * 2. OPENROUTER_API_KEY environment variable (self-hosted)
    */
   async getApiKey(): Promise<string> {
@@ -341,7 +341,7 @@ export class OpenRouterProvider {
     }
 
     const url = new URL(
-      `${process.env.CLOUD_API_HOST || 'https://api.insforge.dev'}/ai/v1/activity/${projectId}`
+      `${process.env.CLOUD_API_HOST || 'https://api.growfoundry.dev'}/ai/v1/activity/${projectId}`
     );
     url.searchParams.set('sign', token);
 
@@ -489,7 +489,7 @@ export class OpenRouterProvider {
 
         // Fetch API key from cloud service with sign token as query parameter
         const response = await fetch(
-          `${process.env.CLOUD_API_HOST || 'https://api.insforge.dev'}/ai/v1/credentials/${projectId}?sign=${token}`
+          `${process.env.CLOUD_API_HOST || 'https://api.growfoundry.dev'}/ai/v1/credentials/${projectId}?sign=${token}`
         );
 
         if (!response.ok) {
@@ -549,7 +549,7 @@ export class OpenRouterProvider {
 
         // Renew API key from cloud service with sign token in request body
         const response = await fetch(
-          `${process.env.CLOUD_API_HOST || 'https://api.insforge.dev'}/ai/v1/credentials/${projectId}/renew`,
+          `${process.env.CLOUD_API_HOST || 'https://api.growfoundry.dev'}/ai/v1/credentials/${projectId}/renew`,
           {
             method: 'POST',
             headers: {

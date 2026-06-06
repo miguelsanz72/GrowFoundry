@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   SearchInput,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 
 interface FeatureSidebarProps {
   title: string;

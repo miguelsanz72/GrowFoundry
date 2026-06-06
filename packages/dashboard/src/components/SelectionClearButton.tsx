@@ -1,4 +1,4 @@
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { X } from 'lucide-react';
 
 interface SelectionClearButtonProps {

@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Implement and ship a manifest-based direct deployment flow that streams source files through InsForge to Vercel without exposing Vercel credentials, while preserving the legacy zip/S3 deployment path for backward compatibility.
+**Goal:** Implement and ship a manifest-based direct deployment flow that streams source files through GrowFoundry to Vercel without exposing Vercel credentials, while preserving the legacy zip/S3 deployment path for backward compatibility.
 
-**Architecture:** The backend exposes a direct deployment session endpoint that stores deployment rows in `deployments.runs`, stores manifest/upload state in `deployments.files`, and returns a `fileId` per entry. Clients then stream each file to `PUT /api/deployments/:id/files/:fileId/content`; InsForge validates the byte stream against the registered SHA/size and proxies it to Vercel's file upload API. Once every manifest row is marked uploaded, the client calls `POST /api/deployments/:id/start`, and InsForge creates the Vercel deployment from uploaded file SHAs. MCP uses the direct flow when the backend version supports it, and falls back to the legacy zip upload flow when the backend is older or returns `404`.
+**Architecture:** The backend exposes a direct deployment session endpoint that stores deployment rows in `deployments.runs`, stores manifest/upload state in `deployments.files`, and returns a `fileId` per entry. Clients then stream each file to `PUT /api/deployments/:id/files/:fileId/content`; GrowFoundry validates the byte stream against the registered SHA/size and proxies it to Vercel's file upload API. Once every manifest row is marked uploaded, the client calls `POST /api/deployments/:id/start`, and GrowFoundry creates the Vercel deployment from uploaded file SHAs. MCP uses the direct flow when the backend version supports it, and falls back to the legacy zip upload flow when the backend is older or returns `404`.
 
 **Tech Stack:** Express, PostgreSQL, Zod shared schemas, Axios + node-fetch streaming, Vercel file upload API, React service layer, Docker Compose, Vitest, MCP server tooling
 
@@ -14,7 +14,7 @@
 
 ## File Map
 
-### InsForge repo
+### GrowFoundry repo
 
 | File | Purpose |
 |------|---------|
@@ -40,9 +40,9 @@
 
 | File | Purpose |
 |------|---------|
-| `../insforge-mcp/src/shared/tools/types.ts` | Register context carrying backend version into tool registration |
-| `../insforge-mcp/src/shared/tools/index.ts` | Backend version discovery and tool registration |
-| `../insforge-mcp/src/shared/tools/deployment.ts` | Direct deployment manifest collection, bounded parallel uploads, remote shell instructions, and legacy fallback |
+| `../growfoundry-mcp/src/shared/tools/types.ts` | Register context carrying backend version into tool registration |
+| `../growfoundry-mcp/src/shared/tools/index.ts` | Backend version discovery and tool registration |
+| `../growfoundry-mcp/src/shared/tools/deployment.ts` | Direct deployment manifest collection, bounded parallel uploads, remote shell instructions, and legacy fallback |
 
 ---
 
@@ -199,7 +199,7 @@ it('rejects duplicate manifest paths before opening a transaction', async () => 
 - [ ] **Step 4: Run the targeted backend test to verify the contract is red first, then green after implementation**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge/backend
+cd /Users/lyu/Documents/GitHub/GrowFoundry/backend
 npm test -- deployment-direct-flow.test.ts
 ```
 
@@ -209,7 +209,7 @@ Expected after Task 2: `Test Files  1 passed`
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge
+cd /Users/lyu/Documents/GitHub/GrowFoundry
 git add \
   packages/shared-schemas/src/deployments-api.schema.ts \
   backend/src/infra/database/migrations/031_create-deployment-files.sql \
@@ -420,7 +420,7 @@ function shouldSkipGlobalRateLimit(req: Request): boolean {
 - [ ] **Step 5: Run focused backend verification**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge/backend
+cd /Users/lyu/Documents/GitHub/GrowFoundry/backend
 npm test -- deployment-direct-flow.test.ts
 npm test -- vercel-upload-batching.test.ts
 npm run build
@@ -434,7 +434,7 @@ Expected:
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge
+cd /Users/lyu/Documents/GitHub/GrowFoundry
 git add \
   backend/src/api/routes/deployments/index.routes.ts \
   backend/src/services/deployments/deployment.service.ts \
@@ -450,9 +450,9 @@ git commit -m "feat: add direct deployment upload proxy"
 ## Task 3: Wire MCP local and remote deployment flows with compatibility fallback
 
 **Files:**
-- Modify: `../insforge-mcp/src/shared/tools/types.ts`
-- Modify: `../insforge-mcp/src/shared/tools/index.ts`
-- Modify: `../insforge-mcp/src/shared/tools/deployment.ts`
+- Modify: `../growfoundry-mcp/src/shared/tools/types.ts`
+- Modify: `../growfoundry-mcp/src/shared/tools/index.ts`
+- Modify: `../growfoundry-mcp/src/shared/tools/deployment.ts`
 
 - [ ] **Step 1: Carry backend version through MCP tool registration context**
 
@@ -543,11 +543,11 @@ const createResponse = await fetch(`${API_BASE_URL}/api/deployments`, {
 ```ts
 return `Direct deployment upload is available for this backend.
 
-Please execute the following command locally from a shell that has INSFORGE_API_KEY set, then call the \`start-deployment\` tool with the deployment ID printed by the script. Set \`INSFORGE_DEPLOY_UPLOAD_CONCURRENCY\` if you want to tune parallel uploads; the default is 8 and the maximum is 32.
+Please execute the following command locally from a shell that has GROWFOUNDRY_API_KEY set, then call the \`start-deployment\` tool with the deployment ID printed by the script. Set \`GROWFOUNDRY_DEPLOY_UPLOAD_CONCURRENCY\` if you want to tune parallel uploads; the default is 8 and the maximum is 32.
 
 \`\`\`bash
 cd ${escapedDir}
-INSFORGE_API_KEY="\${INSFORGE_API_KEY:?Set INSFORGE_API_KEY to your InsForge API key}" node --input-type=module <<'NODE'
+GROWFOUNDRY_API_KEY="\${GROWFOUNDRY_API_KEY:?Set GROWFOUNDRY_API_KEY to your GrowFoundry API key}" node --input-type=module <<'NODE'
 const createResult = await api('/api/deployments/direct', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -571,7 +571,7 @@ If the upload is interrupted after the deployment ID is printed, query \`deploym
 - [ ] **Step 5: Verify MCP compilation and smoke-test tool registration**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/insforge-mcp
+cd /Users/lyu/Documents/GitHub/growfoundry-mcp
 npm test
 npm run build
 ```
@@ -583,7 +583,7 @@ Expected:
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/insforge-mcp
+cd /Users/lyu/Documents/GitHub/growfoundry-mcp
 git add \
   src/shared/tools/types.ts \
   src/shared/tools/index.ts \
@@ -656,8 +656,8 @@ VERCEL_PROJECT_ID=
 ```md
 ## Overview
 
-Deploy frontend applications to InsForge using the `create-deployment` MCP tool. The tool handles uploading source files, building, and deploying automatically.
-Source files are uploaded individually through InsForge's deployment proxy; do not zip the project or upload deployment artifacts to storage yourself.
+Deploy frontend applications to GrowFoundry using the `create-deployment` MCP tool. The tool handles uploading source files, building, and deploying automatically.
+Source files are uploaded individually through GrowFoundry's deployment proxy; do not zip the project or upload deployment artifacts to storage yourself.
 The REST API still supports the legacy zip upload flow for backward compatibility.
 ```
 
@@ -673,12 +673,12 @@ The REST API still supports the legacy zip upload flow for backward compatibilit
 - [ ] **Step 4: Verify the sample config and dashboard package build**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge
+cd /Users/lyu/Documents/GitHub/GrowFoundry
 docker compose -f docker-compose.yml config --quiet
 docker compose -f docker-compose.prod.yml config --quiet
 docker compose -f deploy/docker-compose/docker-compose.yml config --quiet
 
-cd /Users/lyu/Documents/GitHub/InsForge/packages/dashboard
+cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/dashboard
 npm run typecheck
 npm run build
 ```
@@ -691,7 +691,7 @@ Expected:
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge
+cd /Users/lyu/Documents/GitHub/GrowFoundry
 git add \
   packages/dashboard/src/features/deployments/services/deployments.service.ts \
   .env.example \
@@ -711,13 +711,13 @@ git commit -m "docs: document direct deploy flow and self-host config"
 **Files:**
 - Test: `backend/tests/unit/deployment-direct-flow.test.ts`
 - Test: `backend/tests/unit/vercel-upload-batching.test.ts`
-- Test: `../insforge-mcp/src/shared/tools/deployment.ts`
+- Test: `../growfoundry-mcp/src/shared/tools/deployment.ts`
 - Test: compose manifests and docs touched above
 
 - [ ] **Step 1: Run the full backend verification suite**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge/backend
+cd /Users/lyu/Documents/GitHub/GrowFoundry/backend
 npm test
 npm run build
 ```
@@ -729,10 +729,10 @@ Expected:
 - [ ] **Step 2: Run shared schema and dashboard verification**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge/packages/shared-schemas
+cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/shared-schemas
 npm run build
 
-cd /Users/lyu/Documents/GitHub/InsForge/packages/dashboard
+cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/dashboard
 npm run typecheck
 npm run build
 ```
@@ -744,7 +744,7 @@ Expected:
 - [ ] **Step 3: Run MCP verification**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/insforge-mcp
+cd /Users/lyu/Documents/GitHub/growfoundry-mcp
 npm test
 npm run build
 ```
@@ -777,7 +777,7 @@ Expected:
 - [ ] **Step 5: Final commit or tag-ready checkpoint**
 
 ```bash
-cd /Users/lyu/Documents/GitHub/InsForge
+cd /Users/lyu/Documents/GitHub/GrowFoundry
 git status
 git log --oneline -n 5
 ```

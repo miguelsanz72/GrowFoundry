@@ -13,7 +13,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '#lib/api/client';
 import { useAuth } from './AuthContext';
 import { getDashboardBackendUrl } from '#lib/config/runtime';
-import type { SocketMessage } from '@insforge/shared-schemas';
+import type { SocketMessage } from '@growfoundry/shared-schemas';
 import { databaseTableQueryKeys } from '#features/database/queryKeys';
 import { parseDatabaseTableReference } from '#features/database/helpers';
 import { useMcpUsage } from '#features/logs/hooks/useMcpUsage';

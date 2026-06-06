@@ -5,7 +5,7 @@ import type {
   PaymentHistory,
   PaymentHistoryStatus,
   PaymentHistoryType,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import {
   Alert,
   AlertDescription,

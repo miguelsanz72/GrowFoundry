@@ -60,7 +60,7 @@ export const DashboardProjectProvider = DashboardProjectContext.Provider;
 export function useDashboardHost() {
   const value = useContext(DashboardHostContext);
   if (!value) {
-    throw new Error('useDashboardHost must be used within an InsForgeDashboard');
+    throw new Error('useDashboardHost must be used within an GrowFoundryDashboard');
   }
   return value;
 }

@@ -11,7 +11,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from 'lucide-react';
-import { Button, Dialog, DialogContent, DialogDescription, DialogTitle, Input } from '@insforge/ui';
+import { Button, Dialog, DialogContent, DialogDescription, DialogTitle, Input } from '@growfoundry/ui';
 import { Skeleton } from '#components';
 import { useDeployments } from '#features/deployments/hooks/useDeployments';
 import { useDeploymentSlug } from '#features/deployments/hooks/useDeploymentSlug';
@@ -21,14 +21,14 @@ import { useToast } from '#lib/hooks/useToast';
 import type { CustomDomain } from '#features/deployments/services/deployments.service';
 
 /**
- * Extracts the slug portion from a custom insforge.site domain URL.
- * e.g. "https://my-slug.insforge.site" -> "my-slug"
+ * Extracts the slug portion from a custom growfoundry.site domain URL.
+ * e.g. "https://my-slug.growfoundry.site" -> "my-slug"
  */
 function extractSlugFromUrl(url: string | null): string {
   if (!url) {
     return '';
   }
-  const match = url.match(/^https?:\/\/([^.]+)\.insforge\.site$/);
+  const match = url.match(/^https?:\/\/([^.]+)\.growfoundry\.site$/);
   return match?.[1] ?? '';
 }
 
@@ -293,7 +293,7 @@ function CustomDomainRow({
 
 /**
  * Page for managing deployment domains.
- * Shows the auto-generated default domain, the insforge.site custom slug,
+ * Shows the auto-generated default domain, the growfoundry.site custom slug,
  * and user-owned custom domains with full DNS verification workflow.
  */
 export default function DeploymentDomainsPage() {
@@ -325,7 +325,7 @@ export default function DeploymentDomainsPage() {
     removingDomain,
   } = useCustomDomains();
   const { showToast } = useToast();
-  const RESERVED_HOSTED_DOMAIN_SUFFIX = '.insforge.site';
+  const RESERVED_HOSTED_DOMAIN_SUFFIX = '.growfoundry.site';
 
   const latestReadyDeployment = deployments.find((d) => d.status === 'READY') ?? null;
   const defaultDomain = latestReadyDeployment?.url ?? null;
@@ -417,7 +417,7 @@ export default function DeploymentDomainsPage() {
       return;
     }
     if (trimmed.endsWith(RESERVED_HOSTED_DOMAIN_SUFFIX)) {
-      setDomainError('Domains ending with .insforge.site are reserved by InsForge');
+      setDomainError('Domains ending with .growfoundry.site are reserved by GrowFoundry');
       return;
     }
     setDomainError('');
@@ -530,7 +530,7 @@ export default function DeploymentDomainsPage() {
                       className="h-8 w-[200px]"
                     />
                     <span className="text-[13px] text-zinc-950 dark:text-white">
-                      .insforge.site
+                      .growfoundry.site
                     </span>
                   </div>
                 ) : savedCustomSlug ? (

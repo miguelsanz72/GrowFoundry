@@ -2,7 +2,7 @@
 
 **Status**: Draft
 **Date**: 2026-05-24
-**Repo**: InsForge (OSS dashboard)
+**Repo**: GrowFoundry (OSS dashboard)
 **Scope**: `packages/dashboard/src/features/analytics/*` + sidebar nav + routing
 **Design refs** (`Figma`):
 - Disconnected overview — `3177-62515`
@@ -24,7 +24,7 @@ The redesign splits the feature into a **secondary-sidebar pattern** matching ho
 - When PostHog is **not connected**: sub-items are disabled, the gear is disabled, the main area shows a single empty-connect CTA panel
 - When connected: each sub-item routes to a focused dashboard page
 
-Goal: implement that layout using existing InsForge components (`FeatureSidebar`, `MenuDialog`, `Button`, etc.) and existing analytics building blocks (`KpiSectionWithTrend`, `BreakdownPanel`, `RetentionCard`, `RecentReplaysCard`). No hard-coded colors / spacing — Tailwind semantic classes + tokens only.
+Goal: implement that layout using existing GrowFoundry components (`FeatureSidebar`, `MenuDialog`, `Button`, etc.) and existing analytics building blocks (`KpiSectionWithTrend`, `BreakdownPanel`, `RetentionCard`, `RecentReplaysCard`). No hard-coded colors / spacing — Tailwind semantic classes + tokens only.
 
 ---
 
@@ -270,7 +270,7 @@ Node `3174-54062` is the connect-success toast state (`Analytics setup succeeded
 ```
 
 Note: no `TimeRangeSelector` here — `useRecordings` only takes `limit` and doesn't read the time-range context, so showing the selector would be misleading. If the recordings backend later grows time-range filtering, wire `useRecordings` to `TimeRangeContext` and add the selector back.
-The design shows pagination at the bottom of the list. `RecentReplaysCard` today returns ~N recent replays; this redesign asks it to paginate. Use `Pagination` from `@insforge/ui`. Pagination logic is a small extension to `useRecordings` (`limit` + `offset`) — covered in the implementation plan.
+The design shows pagination at the bottom of the list. `RecentReplaysCard` today returns ~N recent replays; this redesign asks it to paginate. Use `Pagination` from `@growfoundry/ui`. Pagination logic is a small extension to `useRecordings` (`limit` + `offset`) — covered in the implementation plan.
 
 ### `Info` notice about Web Analytics lag
 

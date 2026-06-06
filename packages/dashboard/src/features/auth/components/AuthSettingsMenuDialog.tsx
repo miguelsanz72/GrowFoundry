@@ -26,15 +26,15 @@ import {
   SelectItem,
   SelectTrigger,
   Switch,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import {
   updateAuthConfigRequestSchema,
   type AuthConfigSchema,
   type UpdateAuthConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { useAuthConfig } from '#features/auth/hooks/useAuthConfig';
 import { useToast } from '#lib/hooks/useToast';
-import { isInsForgeCloudProject } from '#lib/utils/utils';
+import { isGrowFoundryCloudProject } from '#lib/utils/utils';
 
 interface AuthSettingsMenuDialogProps {
   open: boolean;
@@ -100,7 +100,7 @@ function SettingRow({ label, description, children }: SettingRowProps) {
 }
 
 export function AuthSettingsMenuDialog({ open, onOpenChange }: AuthSettingsMenuDialogProps) {
-  const isCloudProject = isInsForgeCloudProject();
+  const isCloudProject = isGrowFoundryCloudProject();
   const [activeSection, setActiveSection] = useState<AuthSettingsSection>('general');
   const { config, isLoading, isUpdating, updateConfig } = useAuthConfig();
   const { showToast } = useToast();
@@ -342,7 +342,7 @@ export function AuthSettingsMenuDialog({ open, onOpenChange }: AuthSettingsMenuD
                   <>
                     {!isCloudProject ? (
                       <p className="text-sm text-muted-foreground">
-                        Email verification settings are available for InsForge Cloud projects only.
+                        Email verification settings are available for GrowFoundry Cloud projects only.
                       </p>
                     ) : (
                       <>

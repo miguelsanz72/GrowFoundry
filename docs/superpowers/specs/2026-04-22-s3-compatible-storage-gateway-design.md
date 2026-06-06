@@ -2,13 +2,13 @@
 
 ## Overview
 
-Add an S3-protocol HTTP gateway in front of InsForge's Storage module so that any AWS S3-compatible client (`aws` CLI, `rclone`, AWS SDKs, Terraform, backup tools) can read and write InsForge buckets with no code changes.
+Add an S3-protocol HTTP gateway in front of GrowFoundry's Storage module so that any AWS S3-compatible client (`aws` CLI, `rclone`, AWS SDKs, Terraform, backup tools) can read and write GrowFoundry buckets with no code changes.
 
-The gateway sits at `/storage/v1/s3` on each project's backend host (e.g. `{appkey}.{region}.insforge.app/storage/v1/s3`). It verifies AWS SigV4 signatures against project-scoped access keys, dispatches to a small set of S3 operation handlers, and delegates physical IO to the existing `S3StorageProvider`. Object and bucket metadata stays consistent with the REST API by sharing the `storage.buckets` and `storage.objects` tables.
+The gateway sits at `/storage/v1/s3` on each project's backend host (e.g. `{appkey}.{region}.growfoundry.app/storage/v1/s3`). It verifies AWS SigV4 signatures against project-scoped access keys, dispatches to a small set of S3 operation handlers, and delegates physical IO to the existing `S3StorageProvider`. Object and bucket metadata stays consistent with the REST API by sharing the `storage.buckets` and `storage.objects` tables.
 
 ## Motivation
 
-InsForge today exposes only a REST API for storage. Developers who want to migrate existing S3-based workloads (CI upload steps, `aws s3 sync`, backup scripts, Terraform `aws_s3_object` resources) have to rewrite their integration. Supabase shipped an S3-compatible gateway for the same reason; open-sourcing that design ([supabase/storage](https://github.com/supabase/storage)) means a well-trodden implementation path exists. This feature closes the compatibility gap so that InsForge Storage becomes drop-in usable from any S3 toolchain.
+GrowFoundry today exposes only a REST API for storage. Developers who want to migrate existing S3-based workloads (CI upload steps, `aws s3 sync`, backup scripts, Terraform `aws_s3_object` resources) have to rewrite their integration. Supabase shipped an S3-compatible gateway for the same reason; open-sourcing that design ([supabase/storage](https://github.com/supabase/storage)) means a well-trodden implementation path exists. This feature closes the compatibility gap so that GrowFoundry Storage becomes drop-in usable from any S3 toolchain.
 
 ## Goals & Non-Goals
 
@@ -16,7 +16,7 @@ InsForge today exposes only a REST API for storage. Developers who want to migra
 
 1. `aws s3 cp <file> s3://<bucket>/<key>` and the reverse work zero-config (including files >200 MB via automatic multipart).
 2. `aws s3 sync` and `rclone sync` work bidirectionally.
-3. Objects uploaded via S3 protocol appear immediately in the InsForge Dashboard and REST API `GET /api/storage/buckets/:bucket/objects`. Reverse direction works too.
+3. Objects uploaded via S3 protocol appear immediately in the GrowFoundry Dashboard and REST API `GET /api/storage/buckets/:bucket/objects`. Reverse direction works too.
 4. Secret access keys are never exposed after creation; the DB stores only encrypted ciphertext.
 5. Large uploads stream end-to-end; memory usage does not scale with object size.
 
@@ -34,7 +34,7 @@ InsForge today exposes only a REST API for storage. Developers who want to migra
 
 ### Endpoint & Routing
 
-- External endpoint: `https://{appkey}.{region}.insforge.app/storage/v1/s3`
+- External endpoint: `https://{appkey}.{region}.growfoundry.app/storage/v1/s3`
 - SDK configuration: `{ endpoint, region: 'us-east-2', forcePathStyle: true, credentials }`
 - Signature region defaults to `us-east-2` to match the region our `S3StorageProvider` uses by default (see `s3.provider.ts`), so requests forwarded to the underlying S3 don't need a separate region translation step. The validated region comes from `AWS_REGION` — the same env var the S3 provider already reads — so clients sign with the same region the backing bucket lives in, and the Dashboard's S3 Config page (`GET /api/storage/s3/config`) surfaces exactly what the middleware will accept.
 - Mount path is `/storage/v1/s3` with **no `/api` prefix**. The `/api` prefix would force clients to configure `endpoint=<host>/api`, breaking S3 tooling conventions.
@@ -369,7 +369,7 @@ At startup, the gateway detects the active provider. If not `S3StorageProvider`,
 
 ### S3StorageProvider Implementation
 
-Each new method is a thin wrapper over an AWS SDK v3 command, reusing the existing `getS3Key(bucket, key)` helper that applies the `{appKey}/{bucket}/{key}` prefix. Multipart operations use real S3 multipart (uploadId is the real S3 uploadId); InsForge stores no multipart state in its own DB.
+Each new method is a thin wrapper over an AWS SDK v3 command, reusing the existing `getS3Key(bucket, key)` helper that applies the `{appKey}/{bucket}/{key}` prefix. Multipart operations use real S3 multipart (uploadId is the real S3 uploadId); GrowFoundry stores no multipart state in its own DB.
 
 ### Metadata Synchronization Table
 
@@ -434,7 +434,7 @@ ALTER TABLE storage.objects
 
 ### Bucket Name Rules
 
-`CreateBucket` applies the existing InsForge regex `^[a-zA-Z0-9_-]+$`. This is looser than AWS's DNS-compatible rules (lowercase only, 3–63 chars, no underscores). Tradeoff: REST and S3 see the same rules, at the cost of occasional SDK-side warnings. Documented.
+`CreateBucket` applies the existing GrowFoundry regex `^[a-zA-Z0-9_-]+$`. This is looser than AWS's DNS-compatible rules (lowercase only, 3–63 chars, no underscores). Tradeoff: REST and S3 see the same rules, at the cost of occasional SDK-side warnings. Documented.
 
 ### Size Limits
 
@@ -522,10 +522,10 @@ These are parked; they don't block the design but should be resolved during or b
 3. **MinIO self-hosted support.** The design supports it by construction; should we document and recommend it as the self-hosted S3-protocol path? (Recommend: yes.)
 4. **Updating existing REST/Dashboard upload paths** to write `uploaded_via='rest' | 'dashboard'`. Required to keep the new column meaningful. Non-breaking (has DEFAULT).
 5. **Cross-project isolation** rests on the "one process = one app_key" deployment assumption. If the platform ever consolidates processes, this design needs revisiting. Add a code comment flagging the assumption.
-6. **Host-based routing** (`{appkey}.{region}.insforge.app`) is an infrastructure-layer concern (ingress / DNS / ALB), not backend code. The design assumes it works; ingress config is out of scope for this spec.
+6. **Host-based routing** (`{appkey}.{region}.growfoundry.app`) is an infrastructure-layer concern (ingress / DNS / ALB), not backend code. The design assumes it works; ingress config is out of scope for this spec.
 7. **Session-token auth (user-JWT-scoped S3 access)** — Supabase supports a third credential shape `{accessKeyId: project_ref, secretAccessKey: anonKey, sessionToken: <user JWT>}` that lets S3 operations respect per-user permissions via Postgres RLS. Deliberately cut from v1:
     - The `storage.s3_access_keys` path covers the main server-side use cases (CI, scripts, backup tooling, rclone).
-    - InsForge does not use Postgres RLS today; replicating Supabase's "DB filters by JWT" model would mean building an application-layer user-scoping policy on every S3 handler — a separate design problem with its own scope.
+    - GrowFoundry does not use Postgres RLS today; replicating Supabase's "DB filters by JWT" model would mean building an application-layer user-scoping policy on every S3 handler — a separate design problem with its own scope.
     - Browser direct uploads are already served by `POST /api/storage/buckets/:bucket/upload-strategy`.
     
     If added later, the shape should be: detect `X-Amz-Security-Token` in the SigV4 middleware, verify via `TokenManager.verifyToken()`, attach the user identity to `S3AuthContext`, and introduce a handler-layer policy (or bucket-visibility + ownership check) gating every operation. Needs its own spec.

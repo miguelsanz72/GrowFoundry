@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 
 const { mockClient, mockPool } = vi.hoisted(() => ({
   mockClient: {

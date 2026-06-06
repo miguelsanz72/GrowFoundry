@@ -1,9 +1,9 @@
 <div align="center">
-  <a href="https://insforge.dev">
+  <a href="https://growfoundry.dev">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
       <source media="(prefers-color-scheme: light)" srcset="assets/logo-light.svg">
-      <img src="assets/logo-dark.svg" alt="InsForge" width="500">
+      <img src="assets/logo-dark.svg" alt="GrowFoundry" width="500">
     </picture>
   </a>
 
@@ -13,20 +13,20 @@
 
   <p>
     <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-orange.svg" alt="License"></a>
-    <a href="https://www.npmjs.com/package/@insforge/sdk"><img src="https://img.shields.io/npm/dt/@insforge/sdk?color=blue&label=downloads" alt="Downloads"></a>
-    <a href="https://github.com/InsForge/InsForge/graphs/contributors"><img src="https://img.shields.io/github/contributors/InsForge/InsForge?color=green" alt="Contributors"></a>
-    <a href="https://insforge.dev"><img src="https://img.shields.io/badge/Visit-InsForge.dev-181818?logoColor=white&labelColor=555555&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDI0MCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI2LjExODQgMTAxLjZDMjMuMjkzOSA5OC43ODMzIDIzLjI5MzkgOTQuMjE2NiAyNi4xMTg0IDkxLjRMOTcuNzE2NyAyMEwyMDAgMjBMNzcuMjYgMTQyLjRDNzQuNDM1NSAxNDUuMjE3IDY5Ljg1NjIgMTQ1LjIxNyA2Ny4wMzE3IDE0Mi40TDI2LjExODQgMTAxLjZaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0xNTUuMjUxIDc3LjM3NUwyMDAgMTIyVjIyNEwxMDQuMTA5IDEyOC4zNzVMMTU1LjI1MSA3Ny4zNzVaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPgo=" alt="Visit InsForge.dev"></a>
-    <a href="https://gitcgr.com/InsForge/InsForge">
-      <img src="https://gitcgr.com/badge/InsForge/InsForge.svg" alt="gitcgr" />
+    <a href="https://www.npmjs.com/package/@growfoundry/sdk"><img src="https://img.shields.io/npm/dt/@growfoundry/sdk?color=blue&label=downloads" alt="Downloads"></a>
+    <a href="https://github.com/GrowFoundry/GrowFoundry/graphs/contributors"><img src="https://img.shields.io/github/contributors/GrowFoundry/GrowFoundry?color=green" alt="Contributors"></a>
+    <a href="https://growfoundry.dev"><img src="https://img.shields.io/badge/Visit-GrowFoundry.dev-181818?logoColor=white&labelColor=555555&logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDI0MCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI2LjExODQgMTAxLjZDMjMuMjkzOSA5OC43ODMzIDIzLjI5MzkgOTQuMjE2NiAyNi4xMTg0IDkxLjRMOTcuNzE2NyAyMEwyMDAgMjBMNzcuMjYgMTQyLjRDNzQuNDM1NSAxNDUuMjE3IDY5Ljg1NjIgMTQ1LjIxNyA2Ny4wMzE3IDE0Mi40TDI2LjExODQgMTAxLjZaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0xNTUuMjUxIDc3LjM3NUwyMDAgMTIyVjIyNEwxMDQuMTA5IDEyOC4zNzVMMTU1LjI1MSA3Ny4zNzVaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPgo=" alt="Visit GrowFoundry.dev"></a>
+    <a href="https://gitcgr.com/GrowFoundry/GrowFoundry">
+      <img src="https://gitcgr.com/badge/GrowFoundry/GrowFoundry.svg" alt="gitcgr" />
     </a>
   </p>
   <p>
-    <a href="https://x.com/InsForge"><img src="https://img.shields.io/badge/Follow%20on%20X-000000?logo=x&logoColor=white&style=for-the-badge" alt="Follow on X"></a>
-    <a href="https://www.linkedin.com/company/insforge"><img src="https://img.shields.io/badge/Follow%20on%20LinkedIn-0A66C2?logo=linkedin&logoColor=white&style=for-the-badge" alt="Follow on LinkedIn"></a>
+    <a href="https://x.com/GrowFoundry"><img src="https://img.shields.io/badge/Follow%20on%20X-000000?logo=x&logoColor=white&style=for-the-badge" alt="Follow on X"></a>
+    <a href="https://www.linkedin.com/company/growfoundry"><img src="https://img.shields.io/badge/Follow%20on%20LinkedIn-0A66C2?logo=linkedin&logoColor=white&style=for-the-badge" alt="Follow on LinkedIn"></a>
     <a href="https://discord.com/invite/MPxwj5xVvW"><img src="https://img.shields.io/badge/Join%20our%20Discord-5865F2?logo=discord&logoColor=white&style=for-the-badge" alt="Join our Discord"></a>
   </p>
   <a href="https://trendshift.io/repositories/19834" target="_blank">
-    <img src="https://trendshift.io/api/badge/repositories/19834" alt="InsForge%2FInsForge | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/>
+    <img src="https://trendshift.io/api/badge/repositories/19834" alt="GrowFoundry%2FGrowFoundry | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/>
   </a>
   <br /><br />
   <a href="https://vercel.com/oss">
@@ -35,19 +35,19 @@
 </div>
 
 <p align="center">
-  ⭐ <em>Help us reach more developers and grow the InsForge community. Star this repo!</em>
+  ⭐ <em>Help us reach more developers and grow the GrowFoundry community. Star this repo!</em>
 </p>
 
-## InsForge
-The all-in-one, open-source backend platform for agentic coding. InsForge gives your coding agent database, auth, storage, compute, hosting, and AI gateway to ship full-stack apps end-to-end.
+## GrowFoundry
+The all-in-one, open-source backend platform for agentic coding. GrowFoundry gives your coding agent database, auth, storage, compute, hosting, and AI gateway to ship full-stack apps end-to-end.
 
 https://github.com/user-attachments/assets/345efbc6-ca63-4189-bde0-12ef3bda561b
 
 ### How it works
 
-Coding agents interact with InsForge through one of two interfaces:
+Coding agents interact with GrowFoundry through one of two interfaces:
 
-- **MCP Server** (self-hosted and cloud): exposes InsForge's operations as tools any MCP-compatible agent can call.
+- **MCP Server** (self-hosted and cloud): exposes GrowFoundry's operations as tools any MCP-compatible agent can call.
 - **CLI + Skills** (cloud only): a command-line interface paired with Skills that agents invoke directly from the terminal.
 
 Both interfaces let coding agents operate the backend like backend engineers:
@@ -63,7 +63,7 @@ graph TB
     end
 
     subgraph MID[" "]
-        SL[InsForge]
+        SL[GrowFoundry]
     end
 
     AG --> SL
@@ -101,16 +101,16 @@ graph TB
 ## ⭐️ Star the Repository
 
 <p align="center">
-  <img src="assets/insforge-star.gif" alt="Star InsForge" width="100%">
+  <img src="assets/growfoundry-star.gif" alt="Star GrowFoundry" width="100%">
 </p>
 
-If you find InsForge useful or interesting, a GitHub Star ⭐️ would be greatly appreciated.
+If you find GrowFoundry useful or interesting, a GitHub Star ⭐️ would be greatly appreciated.
 
 ## Quickstart
 
-### Cloud-hosted: [insforge.dev](https://insforge.dev)
+### Cloud-hosted: [growfoundry.dev](https://growfoundry.dev)
 
-<a href="https://insforge.dev" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/insforge.dev-181818?logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDI0MCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI2LjExODQgMTAxLjZDMjMuMjkzOSA5OC43ODMzIDIzLjI5MzkgOTQuMjE2NiAyNi4xMTg0IDkxLjRMOTcuNzE2NyAyMEwyMDAgMjBMNzcuMjYgMTQyLjRDNzQuNDM1NSAxNDUuMjE3IDY5Ljg1NjIgMTQ1LjIxNyA2Ny4wMzE3IDE0Mi40TDI2LjExODQgMTAxLjZaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0xNTUuMjUxIDc3LjM3NUwyMDAgMTIyVjIyNEwxMDQuMTA5IDEyOC4zNzVMMTU1LjI1MSA3Ny4zNzVaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPgo=&logoColor=white" alt="InsForge.dev"></a>
+<a href="https://growfoundry.dev" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/growfoundry.dev-181818?logo=data:image/svg%2bxml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDI0MCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI2LjExODQgMTAxLjZDMjMuMjkzOSA5OC43ODMzIDIzLjI5MzkgOTQuMjE2NiAyNi4xMTg0IDkxLjRMOTcuNzE2NyAyMEwyMDAgMjBMNzcuMjYgMTQyLjRDNzQuNDM1NSAxNDUuMjE3IDY5Ljg1NjIgMTQ1LjIxNyA2Ny4wMzE3IDE0Mi40TDI2LjExODQgMTAxLjZaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0xNTUuMjUxIDc3LjM3NUwyMDAgMTIyVjIyNEwxMDQuMTA5IDEyOC4zNzVMMTU1LjI1MSA3Ny4zNzVaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPgo=&logoColor=white" alt="GrowFoundry.dev"></a>
 
 ### Self-hosted: Docker Compose
 
@@ -118,39 +118,39 @@ Prerequisites: [Docker](https://www.docker.com/) + [Node.js](https://nodejs.org/
 
 #### 1. Setup
 
-You can run InsForge locally using Docker Compose. This will start a local InsForge instance on your machine.
+You can run GrowFoundry locally using Docker Compose. This will start a local GrowFoundry instance on your machine.
 
 [![Deploy on Docker][docker-btn]][docker-deploy]
 
 Or run from source:
 ```bash
 # Run with Docker
-git clone https://github.com/InsForge/InsForge.git
-cd insforge
+git clone https://github.com/GrowFoundry/GrowFoundry.git
+cd growfoundry
 cp .env.example .env
 docker compose -f docker-compose.prod.yml up
 ```
 
-#### 2. Connect InsForge MCP
+#### 2. Connect GrowFoundry MCP
 
 Open [http://localhost:7130](http://localhost:7130)
 
-Follow the steps to connect InsForge MCP Server
+Follow the steps to connect GrowFoundry MCP Server
 
 <div align="center">
-  <img src="assets/connect.png" alt="Connect InsForge MCP" width="600">
+  <img src="assets/connect.png" alt="Connect GrowFoundry MCP" width="600">
 </div>
 
 #### 3. Verify installation
 
 To verify the connection, send the following prompt to your agent:
 ```
-I'm using InsForge as my backend platform, call InsForge MCP's fetch-docs tool to learn about InsForge instructions.
+I'm using GrowFoundry as my backend platform, call GrowFoundry MCP's fetch-docs tool to learn about GrowFoundry instructions.
 ```
 
 #### 4. Running Multiple Projects
 
-You can run multiple InsForge projects on the same host by using different ports and project names.
+You can run multiple GrowFoundry projects on the same host by using different ports and project names.
 
 ```bash
 # Create a separate env file for each project
@@ -182,31 +182,31 @@ docker compose -f docker-compose.prod.yml --env-file .env.project1 -p project1 d
 
 ### One-click Deployment
 
-In addition to running InsForge locally, you can also launch InsForge using a pre-configured setup. This allows you to get up and running quickly with InsForge without installing Docker on your local machine.
+In addition to running GrowFoundry locally, you can also launch GrowFoundry using a pre-configured setup. This allows you to get up and running quickly with GrowFoundry without installing Docker on your local machine.
 
 | Railway | Zeabur | Sealos |
 | --- | --- | --- |
-| [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/insforge) | [![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/Q82M3Y) | [![Deploy on Sealos](https://sealos.io/Deploy-on-Sealos.svg)](https://sealos.io/products/app-store/insforge) |
+| [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/growfoundry) | [![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/Q82M3Y) | [![Deploy on Sealos](https://sealos.io/Deploy-on-Sealos.svg)](https://sealos.io/products/app-store/growfoundry) |
 
 
 ## Contributing
 
 **Contributing**: If you're interested in contributing, you can check our guide here [CONTRIBUTING.md](CONTRIBUTING.md). We truly appreciate pull requests, all types of help are appreciated!
 
-**Support**: If you need any help or support, we're responsive on our [Discord channel](https://discord.com/invite/MPxwj5xVvW), and also feel free to email us [info@insforge.dev](mailto:info@insforge.dev) too!
+**Support**: If you need any help or support, we're responsive on our [Discord channel](https://discord.com/invite/MPxwj5xVvW), and also feel free to email us [info@growfoundry.dev](mailto:info@growfoundry.dev) too!
 
 
 ## Documentation & Support
 
 ### Documentation
-- **[Official Docs](https://docs.insforge.dev/introduction)** - Comprehensive guides and API references
+- **[Official Docs](https://docs.growfoundry.dev/introduction)** - Comprehensive guides and API references
 
 ### Community
 - **[Discord](https://discord.com/invite/MPxwj5xVvW)** - Join our vibrant community
-- **[Twitter](https://x.com/InsForge)** - Follow for updates and tips
+- **[Twitter](https://x.com/GrowFoundry)** - Follow for updates and tips
 
 ### Contact
-- **Email**: info@insforge.dev
+- **Email**: info@growfoundry.dev
 
 ## License
 
@@ -214,64 +214,64 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ---
 
-[![Star History Chart](https://api.star-history.com/svg?repos=InsForge/InsForge&type=Date)](https://www.star-history.com/#InsForge/InsForge&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=GrowFoundry/GrowFoundry&type=Date)](https://www.star-history.com/#GrowFoundry/GrowFoundry&Date)
 
 ## Badges
 
-Show your project is built with InsForge.
+Show your project is built with GrowFoundry.
 
-### Made with InsForge
+### Made with GrowFoundry
 
-<a href="https://insforge.dev">
+<a href="https://growfoundry.dev">
   <img
     width="168"
     height="30"
-    src="https://insforge.dev/badge-made-with-insforge.svg"
-    alt="Made with InsForge"
+    src="https://growfoundry.dev/badge-made-with-growfoundry.svg"
+    alt="Made with GrowFoundry"
   />
 </a>
 
 **Markdown:**
 ```md
-[![Made with InsForge](https://insforge.dev/badge-made-with-insforge.svg)](https://insforge.dev)
+[![Made with GrowFoundry](https://growfoundry.dev/badge-made-with-growfoundry.svg)](https://growfoundry.dev)
 ```
 
 **HTML:**
 ```html
-<a href="https://insforge.dev">
+<a href="https://growfoundry.dev">
   <img
     width="168"
     height="30"
-    src="https://insforge.dev/badge-made-with-insforge.svg"
-    alt="Made with InsForge"
+    src="https://growfoundry.dev/badge-made-with-growfoundry.svg"
+    alt="Made with GrowFoundry"
   />
 </a>
 ```
 
-### Made with InsForge (dark)
+### Made with GrowFoundry (dark)
 
-<a href="https://insforge.dev">
+<a href="https://growfoundry.dev">
   <img
     width="168"
     height="30"
-    src="https://insforge.dev/badge-made-with-insforge-dark.svg"
-    alt="Made with InsForge"
+    src="https://growfoundry.dev/badge-made-with-growfoundry-dark.svg"
+    alt="Made with GrowFoundry"
   />
 </a>
 
 **Markdown:**
 ```md
-[![Made with InsForge](https://insforge.dev/badge-made-with-insforge-dark.svg)](https://insforge.dev)
+[![Made with GrowFoundry](https://growfoundry.dev/badge-made-with-growfoundry-dark.svg)](https://growfoundry.dev)
 ```
 
 **HTML:**
 ```html
-<a href="https://insforge.dev">
+<a href="https://growfoundry.dev">
   <img
     width="168"
     height="30"
-    src="https://insforge.dev/badge-made-with-insforge-dark.svg"
-    alt="Made with InsForge"
+    src="https://growfoundry.dev/badge-made-with-growfoundry-dark.svg"
+    alt="Made with GrowFoundry"
   />
 </a>
 ```

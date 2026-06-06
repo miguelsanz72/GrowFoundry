@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { Button, ConfirmDialog } from '@insforge/ui';
+import { Button, ConfirmDialog } from '@growfoundry/ui';
 import {
   DataGrid,
   type DataGridProps,
@@ -23,7 +23,7 @@ import {
   File,
   Folder,
 } from 'lucide-react';
-import { StorageFileSchema } from '@insforge/shared-schemas';
+import { StorageFileSchema } from '@growfoundry/shared-schemas';
 import { cn, formatTime } from '#lib/utils/utils';
 import { useStorageObjects } from '#features/storage/hooks/useStorageObjects';
 import { FilePreviewDialog } from './FilePreviewDialog';

@@ -10,8 +10,8 @@ import {
 } from '#navigation/menuItems';
 import { Link, useLocation, matchPath } from 'react-router-dom';
 import { ExternalLink, PanelLeftOpen, PanelRightOpen } from 'lucide-react';
-import { cn, isInsForgeCloudProject } from '#lib/utils/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@insforge/ui';
+import { cn, isGrowFoundryCloudProject } from '#lib/utils/utils';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@growfoundry/ui';
 import { ProjectSettingsMenuDialog } from '#features/dashboard/components';
 import { getFeatureFlag } from '#lib/analytics/posthog';
 import { useDashboardHost } from '#lib/config/DashboardHostContext';
@@ -25,7 +25,7 @@ export default function AppSidebar({ isCollapsed, onToggleCollapse }: AppSidebar
   const { pathname } = useLocation();
   const [isSettingsDialogOpen, setIsSettingsDialogOpen] = useState(false);
 
-  const isCloud = isInsForgeCloudProject();
+  const isCloud = isGrowFoundryCloudProject();
   const host = useDashboardHost();
   const isDTest = getFeatureFlag('dashboard-v4-experiment') === 'd_test';
   const isDTestCloud = isDTest && host.mode === 'cloud-hosting';

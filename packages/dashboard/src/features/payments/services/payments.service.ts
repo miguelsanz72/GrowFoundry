@@ -13,7 +13,7 @@ import type {
   SyncPaymentsResponse,
   StripeEnvironment,
   UpsertPaymentsConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { apiClient } from '#lib/api/client';
 
 export class PaymentsService {

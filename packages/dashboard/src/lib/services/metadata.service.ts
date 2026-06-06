@@ -5,7 +5,7 @@ import {
   DatabaseConnectionInfo,
   DatabasePasswordInfo,
   ProjectIdResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export interface RotateApiKeyResponse {
   success: boolean;

@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import jwt from 'jsonwebtoken';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 
-const apiHost = 'https://cloud.test.insforge.dev';
+const apiHost = 'https://cloud.test.growfoundry.dev';
 const projectId = '77777777-7777-7777-7777-777777777777';
 const jwtSecret = 's'.repeat(32);
 

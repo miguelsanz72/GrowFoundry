@@ -1,21 +1,21 @@
 import { promises as fs, createReadStream } from 'fs';
 import { createInterface } from 'readline';
 import path from 'path';
-import { LogSchema, LogSourceSchema, LogStatsSchema } from '@insforge/shared-schemas';
+import { LogSchema, LogSourceSchema, LogStatsSchema } from '@growfoundry/shared-schemas';
 import { BaseLogProvider } from './base.provider.js';
 import logger from '@/utils/logger.js';
 
 export class LocalFileProvider extends BaseLogProvider {
   private logsDir: string = '';
   private logFiles = new Map<string, string>([
-    ['insforge.logs', 'insforge.logs.jsonl'],
+    ['growfoundry.logs', 'growfoundry.logs.jsonl'],
     ['postgres.logs', 'postgres.logs.jsonl'],
     ['postgREST.logs', 'postgrest.logs.jsonl'],
     ['function.logs', 'function.logs.jsonl'],
   ]);
 
   async initialize(): Promise<void> {
-    this.logsDir = process.env.LOGS_DIR || path.resolve(process.cwd(), 'insforge-logs');
+    this.logsDir = process.env.LOGS_DIR || path.resolve(process.cwd(), 'growfoundry-logs');
     try {
       await fs.mkdir(this.logsDir, { recursive: true });
     } catch {

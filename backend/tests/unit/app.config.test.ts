@@ -106,7 +106,7 @@ describe('config.cloud', () => {
     );
     const c = loadConfig();
 
-    expect(c.cloud.apiHost).toBe('https://api.insforge.dev');
+    expect(c.cloud.apiHost).toBe('https://api.growfoundry.dev');
     expect(c.cloud.projectId).toBeUndefined();
     expect(c.cloud.cloudFrontUrl).toBeUndefined();
     expect(c.cloud.cloudFrontKeyPairId).toBeUndefined();
@@ -140,7 +140,7 @@ describe('config.denoSubhosting', () => {
 
     expect(c.denoSubhosting.token).toBe('');
     expect(c.denoSubhosting.organizationId).toBe('');
-    expect(c.denoSubhosting.domain).toBe('functions.insforge.app');
+    expect(c.denoSubhosting.domain).toBe('functions.growfoundry.app');
   });
 
   it('reads DENO_SUBHOSTING_TOKEN and DENO_SUBHOSTING_ORG_ID', () => {
@@ -154,7 +154,7 @@ describe('config.denoSubhosting', () => {
 
   it('domain is always the fixed constant', () => {
     // domain is hardcoded, not from env
-    expect(loadConfig().denoSubhosting.domain).toBe('functions.insforge.app');
+    expect(loadConfig().denoSubhosting.domain).toBe('functions.growfoundry.app');
   });
 });
 
@@ -239,8 +239,8 @@ describe('config.server', () => {
   });
 
   it('reads LOGS_DIR when set', () => {
-    process.env.LOGS_DIR = '/var/log/insforge';
-    expect(loadConfig().server.logsDir).toBe('/var/log/insforge');
+    process.env.LOGS_DIR = '/var/log/growfoundry';
+    expect(loadConfig().server.logsDir).toBe('/var/log/growfoundry');
   });
 
   it('defaults trustProxy to 2 hops', () => {
@@ -291,7 +291,7 @@ describe('config.database', () => {
 
     expect(c.database.host).toBe('localhost');
     expect(c.database.port).toBe(5432);
-    expect(c.database.name).toBe('insforge');
+    expect(c.database.name).toBe('growfoundry');
     expect(c.database.user).toBe('postgres');
     expect(c.database.password).toBe('postgres');
     expect(c.database.postgrestBaseUrl).toBe('http://localhost:5430');
@@ -403,7 +403,7 @@ describe('config.storage', () => {
     expect(c.storage.awsAccessKeyId).toBeUndefined();
     expect(c.storage.awsSecretAccessKey).toBeUndefined();
     expect(c.storage.s3EndpointUrl).toBeUndefined();
-    expect(c.storage.awsConfigBucket).toBe('insforge-config');
+    expect(c.storage.awsConfigBucket).toBe('growfoundry-config');
     expect(c.storage.awsConfigRegion).toBe('us-east-2');
     expect(typeof c.storage.storageDir).toBe('string');
   });
@@ -473,8 +473,8 @@ describe('config.storage', () => {
   });
 
   it('reads STORAGE_DIR from env', () => {
-    process.env.STORAGE_DIR = '/data/insforge-storage';
-    expect(loadConfig().storage.storageDir).toBe('/data/insforge-storage');
+    process.env.STORAGE_DIR = '/data/growfoundry-storage';
+    expect(loadConfig().storage.storageDir).toBe('/data/growfoundry-storage');
   });
 
   it('reads config bucket overrides', () => {

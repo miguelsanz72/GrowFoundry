@@ -11,7 +11,7 @@ import { describe, it, expect } from 'vitest';
 // Mirrors isCloudHostingBackend from frontend/src/cloudHostingHelpers.ts
 function isCloudHostingBackend(backendUrl: string): boolean {
   try {
-    return new URL(backendUrl).hostname.endsWith('.insforge.app');
+    return new URL(backendUrl).hostname.endsWith('.growfoundry.app');
   } catch {
     return false;
   }
@@ -66,21 +66,21 @@ function resolveBackendUrl(envVar: string | undefined, windowOrigin: string): st
 
 describe('Cloud Hosting Helpers', () => {
   describe('isCloudHostingBackend', () => {
-    it('returns true for .insforge.app hostnames', () => {
-      expect(isCloudHostingBackend('https://abc123.us-east-1.insforge.app')).toBe(true);
-      expect(isCloudHostingBackend('https://myproject.eu-west-1.insforge.app')).toBe(true);
-      expect(isCloudHostingBackend('https://test.insforge.app')).toBe(true);
+    it('returns true for .growfoundry.app hostnames', () => {
+      expect(isCloudHostingBackend('https://abc123.us-east-1.growfoundry.app')).toBe(true);
+      expect(isCloudHostingBackend('https://myproject.eu-west-1.growfoundry.app')).toBe(true);
+      expect(isCloudHostingBackend('https://test.growfoundry.app')).toBe(true);
     });
 
-    it('returns false for non-insforge hostnames', () => {
+    it('returns false for non-growfoundry hostnames', () => {
       expect(isCloudHostingBackend('http://localhost:7130')).toBe(false);
       expect(isCloudHostingBackend('https://example.com')).toBe(false);
-      expect(isCloudHostingBackend('https://insforge.app')).toBe(false); // no subdomain, but hostname IS insforge.app which ends with .insforge.app? No — "insforge.app".endsWith(".insforge.app") is true
+      expect(isCloudHostingBackend('https://growfoundry.app')).toBe(false); // no subdomain, but hostname IS growfoundry.app which ends with .growfoundry.app? No — "growfoundry.app".endsWith(".growfoundry.app") is true
     });
 
-    it('returns true for bare insforge.app (endsWith includes exact match)', () => {
-      // "insforge.app".endsWith(".insforge.app") => false because of the leading dot
-      expect(isCloudHostingBackend('https://insforge.app')).toBe(false);
+    it('returns true for bare growfoundry.app (endsWith includes exact match)', () => {
+      // "growfoundry.app".endsWith(".growfoundry.app") => false because of the leading dot
+      expect(isCloudHostingBackend('https://growfoundry.app')).toBe(false);
     });
 
     it('returns false for invalid URLs', () => {
@@ -89,32 +89,32 @@ describe('Cloud Hosting Helpers', () => {
     });
 
     it('returns false for similar but different domains', () => {
-      expect(isCloudHostingBackend('https://evil-insforge.app')).toBe(false);
-      expect(isCloudHostingBackend('https://insforge.app.evil.com')).toBe(false);
+      expect(isCloudHostingBackend('https://evil-growfoundry.app')).toBe(false);
+      expect(isCloudHostingBackend('https://growfoundry.app.evil.com')).toBe(false);
     });
   });
 
   describe('resolveBackendUrl (App.tsx logic)', () => {
     it('uses env var when set', () => {
-      expect(resolveBackendUrl('http://localhost:7130', 'https://abc.insforge.app')).toBe(
+      expect(resolveBackendUrl('http://localhost:7130', 'https://abc.growfoundry.app')).toBe(
         'http://localhost:7130'
       );
     });
 
     it('falls back to window origin when env var is empty', () => {
-      expect(resolveBackendUrl('', 'https://abc.us-east-1.insforge.app')).toBe(
-        'https://abc.us-east-1.insforge.app'
+      expect(resolveBackendUrl('', 'https://abc.us-east-1.growfoundry.app')).toBe(
+        'https://abc.us-east-1.growfoundry.app'
       );
     });
 
     it('falls back to window origin when env var is undefined', () => {
-      expect(resolveBackendUrl(undefined, 'https://abc.us-east-1.insforge.app')).toBe(
-        'https://abc.us-east-1.insforge.app'
+      expect(resolveBackendUrl(undefined, 'https://abc.us-east-1.growfoundry.app')).toBe(
+        'https://abc.us-east-1.growfoundry.app'
       );
     });
 
     it('cloud detection works with resolved URL from window.location.origin', () => {
-      const backendUrl = resolveBackendUrl(undefined, 'https://myproject.us-east-1.insforge.app');
+      const backendUrl = resolveBackendUrl(undefined, 'https://myproject.us-east-1.growfoundry.app');
       expect(isCloudHostingBackend(backendUrl)).toBe(true);
     });
 
@@ -146,7 +146,7 @@ describe('Cloud Hosting Helpers', () => {
   });
 
   describe('normalizeProjectInfo', () => {
-    const backendUrl = 'https://test.insforge.app';
+    const backendUrl = 'https://test.growfoundry.app';
 
     it('uses defaults when no previous info exists', () => {
       const result = normalizeProjectInfo(undefined, backendUrl, { type: 'PROJECT_INFO' });

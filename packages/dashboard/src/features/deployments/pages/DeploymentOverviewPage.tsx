@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ExternalLink, Copy, Check, RefreshCw } from 'lucide-react';
-import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@insforge/ui';
+import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@growfoundry/ui';
 import { Skeleton } from '#components';
 import { useDeployments } from '#features/deployments/hooks/useDeployments';
 import { useDeploymentMetadata } from '#features/deployments/hooks/useDeploymentMetadata';
@@ -18,7 +18,7 @@ const statusColors: Record<string, string> = {
   CANCELED: 'bg-gray-500',
 };
 
-const DEPLOY_PROMPT = 'Deploy my app to InsForge';
+const DEPLOY_PROMPT = 'Deploy my app to GrowFoundry';
 
 export default function DeploymentOverviewPage() {
   const { showToast } = useToast();

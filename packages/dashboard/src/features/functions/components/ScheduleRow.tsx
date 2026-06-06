@@ -1,5 +1,5 @@
 import { cn } from '#lib/utils/utils';
-import type { ScheduleSchema } from '@insforge/shared-schemas';
+import type { ScheduleSchema } from '@growfoundry/shared-schemas';
 import { format } from 'date-fns';
 import { MoreVertical, Pencil, Trash2 } from 'lucide-react';
 import {
@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   Switch,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 
 interface ScheduleRowProps {
   schedule: ScheduleSchema;

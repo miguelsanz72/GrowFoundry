@@ -4,7 +4,7 @@ import {
   ListFunctionsResponse,
   UpdateFunctionRequest,
   FunctionResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class FunctionService {
   async listFunctions(): Promise<ListFunctionsResponse> {

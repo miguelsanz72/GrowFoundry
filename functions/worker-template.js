@@ -56,7 +56,7 @@ try {
 // LATE IMPORTS (Pre-emptive Mocking)
 // ----------------------------
 // We use dynamic imports AFTER the environment is shadowed.
-const { createClient } = await import('npm:@insforge/sdk');
+const { createClient } = await import('npm:@growfoundry/sdk');
 const { encodeBase64, decodeBase64 } =
   await import('https://deno.land/std@0.224.0/encoding/base64.ts');
 

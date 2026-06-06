@@ -7,7 +7,7 @@ When enabled, every email (auth flows and `emails.send()` calls) routes through 
 
 ## Concepts
 
-Provider is resolved on every send, so saves take effect on the next request. InsForge runs `transporter.verify()` before saving, so a persisted config always works. Passwords are encrypted at rest with AES-256-GCM and never returned by the API.
+Provider is resolved on every send, so saves take effect on the next request. GrowFoundry runs `transporter.verify()` before saving, so a persisted config always works. Passwords are encrypted at rest with AES-256-GCM and never returned by the API.
 
 ## Usage
 
@@ -21,7 +21,7 @@ Configure SMTP under **Authentication → Email**.
     Host, port (`25`, `465`, `587`, `2525`), username, password, sender email, sender name. Private IPs and self-signed certs are rejected.
   </Step>
   <Step title="Save">
-    InsForge runs an SMTP handshake before persisting. Bad credentials fail fast.
+    GrowFoundry runs an SMTP handshake before persisting. Bad credentials fail fast.
   </Step>
   <Step title="Edit templates (optional)">
     The **Email Templates** card unlocks the four auth templates.

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { aiService } from '#features/ai/services/ai.service';
-import type { AIOverview } from '@insforge/shared-schemas';
+import type { AIOverview } from '@growfoundry/shared-schemas';
 
 export function useAIOverview() {
   return useQuery<AIOverview>({

@@ -1,4 +1,4 @@
-import { ColumnType } from '@insforge/shared-schemas';
+import { ColumnType } from '@growfoundry/shared-schemas';
 import { describe, expect, it } from 'vitest';
 import {
   cn,

@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { CursorDeeplinkGenerator } from './mcp/CursorDeeplinkGenerator';
 import { QoderDeeplinkGenerator } from './mcp/QoderDeeplinkGenerator';
 import { MCP_AGENTS, GenerateInstallCommand, createMCPConfig, type MCPAgent } from './mcp/helpers';
@@ -50,7 +50,7 @@ export function MCPSection({
       <div className="flex w-full flex-col gap-3">
         <div className="flex flex-col">
           <p className="text-sm font-medium leading-6 text-foreground">
-            <span>Step 1 - Install InsForge</span>
+            <span>Step 1 - Install GrowFoundry</span>
           </p>
           {(selectedAgent.id === 'cursor' || selectedAgent.id === 'qoder') && (
             <p className="text-sm leading-6 text-muted-foreground">Install in one click</p>
@@ -64,7 +64,7 @@ export function MCPSection({
             selectedAgent.id !== 'qoder' &&
             selectedAgent.id !== 'mcp' && (
               <p className="text-sm leading-6 text-muted-foreground">
-                Run the following command in terminal to install InsForge MCP Server
+                Run the following command in terminal to install GrowFoundry MCP Server
               </p>
             )}
         </div>

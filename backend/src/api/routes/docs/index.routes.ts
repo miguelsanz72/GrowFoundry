@@ -12,7 +12,7 @@ import {
   docTypeSchema,
   sdkFeatureSchema,
   sdkLanguageSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -95,7 +95,7 @@ async function processSnippets(content: string, docsRoot: string): Promise<strin
 // Legacy documentation map for GET /api/docs/:docType endpoint
 // Only contains keys defined in DocTypeSchema for type safety
 const LEGACY_DOCS_MAP: Record<DocTypeSchema, string> = {
-  instructions: 'insforge-instructions-sdk.md',
+  instructions: 'growfoundry-instructions-sdk.md',
   'db-sdk': 'sdks/typescript/database.mdx',
   'auth-sdk': 'sdks/typescript/auth.mdx',
   'storage-sdk': 'sdks/typescript/storage.mdx',
@@ -164,7 +164,7 @@ router.get('/:docType', async (req: Request, res: Response, next: NextFunction) 
     const docFileName = LEGACY_DOCS_MAP[parsed.data];
 
     // Read the documentation file
-    // PROJECT_ROOT is set in the docker-compose.yml file to point to the InsForge directory
+    // PROJECT_ROOT is set in the docker-compose.yml file to point to the GrowFoundry directory
     const projectRoot = process.env.PROJECT_ROOT || path.resolve(__dirname, '../../../..');
     const docsRoot = path.join(projectRoot, 'docs');
     const filePath = path.join(docsRoot, docFileName);
@@ -211,7 +211,7 @@ router.get('/:docFeature/:docLanguage', async (req: Request, res: Response, next
         : `${parsedFeature.data}-sdk-${parsedLanguage.data}`;
 
     // Read the documentation file
-    // PROJECT_ROOT is set in the docker-compose.yml file to point to the InsForge directory
+    // PROJECT_ROOT is set in the docker-compose.yml file to point to the GrowFoundry directory
     const projectRoot = process.env.PROJECT_ROOT || path.resolve(__dirname, '../../../..');
     const docsRoot = path.join(projectRoot, 'docs');
     const filePath = path.join(docsRoot, docFileName);

@@ -21,7 +21,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { useSchedulesConfig } from '#features/functions/hooks/useSchedulesConfig';
 
 interface FunctionsSettingsDialogProps {

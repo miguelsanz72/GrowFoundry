@@ -24,7 +24,7 @@ import {
   DatabaseMetadataSchema,
   StorageMetadataSchema,
   OAuthProvidersSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 interface SchemaVisualizerProps {
   metadata: {

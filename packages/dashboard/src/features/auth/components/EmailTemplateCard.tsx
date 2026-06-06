@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Button, Input, Tabs, Tab } from '@insforge/ui';
+import { Button, Input, Tabs, Tab } from '@growfoundry/ui';
 import { ChevronRight } from 'lucide-react';
-import type { EmailTemplateSchema, UpdateEmailTemplateRequest } from '@insforge/shared-schemas';
+import type { EmailTemplateSchema, UpdateEmailTemplateRequest } from '@growfoundry/shared-schemas';
 
 interface EmailTemplateCardProps {
   templates: EmailTemplateSchema[];

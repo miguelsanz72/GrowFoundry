@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
-import { Button, Dialog, DialogContent, DialogDescription, DialogTitle } from '@insforge/ui';
+import { Button, Dialog, DialogContent, DialogDescription, DialogTitle } from '@growfoundry/ui';
 import { ScrollArea } from '#components';
 import type { DeploymentSchema } from '#features/deployments/services/deployments.service';
 

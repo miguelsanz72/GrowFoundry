@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   Input,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 
 interface CreateBackupDialogProps {
   open: boolean;

@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { auditService } from '#features/logs/services/audit.service';
-import { GetAuditLogsRequest } from '@insforge/shared-schemas';
+import { GetAuditLogsRequest } from '@growfoundry/shared-schemas';
 import { useToast } from '#lib/hooks/useToast';
 
 export const useAuditLogs = (filters?: Partial<GetAuditLogsRequest>) => {

@@ -1,5 +1,5 @@
 import { RefreshCw } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { useServiceEvents } from '#features/compute/hooks/useComputeServices';
 
 interface ServiceEventsProps {

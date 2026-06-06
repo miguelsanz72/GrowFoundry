@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Allow project admins to configure custom SMTP servers and edit email templates via the Auth Settings UI, replacing the default InsForge cloud email provider.
+**Goal:** Allow project admins to configure custom SMTP servers and edit email templates via the Auth Settings UI, replacing the default GrowFoundry cloud email provider.
 
 **Architecture:** New `SmtpEmailProvider` implementing the existing `EmailProvider` interface, with config and templates stored in PostgreSQL. `EmailService` checks DB config per-call to route through SMTP or cloud. Frontend adds an "Email" tab to the Auth Settings dialog with two cards: SMTP settings and template editor.
 
-**Tech Stack:** nodemailer, PostgreSQL, React + react-hook-form, Zod, existing InsForge patterns (singleton services, EncryptionManager, verifyAdmin middleware)
+**Tech Stack:** nodemailer, PostgreSQL, React + react-hook-form, Zod, existing GrowFoundry patterns (singleton services, EncryptionManager, verifyAdmin middleware)
 
 **Spec:** `docs/superpowers/specs/2026-03-16-custom-smtp-design.md`
 
@@ -51,7 +51,7 @@
 - [ ] **Step 1: Install nodemailer**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 npm install nodemailer
 npm install -D @types/nodemailer
 ```
@@ -59,7 +59,7 @@ npm install -D @types/nodemailer
 - [ ] **Step 2: Verify installation**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 node -e "require('nodemailer')"
 ```
 
@@ -68,7 +68,7 @@ Expected: No error output
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add backend/package.json backend/package-lock.json
 git commit -m "chore: add nodemailer dependency for custom SMTP support"
 ```
@@ -84,7 +84,7 @@ git commit -m "chore: add nodemailer dependency for custom SMTP support"
 
 ```sql
 -- Migration: Create SMTP configuration and email templates tables
--- These tables support custom SMTP email delivery as an alternative to InsForge cloud
+-- These tables support custom SMTP email delivery as an alternative to GrowFoundry cloud
 
 -- ============================================================================
 -- SMTP Configuration (singleton)
@@ -154,7 +154,7 @@ ON CONFLICT (template_type) DO NOTHING;
 - [ ] **Step 2: Verify migration number is correct**
 
 ```bash
-ls /Users/gary/projects/insforge-repo/InsForge/backend/src/infra/database/migrations/ | tail -3
+ls /Users/gary/projects/growfoundry-repo/GrowFoundry/backend/src/infra/database/migrations/ | tail -3
 ```
 
 Expected: `024_create-smtp-config-and-email-templates.sql` follows `023_ai-configs-soft-delete.sql`
@@ -162,7 +162,7 @@ Expected: `024_create-smtp-config-and-email-templates.sql` follows `023_ai-confi
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add backend/src/infra/database/migrations/024_create-smtp-config-and-email-templates.sql
 git commit -m "feat(database): add smtp_configs and email_templates tables"
 ```
@@ -291,7 +291,7 @@ export type ListEmailTemplatesResponse = z.infer<typeof listEmailTemplatesRespon
 - [ ] **Step 3: Verify shared-schemas compile**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/shared-schemas
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/shared-schemas
 npx tsc --noEmit
 ```
 
@@ -300,7 +300,7 @@ Expected: No errors
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add shared-schemas/src/auth.schema.ts shared-schemas/src/auth-api.schema.ts
 git commit -m "feat(schemas): add SMTP config and email template Zod schemas"
 ```
@@ -325,7 +325,7 @@ Add these string literals to the email list that feeds `errorCodeSchema`:
 - [ ] **Step 2: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add packages/shared-schemas/src/error-codes.schema.ts
 git commit -m "feat(types): add SMTP error codes and email template record type"
 ```
@@ -345,9 +345,9 @@ import nodemailer from 'nodemailer';
 import { DatabaseManager } from '@/infra/database/database.manager.js';
 import { EncryptionManager } from '@/infra/security/encryption.manager.js';
 import { AppError } from '@/api/middlewares/error.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import logger from '@/utils/logger.js';
-import type { SmtpConfigSchema, UpsertSmtpConfigRequest } from '@insforge/shared-schemas';
+import type { SmtpConfigSchema, UpsertSmtpConfigRequest } from '@growfoundry/shared-schemas';
 
 export class SmtpConfigService {
   private static instance: SmtpConfigService;
@@ -620,7 +620,7 @@ export class SmtpConfigService {
 - [ ] **Step 2: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 npx tsc --noEmit
 ```
 
@@ -629,7 +629,7 @@ Expected: No errors related to smtp-config.service
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add backend/src/services/email/smtp-config.service.ts
 git commit -m "feat(email): add SMTP config service with encrypted password storage"
 ```
@@ -647,10 +647,10 @@ git commit -m "feat(email): add SMTP config service with encrypted password stor
 import { Pool } from 'pg';
 import { DatabaseManager } from '@/infra/database/database.manager.js';
 import { AppError } from '@/api/middlewares/error.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import logger from '@/utils/logger.js';
 import type { EmailTemplate } from '@/types/email.js';
-import type { EmailTemplateSchema, UpdateEmailTemplateRequest } from '@insforge/shared-schemas';
+import type { EmailTemplateSchema, UpdateEmailTemplateRequest } from '@growfoundry/shared-schemas';
 
 export class EmailTemplateService {
   private static instance: EmailTemplateService;
@@ -775,14 +775,14 @@ export class EmailTemplateService {
 - [ ] **Step 2: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 npx tsc --noEmit
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add backend/src/services/email/email-template.service.ts
 git commit -m "feat(email): add email template CRUD service"
 ```
@@ -803,10 +803,10 @@ import { EmailProvider } from './base.provider.js';
 import { SmtpConfigService } from '@/services/email/smtp-config.service.js';
 import { EmailTemplateService } from '@/services/email/email-template.service.js';
 import { AppError } from '@/api/middlewares/error.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import logger from '@/utils/logger.js';
 import type { EmailTemplate } from '@/types/email.js';
-import type { SendRawEmailRequest } from '@insforge/shared-schemas';
+import type { SendRawEmailRequest } from '@growfoundry/shared-schemas';
 
 /**
  * HTML-escape a string to prevent XSS in email templates
@@ -954,14 +954,14 @@ export class SmtpEmailProvider implements EmailProvider {
 - [ ] **Step 2: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 npx tsc --noEmit
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add backend/src/providers/email/smtp.provider.ts
 git commit -m "feat(email): add SMTP email provider with nodemailer"
 ```
@@ -983,7 +983,7 @@ import { CloudEmailProvider } from '@/providers/email/cloud.provider.js';
 import { SmtpEmailProvider } from '@/providers/email/smtp.provider.js';
 import { SmtpConfigService } from '@/services/email/smtp-config.service.js';
 import { EmailTemplate } from '@/types/email.js';
-import { SendRawEmailRequest } from '@insforge/shared-schemas';
+import { SendRawEmailRequest } from '@growfoundry/shared-schemas';
 import logger from '@/utils/logger.js';
 
 /**
@@ -1060,14 +1060,14 @@ export class EmailService {
 - [ ] **Step 2: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 npx tsc --noEmit
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add backend/src/services/email/email.service.ts
 git commit -m "feat(email): route email sends through SMTP when configured"
 ```
@@ -1089,7 +1089,7 @@ import { EmailTemplateService } from '@/services/email/email-template.service.js
 import {
   upsertSmtpConfigRequestSchema,
   updateEmailTemplateRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import type { EmailTemplate } from '@/types/email.js';
 ```
 
@@ -1210,14 +1210,14 @@ router.put('/email-templates/:type', verifyAdmin, async (req: AuthRequest, res: 
 - [ ] **Step 3: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 npx tsc --noEmit
 ```
 
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add backend/src/api/routes/auth/index.routes.ts
 git commit -m "feat(api): add SMTP config and email template CRUD routes"
 ```
@@ -1234,7 +1234,7 @@ git commit -m "feat(api): add SMTP config and email template CRUD routes"
 
 ```typescript
 import { apiClient } from '@/lib/api/client';
-import type { SmtpConfigSchema, UpsertSmtpConfigRequest } from '@insforge/shared-schemas';
+import type { SmtpConfigSchema, UpsertSmtpConfigRequest } from '@growfoundry/shared-schemas';
 
 export class SmtpConfigService {
   async getConfig(): Promise<SmtpConfigSchema> {
@@ -1258,7 +1258,7 @@ export const smtpConfigService = new SmtpConfigService();
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@/lib/hooks/useToast';
 import { smtpConfigService } from '@/features/auth/services/smtp-config.service';
-import type { SmtpConfigSchema, UpsertSmtpConfigRequest } from '@insforge/shared-schemas';
+import type { SmtpConfigSchema, UpsertSmtpConfigRequest } from '@growfoundry/shared-schemas';
 
 export function useSmtpConfig() {
   const queryClient = useQueryClient();
@@ -1299,7 +1299,7 @@ export function useSmtpConfig() {
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add frontend/src/features/auth/services/smtp-config.service.ts frontend/src/features/auth/hooks/useSmtpConfig.ts
 git commit -m "feat(frontend): add SMTP config service and React Query hook"
 ```
@@ -1320,7 +1320,7 @@ import type {
   EmailTemplateSchema,
   ListEmailTemplatesResponse,
   UpdateEmailTemplateRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class EmailTemplateService {
   async getTemplates(): Promise<ListEmailTemplatesResponse> {
@@ -1350,7 +1350,7 @@ import { emailTemplateService } from '@/features/auth/services/email-template.se
 import type {
   ListEmailTemplatesResponse,
   UpdateEmailTemplateRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export function useEmailTemplates() {
   const queryClient = useQueryClient();
@@ -1392,7 +1392,7 @@ export function useEmailTemplates() {
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add frontend/src/features/auth/services/email-template.service.ts frontend/src/features/auth/hooks/useEmailTemplates.ts
 git commit -m "feat(frontend): add email template service and React Query hook"
 ```
@@ -1410,12 +1410,12 @@ git commit -m "feat(frontend): add email template service and React Query hook"
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input, Switch } from '@insforge/ui';
+import { Button, Input, Switch } from '@growfoundry/ui';
 import {
   upsertSmtpConfigRequestSchema,
   type SmtpConfigSchema,
   type UpsertSmtpConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 interface SmtpSettingsCardProps {
   config: SmtpConfigSchema | undefined;
@@ -1506,7 +1506,7 @@ export function SmtpSettingsCard({ config, isLoading, isUpdating, onSave }: Smtp
 
       <SettingRow
         label="Enable Custom SMTP"
-        description="Use your own SMTP server instead of InsForge cloud"
+        description="Use your own SMTP server instead of GrowFoundry cloud"
       >
         <Switch
           checked={enabled}
@@ -1617,14 +1617,14 @@ export function SmtpSettingsCard({ config, isLoading, isUpdating, onSave }: Smtp
 - [ ] **Step 2: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/frontend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/frontend
 npx tsc --noEmit
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add frontend/src/features/auth/components/SmtpSettingsCard.tsx
 git commit -m "feat(frontend): add SMTP settings card component"
 ```
@@ -1640,8 +1640,8 @@ git commit -m "feat(frontend): add SMTP settings card component"
 
 ```tsx
 import { useEffect, useState } from 'react';
-import { Button, Input, Select, SelectContent, SelectItem, SelectTrigger } from '@insforge/ui';
-import type { EmailTemplateSchema, UpdateEmailTemplateRequest } from '@insforge/shared-schemas';
+import { Button, Input, Select, SelectContent, SelectItem, SelectTrigger } from '@growfoundry/ui';
+import type { EmailTemplateSchema, UpdateEmailTemplateRequest } from '@growfoundry/shared-schemas';
 
 interface EmailTemplateCardProps {
   templates: EmailTemplateSchema[];
@@ -1838,14 +1838,14 @@ export function EmailTemplateCard({
 - [ ] **Step 2: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/frontend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/frontend
 npx tsc --noEmit
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add frontend/src/features/auth/components/EmailTemplateCard.tsx
 git commit -m "feat(frontend): add email template editor with source/preview tabs"
 ```
@@ -1970,14 +1970,14 @@ To:
 - [ ] **Step 8: Verify it compiles**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/frontend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/frontend
 npx tsc --noEmit
 ```
 
 - [ ] **Step 9: Commit**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add frontend/src/features/auth/components/AuthSettingsMenuDialog.tsx
 git commit -m "feat(frontend): add Email tab to Auth Settings with SMTP and template editors"
 ```
@@ -1989,7 +1989,7 @@ git commit -m "feat(frontend): add Email tab to Auth Settings with SMTP and temp
 - [ ] **Step 1: Run full backend type check**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/backend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/backend
 npx tsc --noEmit
 ```
 
@@ -1998,7 +1998,7 @@ Expected: No errors
 - [ ] **Step 2: Run full frontend type check**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/frontend
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/frontend
 npx tsc --noEmit
 ```
 
@@ -2007,7 +2007,7 @@ Expected: No errors
 - [ ] **Step 3: Run shared-schemas build**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge/shared-schemas
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry/shared-schemas
 npx tsc --noEmit
 ```
 
@@ -2016,14 +2016,14 @@ Expected: No errors
 - [ ] **Step 4: Run linter if available**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 npm run lint --if-present
 ```
 
 - [ ] **Step 5: Verify migration file is sequential**
 
 ```bash
-ls /Users/gary/projects/insforge-repo/InsForge/backend/src/infra/database/migrations/ | sort
+ls /Users/gary/projects/growfoundry-repo/GrowFoundry/backend/src/infra/database/migrations/ | sort
 ```
 
 Expected: `024_create-smtp-config-and-email-templates.sql` follows `023_ai-configs-soft-delete.sql`
@@ -2031,7 +2031,7 @@ Expected: `024_create-smtp-config-and-email-templates.sql` follows `023_ai-confi
 - [ ] **Step 6: Final commit (if any lint fixes needed)**
 
 ```bash
-cd /Users/gary/projects/insforge-repo/InsForge
+cd /Users/gary/projects/growfoundry-repo/GrowFoundry
 git add -A
 git commit -m "fix: address lint issues from SMTP feature implementation"
 ```

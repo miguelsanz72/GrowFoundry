@@ -1,5 +1,5 @@
 import { AppError } from '@/utils/errors.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import { validateIdentifier, validateSchemaName, validateTableName } from '@/utils/validations.js';
 
 export const DEFAULT_DATABASE_SCHEMA = 'public' as const;

@@ -144,7 +144,7 @@ export const dashboardAnalyticsMenuItem: DashboardPrimaryMenuItem = {
   icon: BarChart3,
 };
 
-// d_test + cloud-hosting only: navigates to the Install InsForge route.
+// d_test + cloud-hosting only: navigates to the Install GrowFoundry route.
 export const dashboardDTestInstallMenuItem: DashboardPrimaryMenuItem = {
   id: 'dtest-install',
   label: 'Install',
@@ -156,7 +156,7 @@ export const dashboardDTestInstallMenuItem: DashboardPrimaryMenuItem = {
 export const dashboardDTestDocMenuItem: DashboardPrimaryMenuItem = {
   id: 'dtest-doc',
   label: 'Doc',
-  href: 'https://docs.insforge.dev/introduction',
+  href: 'https://docs.growfoundry.dev/introduction',
   icon: BookOpen,
   external: true,
 };

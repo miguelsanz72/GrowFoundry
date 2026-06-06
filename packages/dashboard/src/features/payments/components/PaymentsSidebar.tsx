@@ -1,5 +1,5 @@
 import { Settings } from 'lucide-react';
-import type { StripeEnvironment } from '@insforge/shared-schemas';
+import type { StripeEnvironment } from '@growfoundry/shared-schemas';
 import {
   FeatureSidebar,
   type FeatureSidebarHeaderButton,

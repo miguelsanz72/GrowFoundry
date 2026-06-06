@@ -18,8 +18,8 @@ import {
   MenuDialogSideNavHeader,
   MenuDialogSideNavTitle,
   MenuDialogTitle,
-} from '@insforge/ui';
-import type { PosthogConnection } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { PosthogConnection } from '@growfoundry/shared-schemas';
 import { useDashboardHost } from '#lib/config/DashboardHostContext';
 import { useToast } from '#lib/hooks/useToast';
 import { ANALYTICS_SETUP_PROMPT } from '#features/analytics/lib/constants';

@@ -13,7 +13,7 @@ import {
   chatCompletionRequestSchema,
   embeddingsRequestSchema,
   imageGenerationRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const router = Router();
 const chatService = ChatCompletionService.getInstance();

@@ -10,7 +10,7 @@ import type {
   RlsPolicy,
   RealtimePermissionsResponse,
   UpdateRealtimeConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export type { RealtimeChannel, RealtimeMessage, RlsPolicy, RealtimePermissionsResponse };
 

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ClipboardEvent } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
-import { Button, Dialog, DialogContent, DialogDescription, DialogTitle, Input } from '@insforge/ui';
-import type { DeploymentEnvVar } from '@insforge/shared-schemas';
+import { Button, Dialog, DialogContent, DialogDescription, DialogTitle, Input } from '@growfoundry/ui';
+import type { DeploymentEnvVar } from '@growfoundry/shared-schemas';
 import { useToast } from '#lib/hooks/useToast';
 import {
   createEnvVarDraft,

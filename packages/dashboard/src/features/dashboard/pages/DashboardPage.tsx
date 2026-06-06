@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Badge, Button } from '@insforge/ui';
+import { Badge, Button } from '@growfoundry/ui';
 import { Skeleton } from '#components';
 import {
   Braces,
@@ -33,7 +33,7 @@ import { useApiKey, useMetadata } from '#lib/hooks/useMetadata';
 import { useDashboardProject, useIsCloudHostingMode } from '#lib/config/DashboardHostContext';
 import { useCloudProjectInfo } from '#lib/hooks/useCloudProjectInfo';
 import { useMcpUsage } from '#features/logs/hooks/useMcpUsage';
-import { getBackendUrl, isInsForgeCloudProject } from '#lib/utils/utils';
+import { getBackendUrl, isGrowFoundryCloudProject } from '#lib/utils/utils';
 import { useUsers } from '#features/auth';
 import { CLISection, MCPSection } from '#features/dashboard/components/connect';
 import { useOpenConnectDialog } from '#layout/ConnectDialogContext';
@@ -301,7 +301,7 @@ function DashboardLoadingState() {
   return (
     <main className="h-full min-h-0 min-w-0 overflow-y-auto bg-semantic-0">
       <div className="flex min-w-0 flex-col lg:flex-row">
-        <section className="insforge-dashboard-home-sidebar min-w-0 shrink-0 border-b border-[var(--alpha-8)] px-10 py-10 lg:border-r lg:border-b-0">
+        <section className="growfoundry-dashboard-home-sidebar min-w-0 shrink-0 border-b border-[var(--alpha-8)] px-10 py-10 lg:border-r lg:border-b-0">
           <div className="mx-auto flex w-full max-w-[400px] flex-col gap-12">
             <div className="flex flex-col gap-12">
               <div className="flex items-center gap-2">
@@ -367,7 +367,7 @@ export default function DashboardPage() {
   const navigate = useNavigate();
   const openConnectDialog = useOpenConnectDialog();
   const isCloudHostingMode = useIsCloudHostingMode();
-  const isCloudProject = isInsForgeCloudProject();
+  const isCloudProject = isGrowFoundryCloudProject();
   const canShowCliGettingStarted = isCloudProject && isCloudHostingMode;
   const {
     metadata,
@@ -392,7 +392,7 @@ export default function DashboardPage() {
   const agentConnected = hasCompletedOnboarding || isBranch;
   const shouldShowLoadingState =
     isMetadataLoading || isMcpUsageLoading || (isCloudProject && isProjectInfoLoading);
-  const projectName = isCloudProject ? projectInfo.name : 'My InsForge Project';
+  const projectName = isCloudProject ? projectInfo.name : 'My GrowFoundry Project';
   const instanceType = projectInfo.instanceType?.toUpperCase();
   const showInstanceTypeBadge = isCloudProject && !!instanceType;
   const showRegionInfo = isCloudProject && !!projectInfo.region;
@@ -550,7 +550,7 @@ export default function DashboardPage() {
       <div
         className={`flex min-w-0 flex-col lg:flex-row${isCloudHostingMode ? '' : ' min-h-full lg:h-full lg:min-h-0'}`}
       >
-        <section className="insforge-dashboard-home-sidebar min-w-0 shrink-0 border-b border-[var(--alpha-8)] px-10 py-10 lg:border-r lg:border-b-0">
+        <section className="growfoundry-dashboard-home-sidebar min-w-0 shrink-0 border-b border-[var(--alpha-8)] px-10 py-10 lg:border-r lg:border-b-0">
           <div className="mx-auto flex w-full max-w-[400px] flex-col gap-12">
             <div className="flex flex-col gap-12">
               <div className="flex items-center gap-2">

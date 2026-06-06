@@ -23,7 +23,7 @@ import {
   oAuthCodeExchangeRequestSchema,
   type ListOAuthConfigsResponse,
   oAuthProvidersSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { isOAuthSharedKeysAvailable } from '@/utils/environment.js';
 
 const router = Router();
@@ -402,7 +402,7 @@ router.get('/shared/callback/:state', async (req: Request, res: Response, next: 
 
       // Redirect with only the exchange code (no sensitive tokens in URL)
       const successUrl = new URL(redirectUri);
-      successUrl.searchParams.set('insforge_code', exchangeCode);
+      successUrl.searchParams.set('growfoundry_code', exchangeCode);
       return res.redirect(successUrl.toString());
     } catch (error) {
       logger.error('Shared OAuth callback completion error', {
@@ -507,7 +507,7 @@ const handleOAuthCallback = async (req: Request, res: Response, next: NextFuncti
 
       // Redirect with only the exchange code (no sensitive tokens in URL)
       const successUrl = new URL(redirectUri);
-      successUrl.searchParams.set('insforge_code', exchangeCode);
+      successUrl.searchParams.set('growfoundry_code', exchangeCode);
       return res.redirect(successUrl.toString());
     } catch (error) {
       logger.error('OAuth callback error', {

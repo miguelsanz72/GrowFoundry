@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import type { StripeEnvironment } from '@insforge/shared-schemas';
+import type { StripeEnvironment } from '@growfoundry/shared-schemas';
 import { PaymentsSidebar } from './PaymentsSidebar';
 import { PaymentsSettingsDialog } from './PaymentsSettingsDialog';
 

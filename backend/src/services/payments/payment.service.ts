@@ -82,7 +82,7 @@ import {
   type SyncPaymentsResponse,
   type SyncPaymentsEnvironmentResult,
   type SyncPaymentsSubscriptionsSummary,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class PaymentService {
   private static instance: PaymentService;
@@ -712,10 +712,10 @@ export class PaymentService {
     subject: BillingSubject | undefined,
     checkoutMode?: 'payment' | 'subscription'
   ): Record<string, string> {
-    const reservedKey = Object.keys(metadata ?? {}).find((key) => key.startsWith('insforge_'));
+    const reservedKey = Object.keys(metadata ?? {}).find((key) => key.startsWith('growfoundry_'));
     if (reservedKey) {
       throw new AppError(
-        `Metadata key ${reservedKey} is reserved for InsForge`,
+        `Metadata key ${reservedKey} is reserved for GrowFoundry`,
         400,
         ERROR_CODES.INVALID_INPUT
       );

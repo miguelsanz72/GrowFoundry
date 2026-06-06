@@ -13,7 +13,7 @@ import {
   DialogTitle,
   Input,
   Switch,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 
 interface BucketFormDialogProps {
   open: boolean;

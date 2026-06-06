@@ -1,4 +1,4 @@
-# InsForge Payments - Agent Documentation
+# GrowFoundry Payments - Agent Documentation
 
 ## Use Payments For
 
@@ -21,9 +21,9 @@ Do not build raw card collection UI. Use Stripe Checkout and Billing Portal. Han
 Project admins configure Payments in Dashboard -> Payments -> Settings or with the CLI:
 
 ```bash
-npx @insforge/cli payments status
-npx @insforge/cli payments config set test sk_test_xxx
-npx @insforge/cli payments webhooks configure test
+npx @growfoundry/cli payments status
+npx @growfoundry/cli payments config set test sk_test_xxx
+npx @growfoundry/cli payments webhooks configure test
 ```
 
 ## Runtime Checkout Pattern
@@ -31,22 +31,22 @@ npx @insforge/cli payments webhooks configure test
 Use the TypeScript SDK from application code:
 
 ```typescript
-import { createClient } from '@insforge/sdk';
+import { createClient } from '@growfoundry/sdk';
 
-const insforge = createClient({
-  baseUrl: 'https://your-project.insforge.app',
+const growfoundry = createClient({
+  baseUrl: 'https://your-project.growfoundry.app',
   anonKey: 'your-anon-key'
 });
 ```
 
-Checkout requires an InsForge user token. Guest one-time checkout can use an anonymous InsForge token. API keys are not a replacement for runtime checkout because the backend needs a user context for `payments.checkout_sessions`.
+Checkout requires an GrowFoundry user token. Guest one-time checkout can use an anonymous GrowFoundry token. API keys are not a replacement for runtime checkout because the backend needs a user context for `payments.checkout_sessions`.
 
 ### One-Time Payment
 
 Create an app-owned pending order first, then start Checkout:
 
 ```typescript
-const { data: order, error: orderError } = await insforge
+const { data: order, error: orderError } = await growfoundry
   .from('orders')
   .insert([{ user_id: user.id, status: 'pending' }])
   .select()
@@ -54,7 +54,7 @@ const { data: order, error: orderError } = await insforge
 
 if (orderError) throw orderError;
 
-const { data, error } = await insforge.payments.createCheckoutSession({
+const { data, error } = await growfoundry.payments.createCheckoutSession({
   environment: 'test',
   mode: 'payment',
   lineItems: [{ stripePriceId: 'price_123', quantity: 1 }],
@@ -78,7 +78,7 @@ For anonymous one-time purchases, omit `subject` and pass `customerEmail` when a
 Subscriptions require a billing subject. Pick a stable app owner such as user, team, organization, workspace, tenant, or group.
 
 ```typescript
-const { data, error } = await insforge.payments.createCheckoutSession({
+const { data, error } = await growfoundry.payments.createCheckoutSession({
   environment: 'test',
   mode: 'subscription',
   subject: { type: 'team', id: teamId },
@@ -102,7 +102,7 @@ Do not let users submit arbitrary `subject.type` and `subject.id` values unless 
 Use Billing Portal after Checkout has created a Stripe customer mapping for the subject.
 
 ```typescript
-const { data, error } = await insforge.payments.createCustomerPortalSession({
+const { data, error } = await growfoundry.payments.createCustomerPortalSession({
   environment: 'test',
   subject: { type: 'team', id: teamId },
   returnUrl: `${window.location.origin}/billing`
@@ -171,7 +171,7 @@ Adapt the metadata lookup to the app schema. Protect app-owned billing tables wi
 - Consider enabling RLS on `payments.checkout_sessions` and `payments.customer_portal_sessions` with `INSERT` policies that check app membership.
 - Do not expose `payments.customers`, `payments.payment_history`, or `payments.subscriptions` directly to end users.
 - Do not write Stripe-managed payments tables directly. Use the Payments API, Stripe webhooks, or app-owned trigger targets.
-- Metadata keys starting with `insforge_` are reserved.
+- Metadata keys starting with `growfoundry_` are reserved.
 
 ## Debugging
 
@@ -225,5 +225,5 @@ LIMIT 20;
 | Checkout uses the wrong price | Verify the price ID belongs to the selected environment. |
 | Duplicate checkout attempts | Use a stable `idempotencyKey` based on the order, cart, or billing subject. |
 | Portal returns not found | The subject has no Stripe customer mapping yet. Have the customer complete Checkout first. |
-| Payment shows in Stripe but not InsForge | Check managed webhook configuration and `payments.webhook_events`. |
+| Payment shows in Stripe but not GrowFoundry | Check managed webhook configuration and `payments.webhook_events`. |
 | User can start checkout for another team | Add RLS or server-side membership checks for the billing subject. |

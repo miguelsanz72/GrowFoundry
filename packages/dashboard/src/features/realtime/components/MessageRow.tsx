@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { CodeBlock } from '@insforge/ui';
+import { CodeBlock } from '@growfoundry/ui';
 import { cn, formatTime } from '#lib/utils/utils';
 import type { RealtimeMessage } from '#features/realtime/services/realtime.service';
 

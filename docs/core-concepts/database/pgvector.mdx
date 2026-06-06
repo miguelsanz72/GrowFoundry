@@ -3,7 +3,7 @@ title: "pgvector"
 description: "Store embeddings and run similarity search inside Postgres"
 ---
 
-[pgvector](https://github.com/pgvector/pgvector) ships on every InsForge project. Use it for semantic search, recommendations, and [RAG](https://www.pinecone.io/learn/retrieval-augmented-generation/).
+[pgvector](https://github.com/pgvector/pgvector) ships on every GrowFoundry project. Use it for semantic search, recommendations, and [RAG](https://www.pinecone.io/learn/retrieval-augmented-generation/).
 
 ## Prompt your agent
 
@@ -31,20 +31,20 @@ Generate an embedding server-side and insert it.
 
 ```typescript
 import OpenAI from 'openai';
-import { createClient } from '@insforge/sdk';
+import { createClient } from '@growfoundry/sdk';
 
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
   apiKey: process.env.OPENROUTER_API_KEY,
 });
-const insforge = createClient({ projectId: process.env.INSFORGE_PROJECT_ID });
+const growfoundry = createClient({ projectId: process.env.GROWFOUNDRY_PROJECT_ID });
 
 const { data } = await openai.embeddings.create({
   model: 'openai/text-embedding-3-small',
   input: 'hello world',
 });
 
-await insforge.database.from('documents').insert({
+await growfoundry.database.from('documents').insert({
   content: 'hello world',
   embedding: data[0].embedding,
 });
@@ -90,4 +90,4 @@ create index on documents using hnsw (embedding vector_cosine_ops);
 
 - [pgvector on GitHub](https://github.com/pgvector/pgvector) for operators and indexes.
 - [OpenRouter embeddings](https://openrouter.ai/docs/features/multimodal/embeddings) for the model catalog.
-- [Model Gateway overview](/core-concepts/ai/overview) for the InsForge side of OpenRouter.
+- [Model Gateway overview](/core-concepts/ai/overview) for the GrowFoundry side of OpenRouter.

@@ -1,4 +1,4 @@
-import type { ServiceSchema, ServiceStatus } from '@insforge/shared-schemas';
+import type { ServiceSchema, ServiceStatus } from '@growfoundry/shared-schemas';
 
 export const statusColors: Record<ServiceStatus, string> = {
   running: 'bg-green-500',

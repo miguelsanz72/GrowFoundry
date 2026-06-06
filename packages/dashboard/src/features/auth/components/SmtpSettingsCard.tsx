@@ -10,13 +10,13 @@ import {
   SelectTrigger,
   SelectValue,
   Switch,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { z } from 'zod';
 import {
   upsertSmtpConfigRequestSchema,
   type SmtpConfigSchema,
   type UpsertSmtpConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 type SmtpFormValues = z.input<typeof upsertSmtpConfigRequestSchema>;
 

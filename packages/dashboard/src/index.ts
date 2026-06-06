@@ -1,6 +1,6 @@
 import './styles.css';
 
-export { InsForgeDashboard } from './app/InsforgeDashboard';
+export { GrowFoundryDashboard } from './app/GrowfoundryDashboard';
 export {
   dashboardDeploymentsMenuItem,
   dashboardSettingsMenuItem,
@@ -16,7 +16,7 @@ export type {
   DashboardProjectInfo,
   DashboardProps,
   DashboardUserInfo,
-  InsForgeDashboardProps,
+  GrowFoundryDashboardProps,
   SelfHostingDashboardProps,
   DashboardMetricsRange,
   DashboardMetricName,

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi, type MockInstance } from 'vitest';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import jwt from 'jsonwebtoken';
 
 vi.mock('@/infra/config/app.config.js', () => {

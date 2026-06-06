@@ -10,7 +10,7 @@ import {
   StorageBucketSchema,
   StorageFileSchema,
   StorageMetadataSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { StorageProvider } from '@/providers/storage/base.provider.js';
 import { LocalStorageProvider } from '@/providers/storage/local.provider.js';
 import { S3StorageProvider } from '@/providers/storage/s3.provider.js';

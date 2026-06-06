@@ -5,7 +5,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { cn } from '#lib/utils/utils';
 import { SEVERITY_CONFIG, type SeverityType } from '#features/logs/helpers';
 

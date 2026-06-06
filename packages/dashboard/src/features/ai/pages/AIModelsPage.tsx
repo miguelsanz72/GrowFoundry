@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { ErrorState } from '#components';
 import {
   generateProviderTabs,

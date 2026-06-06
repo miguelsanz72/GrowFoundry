@@ -2,15 +2,15 @@
 
 **Status:** Current source-of-truth implementation for the Stripe payments foundation.
 
-**Audience:** InsForge engineers, dashboard maintainers, CLI/SDK authors, OpenAPI maintainers, and agents that need to understand how to build on the payment feature.
+**Audience:** GrowFoundry engineers, dashboard maintainers, CLI/SDK authors, OpenAPI maintainers, and agents that need to understand how to build on the payment feature.
 
-**Goal:** Let a developer configure their own Stripe test/live secret keys, let agents configure Stripe catalog objects, and let InsForge support complete runtime payment flows for one-time purchases, subscriptions, webhook projections, and customer billing portal sessions.
+**Goal:** Let a developer configure their own Stripe test/live secret keys, let agents configure Stripe catalog objects, and let GrowFoundry support complete runtime payment flows for one-time purchases, subscriptions, webhook projections, and customer billing portal sessions.
 
 ## Product Direction
 
-InsForge uses the developer-owned Stripe account model for this phase. Developers configure `STRIPE_TEST_SECRET_KEY` and/or `STRIPE_LIVE_SECRET_KEY` through the dashboard, or seed them from environment variables into the secret store. InsForge does not use Connected Accounts, claimable sandboxes, or test-to-live publishing in this version.
+GrowFoundry uses the developer-owned Stripe account model for this phase. Developers configure `STRIPE_TEST_SECRET_KEY` and/or `STRIPE_LIVE_SECRET_KEY` through the dashboard, or seed them from environment variables into the secret store. GrowFoundry does not use Connected Accounts, claimable sandboxes, or test-to-live publishing in this version.
 
-Stripe is the source of truth. InsForge stores a local mirror and runtime projection so agents and the dashboard can reason about the state of payments without re-querying Stripe for every action. Mutations still go to Stripe first; InsForge only updates its mirror after Stripe succeeds.
+Stripe is the source of truth. GrowFoundry stores a local mirror and runtime projection so agents and the dashboard can reason about the state of payments without re-querying Stripe for every action. Mutations still go to Stripe first; GrowFoundry only updates its mirror after Stripe succeeds.
 
 The system is agent-first. The dashboard provides visibility and controls, but the backend API and shared schemas are the primary surface that agents, CLI commands, SDKs, and generated apps should build against.
 
@@ -26,7 +26,7 @@ Generated apps can create Checkout Sessions at runtime. Anonymous one-time check
 
 Generated apps can create Stripe Billing Portal Sessions for authenticated users. This is intentionally mediated through `payments.customer_portal_sessions`, where developers or agents can define custom RLS policies for their app's subject model.
 
-Managed Stripe webhooks are used to keep runtime projections current. InsForge stores webhook signing secrets in the secret store, not in environment variables. Webhook setup is best-effort during new account configuration and can also be retried from the dashboard Webhooks tab.
+Managed Stripe webhooks are used to keep runtime projections current. GrowFoundry stores webhook signing secrets in the secret store, not in environment variables. Webhook setup is best-effort during new account configuration and can also be retried from the dashboard Webhooks tab.
 
 ## Data Model
 
@@ -52,7 +52,7 @@ The payments schema is created by `backend/src/infra/database/migrations/038_cre
 
 ## Backend Surface
 
-Runtime routes use `verifyUser` so generated apps can call them with InsForge user tokens, including anon tokens for anonymous one-time checkout.
+Runtime routes use `verifyUser` so generated apps can call them with GrowFoundry user tokens, including anon tokens for anonymous one-time checkout.
 
 - `POST /api/payments/:environment/checkout-sessions`: creates a local checkout attempt, then creates a Stripe Checkout Session. Subscription mode requires `subject`.
 - `POST /api/payments/:environment/customer-portal-sessions`: creates a local portal attempt under the caller context, checks `stripe_customer_mappings`, then creates a Stripe Billing Portal Session. Anonymous users are rejected.
@@ -67,7 +67,7 @@ Admin routes use `verifyAdmin` and are intended for dashboard, agents, CLI, and 
 - `POST /api/payments/sync`: syncs products, prices, customers, and subscriptions for all configured environments.
 - `POST /api/payments/:environment/sync`: syncs products, prices, customers, and subscriptions for one environment.
 - `GET /api/payments/:environment/customers`: lists mirrored Stripe customers for one environment.
-- `POST /api/payments/:environment/webhook`: recreates the InsForge-managed Stripe webhook endpoint for the environment.
+- `POST /api/payments/:environment/webhook`: recreates the GrowFoundry-managed Stripe webhook endpoint for the environment.
 - `GET /api/payments/:environment/catalog`: reads mirrored products and prices.
 - `GET|POST|PATCH|DELETE /api/payments/:environment/catalog/products...`: manages Stripe products.
 - `GET|POST|PATCH|DELETE /api/payments/:environment/catalog/prices...`: manages Stripe prices, where delete archives the Stripe price.
@@ -83,13 +83,13 @@ The secret store is the canonical runtime source for Stripe keys. Environment va
 - Test webhook secret store key: `STRIPE_TEST_WEBHOOK_SECRET`
 - Live webhook secret store key: `STRIPE_LIVE_WEBHOOK_SECRET`
 
-When a Stripe key is saved, InsForge validates the key prefix, retrieves the Stripe account id, and compares it with the existing connection row.
+When a Stripe key is saved, GrowFoundry validates the key prefix, retrieves the Stripe account id, and compares it with the existing connection row.
 
 If the exact key is already configured and the connection has an account id, the save is a no-op.
 
-If the key is different but points to the same Stripe account, InsForge updates the secret and connection metadata but skips webhook recreation and sync.
+If the key is different but points to the same Stripe account, GrowFoundry updates the secret and connection metadata but skips webhook recreation and sync.
 
-If the key points to a different Stripe account, InsForge clears all mirrored payment data for that environment, best-effort recreates the managed webhook, persists the new key and account metadata, then runs unified sync.
+If the key points to a different Stripe account, GrowFoundry clears all mirrored payment data for that environment, best-effort recreates the managed webhook, persists the new key and account metadata, then runs unified sync.
 
 If webhook creation fails because the backend URL is not publicly accessible, key configuration still succeeds and sync still runs. Developers can retry webhook setup later from the Webhooks tab or use Stripe CLI for local webhook testing.
 
@@ -99,15 +99,15 @@ Manual sync does not touch webhook setup. It only pulls Stripe data and updates 
 
 Checkout creation is a two-step local-plus-Stripe process.
 
-First, InsForge inserts `payments.checkout_sessions` using the caller's Postgres role and JWT context. This lets future developer-defined policies work without changing the route. The current migration does not enable RLS by default.
+First, GrowFoundry inserts `payments.checkout_sessions` using the caller's Postgres role and JWT context. This lets future developer-defined policies work without changing the route. The current migration does not enable RLS by default.
 
-Second, if the insert succeeds, InsForge creates the Stripe Checkout Session. If Stripe creation succeeds, the local row becomes `open` with Stripe ids and URL. If Stripe creation fails, the local row becomes `failed`.
+Second, if the insert succeeds, GrowFoundry creates the Stripe Checkout Session. If Stripe creation succeeds, the local row becomes `open` with Stripe ids and URL. If Stripe creation fails, the local row becomes `failed`.
 
-Idempotency is handled at both layers. The local table has a unique partial index on `(environment, idempotency_key)`. If a caller retries the same request and the existing row has a usable Stripe URL, InsForge returns it. If the existing row is incomplete, InsForge retries Stripe creation using the same local row.
+Idempotency is handled at both layers. The local table has a unique partial index on `(environment, idempotency_key)`. If a caller retries the same request and the existing row has a usable Stripe URL, GrowFoundry returns it. If the existing row is incomplete, GrowFoundry retries Stripe creation using the same local row.
 
-Caller-provided metadata cannot use keys that start with `insforge_`. InsForge owns these reserved keys because webhooks trust them to recover checkout mode, checkout session id, and billing subject.
+Caller-provided metadata cannot use keys that start with `growfoundry_`. GrowFoundry owns these reserved keys because webhooks trust them to recover checkout mode, checkout session id, and billing subject.
 
-When an identified one-time checkout has no existing customer mapping, InsForge asks Stripe Checkout to create a customer with `customer_creation = always`. When the checkout completes and Stripe returns a customer id, InsForge creates or updates `payments.stripe_customer_mappings`.
+When an identified one-time checkout has no existing customer mapping, GrowFoundry asks Stripe Checkout to create a customer with `customer_creation = always`. When the checkout completes and Stripe returns a customer id, GrowFoundry creates or updates `payments.stripe_customer_mappings`.
 
 One-time checkout does not currently create a separate checkout item projection. The checkout attempt stores line items, while durable fulfillment state is represented by webhook-driven payment history and app-specific business tables.
 
@@ -115,9 +115,9 @@ One-time checkout does not currently create a separate checkout item projection.
 
 Customer portal sessions are authenticated-only. Anonymous users cannot create them.
 
-The request includes a billing subject and optional return URL/configuration id. InsForge inserts `payments.customer_portal_sessions` using the caller's Postgres role and JWT context. Developers or agents can add app-specific RLS policies on this table to decide who may create portal sessions for which subject.
+The request includes a billing subject and optional return URL/configuration id. GrowFoundry inserts `payments.customer_portal_sessions` using the caller's Postgres role and JWT context. Developers or agents can add app-specific RLS policies on this table to decide who may create portal sessions for which subject.
 
-After the local insert succeeds, InsForge looks up the subject in `payments.stripe_customer_mappings`. If there is no mapped Stripe customer, the request fails with `404`. If there is a mapping, InsForge creates a Stripe Billing Portal Session and stores the returned portal URL.
+After the local insert succeeds, GrowFoundry looks up the subject in `payments.stripe_customer_mappings`. If there is no mapped Stripe customer, the request fails with `404`. If there is a mapping, GrowFoundry creates a Stripe Billing Portal Session and stores the returned portal URL.
 
 ## Webhook Projection Flow
 
@@ -143,9 +143,9 @@ Managed webhooks listen for the events needed to maintain checkout, subscription
 
 Webhook processing is idempotent. A duplicate processed or ignored event is returned as already handled. Failed events can be retried and will increment `attempt_count`.
 
-Payment history supports out-of-order refund events. When refund context is missing locally, InsForge retrieves the PaymentIntent, Charge, and Invoice Payments context from Stripe, hydrates the original payment/invoice row where possible, and preserves previously known context with `COALESCE` rather than overwriting it with null fields.
+Payment history supports out-of-order refund events. When refund context is missing locally, GrowFoundry retrieves the PaymentIntent, Charge, and Invoice Payments context from Stripe, hydrates the original payment/invoice row where possible, and preserves previously known context with `COALESCE` rather than overwriting it with null fields.
 
-Subscription projections support existing Stripe accounts. If a synced subscription has no InsForge billing subject mapping, it is still imported with nullable subject fields and counted as unmapped.
+Subscription projections support existing Stripe accounts. If a synced subscription has no GrowFoundry billing subject mapping, it is still imported with nullable subject fields and counted as unmapped.
 
 ## Dashboard Surface
 
@@ -153,7 +153,7 @@ The Payments feature has a secondary menu with Products and Subscriptions.
 
 Products shows test/live tabs, environment-specific empty states when a key is missing, product rows aligned with the Realtime Messages visual style, and product detail rows for associated prices.
 
-Subscriptions shows test/live tabs and subscription detail rows for subscription items. Existing Stripe subscriptions can appear without InsForge subject mapping.
+Subscriptions shows test/live tabs and subscription detail rows for subscription items. Existing Stripe subscriptions can appear without GrowFoundry subject mapping.
 
 The Payments Settings dialog has three tabs:
 

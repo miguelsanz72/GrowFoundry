@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import RefreshIcon from '#assets/icons/refresh.svg?react';
-import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@insforge/ui';
+import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@growfoundry/ui';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   DataGridEmptyState,
@@ -15,7 +15,7 @@ import { useDatabaseSchemas, usePolicies } from '#features/database/hooks/useDat
 import { useDatabaseSchemaSelection } from '#features/database/hooks/useDatabaseSchemaSelection';
 import { SQLModal, SQLCellButton } from '#features/database/components/SQLModal';
 import { DatabaseStudioSidebarPanel } from '#features/database/components/DatabaseSidebar';
-import { type DatabasePoliciesResponse } from '@insforge/shared-schemas';
+import { type DatabasePoliciesResponse } from '@growfoundry/shared-schemas';
 import { DatabaseSchemaSelect } from '#features/database/components/DatabaseSchemaSelect';
 import { DEFAULT_DATABASE_SCHEMA, getDatabaseSchemaInfo } from '#features/database/helpers';
 

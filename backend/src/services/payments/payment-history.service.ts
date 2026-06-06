@@ -21,7 +21,7 @@ import type {
   BillingSubject,
   ListPaymentHistoryRequest,
   ListPaymentHistoryResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 type PaymentHistoryStatus = 'pending' | 'succeeded' | 'failed' | 'refunded' | 'partially_refunded';
 

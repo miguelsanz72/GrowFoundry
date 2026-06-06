@@ -4,7 +4,7 @@ import {
   CreateOAuthConfigRequest,
   UpdateOAuthConfigRequest,
   ListOAuthConfigsResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class OAuthConfigService {
   // List all OAuth configurations

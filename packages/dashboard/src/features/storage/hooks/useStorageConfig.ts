@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { StorageConfigSchema, UpdateStorageConfigRequest } from '@insforge/shared-schemas';
+import { StorageConfigSchema, UpdateStorageConfigRequest } from '@growfoundry/shared-schemas';
 import { storageConfigService } from '#features/storage/services/storage-config.service';
 import { useToast } from '#lib/hooks/useToast';
 

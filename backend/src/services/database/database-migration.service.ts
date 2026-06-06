@@ -4,7 +4,7 @@ import {
   type CreateMigrationResponse,
   type DatabaseMigrationsResponse,
   type Migration,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { AppError, isPgErrorLike } from '@/utils/errors.js';
 import { DatabaseManager } from '@/infra/database/database.manager.js';
 import {

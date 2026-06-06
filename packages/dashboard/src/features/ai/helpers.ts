@@ -1,4 +1,4 @@
-import { ModalitySchema, AIModelSchema } from '@insforge/shared-schemas';
+import { ModalitySchema, AIModelSchema } from '@growfoundry/shared-schemas';
 export interface ModelOption {
   id: string;
   created?: number;

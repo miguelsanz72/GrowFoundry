@@ -11,7 +11,7 @@ import {
   type CreateCustomerPortalSessionRequest,
   type CustomerPortalSession,
   type RoleSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const CUSTOMER_PORTAL_SESSION_COLUMNS = `
   id,

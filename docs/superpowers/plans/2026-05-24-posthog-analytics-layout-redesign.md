@@ -6,7 +6,7 @@
 
 **Architecture:** Mirror the existing OSS pattern used by `features/auth`, `features/payments`, `features/realtime`, `features/deployments`: `AnalyticsLayout` (default export, sidebar + `<Outlet />` | `EmptyConnectPanel`) + `AnalyticsSidebar` (wraps `FeatureSidebar`) + `AnalyticsConfigDialog` (`MenuDialog` for settings) + sub-pages under `pages/`. Shared change: add optional `disabled` flag to `FeatureSidebarListItem`. All styling via Tailwind semantic classes and existing CSS variables — no hex / `rgba()`.
 
-**Tech Stack:** React 19 + react-router-dom v6 + @tanstack/react-query + Tailwind + `@insforge/ui` (Button, MenuDialog family, Pagination, Input, CopyButton) + existing dashboard `#components` (`FeatureSidebar`, `LoadingState`, `ErrorState`, `PaginationControls`). Tests with `vitest` + `@testing-library/react`.
+**Tech Stack:** React 19 + react-router-dom v6 + @tanstack/react-query + Tailwind + `@growfoundry/ui` (Button, MenuDialog family, Pagination, Input, CopyButton) + existing dashboard `#components` (`FeatureSidebar`, `LoadingState`, `ErrorState`, `PaginationControls`). Tests with `vitest` + `@testing-library/react`.
 
 **Spec:** `docs/superpowers/specs/2026-05-24-posthog-analytics-layout-redesign-design.md`
 
@@ -233,7 +233,7 @@ Replace `packages/dashboard/src/features/analytics/components/posthog/RecentRepl
 
 ```tsx
 import { useState } from 'react';
-import type { PosthogRecording } from '@insforge/shared-schemas';
+import type { PosthogRecording } from '@growfoundry/shared-schemas';
 import { formatDuration, formatRelativeTime, truncateId } from '#features/analytics/lib/format';
 import { ReplayModal } from './ReplayModal';
 
@@ -369,12 +369,12 @@ import {
   MenuDialogSideNavHeader,
   MenuDialogSideNavTitle,
   MenuDialogTitle,
-} from '@insforge/ui';
-import type { PosthogConnection } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { PosthogConnection } from '@growfoundry/shared-schemas';
 import { DisconnectDialog } from './posthog/DisconnectDialog';
 
 const ANALYTICS_SETUP_PROMPT =
-  "I'm using InsForge as my backend platform. I want to add product analytics to this project. Read the current directory and use the InsForge skill to set up PostHog analytics for me.";
+  "I'm using GrowFoundry as my backend platform. I want to add product analytics to this project. Read the current directory and use the GrowFoundry skill to set up PostHog analytics for me.";
 
 interface AnalyticsConfigDialogProps {
   open: boolean;
@@ -499,7 +499,7 @@ function ReadOnlyField({ label, value }: { label: string; value: string }) {
 - [ ] **Step 2: TypeScript check**
 
 Run: `cd packages/dashboard && npx tsc --noEmit`
-Expected: PASS — `PosthogConnection` is already a known type from `@insforge/shared-schemas`.
+Expected: PASS — `PosthogConnection` is already a known type from `@growfoundry/shared-schemas`.
 
 - [ ] **Step 3: Commit**
 
@@ -522,7 +522,7 @@ Create `packages/dashboard/src/features/analytics/components/AnalyticsSidebar.ts
 ```tsx
 import { useState } from 'react';
 import { Settings } from 'lucide-react';
-import type { PosthogConnection } from '@insforge/shared-schemas';
+import type { PosthogConnection } from '@growfoundry/shared-schemas';
 import {
   FeatureSidebar,
   type FeatureSidebarHeaderButton,
@@ -1010,7 +1010,7 @@ Expected: PASS (existing tests not affected; new `FeatureSidebar` test passes; n
 - No "TBD" / "handle edge cases" / "similar to Task N" / "implement later" anywhere.
 
 **Type consistency:**
-- `PosthogConnection` used in both `AnalyticsConfigDialog` (Task 3) and `AnalyticsSidebar` (Task 4) — same import from `@insforge/shared-schemas`, same shape.
+- `PosthogConnection` used in both `AnalyticsConfigDialog` (Task 3) and `AnalyticsSidebar` (Task 4) — same import from `@growfoundry/shared-schemas`, same shape.
 - `RecentReplaysCardProps` (Task 2) defines `items: PosthogRecording[]` — used by `SessionReplayPage` (Task 5) via `pageItems` from `data?.items ?? []`. Consistent.
 - `usePosthogConnection` return shape used consistently in Task 6's Layout.
 

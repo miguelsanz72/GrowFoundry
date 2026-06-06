@@ -1,5 +1,5 @@
 import { EmailTemplate } from '@/types/email.js';
-import { SendRawEmailRequest } from '@insforge/shared-schemas';
+import { SendRawEmailRequest } from '@growfoundry/shared-schemas';
 
 /**
  * Email provider interface

@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "InsForge Docs",
+  "name": "GrowFoundry Docs",
   "colors": {
     "primary": "#07C983",
     "light": "#4ADE80",
@@ -15,13 +15,13 @@
   },
   "seo": {
     "metatags": {
-      "og:site_name": "InsForge Docs",
+      "og:site_name": "GrowFoundry Docs",
       "google-site-verification": "2dSsr0kxw61j9-qSOR0a1dq1PT6U1-2o3kiZMdsIf9g"
     },
     "indexing": "navigable"
   },
   "search": {
-    "prompt": "Search InsForge docs..."
+    "prompt": "Search GrowFoundry docs..."
   },
   "favicon": "/favicon.png",
   "navigation": {
@@ -229,55 +229,55 @@
         "groups": [
           {
             "group": "Tables",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/tables.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/tables.yaml"
           },
           {
             "group": "Authentication",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/auth.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/auth.yaml"
           },
           {
             "group": "Records",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/records.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/records.yaml"
           },
           {
             "group": "Storage",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/storage.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/storage.yaml"
           },
           {
             "group": "Model Gateway",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/ai.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/ai.yaml"
           },
           {
             "group": "Functions",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/functions.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/functions.yaml"
           },
           {
             "group": "Realtime",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/realtime.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/realtime.yaml"
           },
           {
             "group": "Messaging",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/email.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/email.yaml"
           },
           {
             "group": "Payments",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/payments.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/payments.yaml"
           },
           {
             "group": "Secrets",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/secrets.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/secrets.yaml"
           },
           {
             "group": "Logs",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/logs.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/logs.yaml"
           },
           {
             "group": "Metadata",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/metadata.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/metadata.yaml"
           },
           {
             "group": "Health",
-            "openapi": "https://raw.githubusercontent.com/InsForge/InsForge/main/openapi/health.yaml"
+            "openapi": "https://raw.githubusercontent.com/GrowFoundry/GrowFoundry/main/openapi/health.yaml"
           }
         ]
       }
@@ -291,17 +291,17 @@
         },
         {
           "anchor": "Blog",
-          "href": "https://insforge.dev/blog",
+          "href": "https://growfoundry.dev/blog",
           "icon": "newspaper"
         },
         {
           "anchor": "Roadmap",
-          "href": "https://feedback.insforge.dev/roadmap",
+          "href": "https://feedback.growfoundry.dev/roadmap",
           "icon": "route"
         },
         {
           "anchor": "GitHub",
-          "href": "https://github.com/InsForge/InsForge",
+          "href": "https://github.com/GrowFoundry/GrowFoundry",
           "icon": "github"
         }
       ]
@@ -316,13 +316,13 @@
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg",
-    "href": "https://insforge.dev"
+    "href": "https://growfoundry.dev"
   },
   "navbar": {
     "primary": {
       "type": "button",
       "label": "Get Started",
-      "href": "https://insforge.dev/auth/sign-up"
+      "href": "https://growfoundry.dev/auth/sign-up"
     }
   },
   "contextual": {
@@ -339,9 +339,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/InsForge_dev",
-      "github": "https://github.com/InsForge/InsForge",
-      "linkedin": "https://linkedin.com/company/insforge"
+      "x": "https://x.com/GrowFoundry_dev",
+      "github": "https://github.com/GrowFoundry/GrowFoundry",
+      "linkedin": "https://linkedin.com/company/growfoundry"
     }
   }
 }

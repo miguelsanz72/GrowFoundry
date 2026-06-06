@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Skeleton } from '#components';
 import { useMcpUsage } from '#features/logs/hooks/useMcpUsage';
 import { ClientDetailPage } from '#features/dashboard/components/dtest/ClientDetailPage';
-import { InstallInsForgePage } from '#features/dashboard/components/dtest/InstallInsForgePage';
+import { InstallGrowFoundryPage } from '#features/dashboard/components/dtest/InstallGrowFoundryPage';
 import type { ClientId } from '#features/dashboard/components/dtest/clientRegistry';
 
 function DTestLoadingState() {
@@ -46,7 +46,7 @@ export default function DTestInstallPage() {
   }
 
   return (
-    <InstallInsForgePage
+    <InstallGrowFoundryPage
       onSelectClient={(id) => setSelectedClient(id)}
       onDismiss={() => void navigate('/dashboard')}
     />

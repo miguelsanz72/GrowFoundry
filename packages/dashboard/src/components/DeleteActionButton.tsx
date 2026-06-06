@@ -1,4 +1,4 @@
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 
 interface DeleteActionButtonProps {
   selectedCount: number;

@@ -2,7 +2,7 @@ interface PartnershipConfig {
   partner_sites: string[];
 }
 
-const PARTNERSHIP_CONFIG_URL = 'https://config.insforge.dev/partnership.json';
+const PARTNERSHIP_CONFIG_URL = 'https://config.growfoundry.dev/partnership.json';
 const FAILED_FETCH_RETRY_MS = 60_000;
 
 function normalizeOrigin(value: string): string | null {

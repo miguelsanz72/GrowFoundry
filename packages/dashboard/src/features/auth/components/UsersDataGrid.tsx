@@ -28,9 +28,9 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { cn, formatTime } from '#lib/utils/utils';
-import type { UserSchema } from '@insforge/shared-schemas';
+import type { UserSchema } from '@growfoundry/shared-schemas';
 import { useCustomOAuthConfig } from '#features/auth/hooks/useCustomOAuthConfig';
 
 type UserDataGridRow = UserSchema & {

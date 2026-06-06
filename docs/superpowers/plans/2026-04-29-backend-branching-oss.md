@@ -316,7 +316,7 @@ private constructor() {
     }
   } else {
     // local storage — fallback unsupported in v1, ignore
-    const baseDir = process.env.STORAGE_DIR || path.resolve(process.cwd(), 'insforge-storage');
+    const baseDir = process.env.STORAGE_DIR || path.resolve(process.cwd(), 'growfoundry-storage');
     this.provider = new LocalStorageProvider(baseDir);
   }
 }
@@ -350,7 +350,7 @@ Pre-requisites: AWS creds + a test bucket with two prefixes:
 
 ```bash
 # Branch mode boot
-APP_KEY=branchkey PARENT_APP_KEY=parentkey AWS_S3_BUCKET=insforge-storage-test \
+APP_KEY=branchkey PARENT_APP_KEY=parentkey AWS_S3_BUCKET=growfoundry-storage-test \
   AWS_REGION=us-east-2 npm run dev:backend
 ```
 
@@ -368,8 +368,8 @@ curl -i -X PUT http://localhost:7130/api/storage/buckets/photos/objects/new.txt 
   -H "Authorization: Bearer $TOKEN" --data-binary "branch-write"
 
 # Verify on S3 directly
-aws s3 ls s3://insforge-storage-test/branchkey/photos/   # contains new.txt
-aws s3 ls s3://insforge-storage-test/parentkey/photos/   # unchanged
+aws s3 ls s3://growfoundry-storage-test/branchkey/photos/   # contains new.txt
+aws s3 ls s3://growfoundry-storage-test/parentkey/photos/   # unchanged
 ```
 
 - [ ] **Step 2: Open PR**

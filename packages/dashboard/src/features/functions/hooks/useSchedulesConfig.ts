@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { SchedulesConfig } from '@insforge/shared-schemas';
+import type { SchedulesConfig } from '@growfoundry/shared-schemas';
 import { scheduleService } from '#features/functions/services/schedule.service';
 import { useToast } from '#lib/hooks/useToast';
 

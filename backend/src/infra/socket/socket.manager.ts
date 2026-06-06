@@ -12,7 +12,7 @@ import {
   type SubscribeResponse,
   type UnsubscribeChannelPayload,
   type PresenceMember,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { NEXT_ACTIONS } from '../../utils/next-actions.js';
 import { AppError } from '@/utils/errors.js';
 import { RealtimeAuthService } from '@/services/realtime/realtime-auth.service.js';

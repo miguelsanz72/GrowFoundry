@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { createRemoteJWKSet, JWTPayload, jwtVerify } from 'jose';
 import { AppError } from '@/utils/errors.js';
-import { ERROR_CODES, type TokenPayloadSchema } from '@insforge/shared-schemas';
+import { ERROR_CODES, type TokenPayloadSchema } from '@growfoundry/shared-schemas';
 import { NEXT_ACTIONS } from '../../utils/next-actions.js';
 import { appConfig } from '@/infra/config/app.config.js';
 
@@ -121,7 +121,7 @@ export class TokenManager {
     try {
       const decoded = jwt.verify(token, JWT_SECRET, {
         algorithms: ['HS256'],
-        issuer: 'insforge',
+        issuer: 'growfoundry',
       }) as RefreshTokenPayload;
 
       // Ensure this is a refresh token, not an access token
@@ -150,7 +150,7 @@ export class TokenManager {
   generateAnonToken(): string {
     const payload = {
       sub: '12345678-1234-5678-90ab-cdef12345678',
-      email: 'anon@insforge.com',
+      email: 'anon@growfoundry.com',
       role: 'anon',
     };
     return jwt.sign(payload, JWT_SECRET, {
@@ -180,7 +180,7 @@ export class TokenManager {
 
   /**
    * Verify cloud backend JWT token
-   * Validates JWT tokens from api.insforge.dev using JWKS
+   * Validates JWT tokens from api.growfoundry.dev using JWKS
    */
   async verifyCloudToken(token: string): Promise<{ projectId: string; payload: JWTPayload }> {
     try {
@@ -228,7 +228,7 @@ export class TokenManager {
   generateCsrfToken(payload: RefreshTokenPayload): string {
     return crypto
       .createHmac('sha256', JWT_SECRET)
-      .update(`insforge:csrf:v1:${payload.sessionType}:${payload.sub}:${payload.csrfNonce}`)
+      .update(`growfoundry:csrf:v1:${payload.sessionType}:${payload.sub}:${payload.csrfNonce}`)
       .digest('hex');
   }
 
@@ -261,7 +261,7 @@ export class TokenManager {
     return {
       sub: userId,
       type: 'refresh',
-      iss: 'insforge',
+      iss: 'growfoundry',
       csrfNonce,
       sessionType,
     };

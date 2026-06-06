@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import type { PosthogTimeframe } from '@insforge/shared-schemas';
+import type { PosthogTimeframe } from '@growfoundry/shared-schemas';
 import { analyticsService, type Breakdown } from '#features/analytics/services/analytics.service';
 
 export function useWebStats(breakdown: Breakdown, timeframe: PosthogTimeframe, enabled: boolean) {

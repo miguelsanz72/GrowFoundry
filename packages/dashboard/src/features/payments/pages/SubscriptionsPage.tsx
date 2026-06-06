@@ -8,7 +8,7 @@ import type {
   StripeSubscriptionItem,
   StripeSubscription,
   StripeSubscriptionStatus,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import {
   Alert,
   AlertDescription,

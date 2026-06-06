@@ -16,7 +16,7 @@ import {
   updatePaymentPriceBodySchema,
   updatePaymentProductBodySchema,
   upsertPaymentsConfigBodySchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const FAKE_LIVE_SECRET_KEY = 'stripe_live_secret_placeholder';
 
@@ -232,7 +232,7 @@ describe('payments route schemas', () => {
     });
   });
 
-  it('rejects caller-provided InsForge-reserved checkout metadata', () => {
+  it('rejects caller-provided GrowFoundry-reserved checkout metadata', () => {
     expect(() =>
       createCheckoutSessionBodySchema.parse({
         mode: 'payment',
@@ -240,8 +240,8 @@ describe('payments route schemas', () => {
         successUrl: 'https://example.com/success',
         cancelUrl: 'https://example.com/cancel',
         metadata: {
-          insforge_subject_type: 'team',
-          insforge_subject_id: 'team_victim',
+          growfoundry_subject_type: 'team',
+          growfoundry_subject_id: 'team_victim',
         },
       })
     ).toThrow(/reserved/i);

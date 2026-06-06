@@ -1,9 +1,9 @@
-# 📖 Deploying InsForge to Azure Virtual Machines (Extended Guide)
+# 📖 Deploying GrowFoundry to Azure Virtual Machines (Extended Guide)
 
-This guide provides comprehensive, step-by-step instructions for deploying, managing, and securing InsForge on an Azure Virtual Machine (VM) using Docker Compose.
+This guide provides comprehensive, step-by-step instructions for deploying, managing, and securing GrowFoundry on an Azure Virtual Machine (VM) using Docker Compose.
 
 <Note>
-  This cloud walkthrough is community-maintained and can lag the latest InsForge release. The canonical, always-current setup is the `deploy/docker-compose/` directory in the [InsForge repo](https://github.com/InsForge/InsForge).
+  This cloud walkthrough is community-maintained and can lag the latest GrowFoundry release. The canonical, always-current setup is the `deploy/docker-compose/` directory in the [GrowFoundry repo](https://github.com/GrowFoundry/GrowFoundry).
 </Note>
 
 ## Prerequisites
@@ -19,19 +19,19 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
 1.  **Log in to the [Azure Portal](https://portal.azure.com/)** and navigate to **Virtual machines**.
 2.  Click **+ Create** > **Azure virtual machine**.
 3.  **Basics Tab:**
-    * **Resource Group:** Create a new one (e.g., `insforge-rg`).
-    * **Virtual machine name:** `insforge-vm`.
+    * **Resource Group:** Create a new one (e.g., `growfoundry-rg`).
+    * **Virtual machine name:** `growfoundry-vm`.
     * **Image:** **Ubuntu Server 22.04 LTS** or newer.
     * **Size:** `Standard_B2s` (2 vCPUs, 4 GiB memory) is a good start. For production, consider `Standard_B4ms` (4 vCPUs, 16 GiB memory).
     * **Authentication type:** **SSH public key**.
-    * **SSH public key source:** **Generate new key pair**. Name it `insforge-key`.
+    * **SSH public key source:** **Generate new key pair**. Name it `growfoundry-key`.
 4.  **Networking Tab:**
     * In the **Network security group** section, click **Create new**.
     * Add the following **inbound port rules** to allow traffic:
         * `22` (SSH)
         * `80` (HTTP for Nginx)
         * `443` (HTTPS for Nginx/SSL)
-        * `7130` (InsForge API and dashboard)
+        * `7130` (GrowFoundry API and dashboard)
 5.  **Review and Create:**
     * Click **Review + create**, then **Create**.
     * When prompted, **Download private key and create resource**. Save the `.pem` file securely.
@@ -45,8 +45,8 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
     Open your terminal, give your key the correct permissions, and connect to the VM.
 
     ```bash
-    chmod 400 /path/to/your/insforge-key.pem
-    ssh -i /path/to/your/insforge-key.pem azureuser@<your-vm-public-ip>
+    chmod 400 /path/to/your/growfoundry-key.pem
+    ssh -i /path/to/your/growfoundry-key.pem azureuser@<your-vm-public-ip>
     ```
 
 2.  **Update System Packages:**
@@ -83,14 +83,14 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
 
 ---
 
-## Step 3: 🚀 Deploy InsForge
+## Step 3: 🚀 Deploy GrowFoundry
 
 1.  **Clone the Repository:**
-    Navigate to your home directory and clone the InsForge project.
+    Navigate to your home directory and clone the GrowFoundry project.
     ```bash
     cd ~
-    git clone https://github.com/InsForge/InsForge.git
-    cd InsForge/deploy/docker-compose
+    git clone https://github.com/GrowFoundry/GrowFoundry.git
+    cd GrowFoundry/deploy/docker-compose
     ```
 
 2.  **Create Environment Configuration:**
@@ -125,7 +125,7 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
     > openssl rand -base64 32
     > ```
 
-3.  **Start InsForge Services:**
+3.  **Start GrowFoundry Services:**
     Pull the Docker images and start all services in the background.
     ```bash
     docker compose up -d
@@ -136,11 +136,11 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
     ```bash
     docker compose ps
     ```
-    You should see the `postgres`, `postgrest`, `insforge`, and `deno` services running.
+    You should see the `postgres`, `postgrest`, `growfoundry`, and `deno` services running.
 
 ---
 
-## Step 4: 🔑 Access Your InsForge Instance
+## Step 4: 🔑 Access Your GrowFoundry Instance
 
 1.  **Test Backend API:**
     Use `curl` to check the health endpoint.
@@ -165,7 +165,7 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
 2.  **Install and Configure Nginx as a Reverse Proxy:**
     ```bash
     sudo apt install nginx -y
-    sudo nano /etc/nginx/sites-available/insforge
+    sudo nano /etc/nginx/sites-available/growfoundry
     ```
     Paste the following configuration:
     ```nginx
@@ -196,7 +196,7 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
     ```
     Enable the configuration and reload Nginx:
     ```bash
-    sudo ln -s /etc/nginx/sites-available/insforge /etc/nginx/sites-enabled/
+    sudo ln -s /etc/nginx/sites-available/growfoundry /etc/nginx/sites-enabled/
     sudo nginx -t
     sudo systemctl reload nginx
     ```
@@ -213,7 +213,7 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
 4.  **Update `.env` with HTTPS URLs:**
     Edit your `.env` file and update the URLs.
     ```bash
-    cd ~/InsForge
+    cd ~/GrowFoundry
     nano .env
     ```
     Change the URLs to `https`:
@@ -230,18 +230,18 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
 
 ## 🔧 Management & Maintenance
 
-* **View Logs:** `docker compose logs -f` (all services) or `docker compose logs -f insforge` (specific service).
+* **View Logs:** `docker compose logs -f` (all services) or `docker compose logs -f growfoundry` (specific service).
 * **Stop Services:** `docker compose down`
 * **Restart Services:** `docker compose restart`
-* **Update InsForge:** Run these from `~/InsForge/deploy/docker-compose`. The images are prebuilt, so pull the latest tags instead of rebuilding.
+* **Update GrowFoundry:** Run these from `~/GrowFoundry/deploy/docker-compose`. The images are prebuilt, so pull the latest tags instead of rebuilding.
     ```bash
-    cd ~/InsForge/deploy/docker-compose
-    git -C ~/InsForge pull origin main
+    cd ~/GrowFoundry/deploy/docker-compose
+    git -C ~/GrowFoundry pull origin main
     docker compose pull && docker compose up -d
     ```
-* **Backup Database:** Run from `~/InsForge/deploy/docker-compose`.
+* **Backup Database:** Run from `~/GrowFoundry/deploy/docker-compose`.
     ```bash
-    docker compose exec postgres pg_dump -U postgres insforge > backup_$(date +%Y%m%d_%H%M%S).sql
+    docker compose exec postgres pg_dump -U postgres growfoundry > backup_$(date +%Y%m%d_%H%M%S).sql
     ```
 
 ## 🐛 Troubleshooting
@@ -261,7 +261,7 @@ This guide provides comprehensive, step-by-step instructions for deploying, mana
 
 ### Starter Setup (for Development & Small Projects)
 * **Cost:** **~$30 - $40/month**
-* **Resources:** This estimate is for a `Standard_B2s` VM (2 vCPU, 4 GiB RAM) running all the InsForge Docker containers.
+* **Resources:** This estimate is for a `Standard_B2s` VM (2 vCPU, 4 GiB RAM) running all the GrowFoundry Docker containers.
 * **Breakdown:** The cost primarily consists of the VM compute hours. It also includes the OS disk storage and a static public IP address. This single VM runs your database, backend, Deno, and all other services.
 
 ### Production Setup (for Scalability & Reliability)
@@ -276,7 +276,7 @@ For production, you can choose between an all-in-one, larger VM or a more robust
 * **Option B: Managed Services (Recommended for Production)**
     * **Cost:** **~$120+/month** (highly variable)
     * **Resources:**
-        * **Application VM:** A `Standard_B2s` VM for the app services (InsForge, PostgREST, Deno). `(~$30/month)`
+        * **Application VM:** A `Standard_B2s` VM for the app services (GrowFoundry, PostgREST, Deno). `(~$30/month)`
         * **Managed Database:** Use **Azure Database for PostgreSQL** for reliability, automated backups, and scaling. `(~$40+/month for a starter tier)`
     * **Pros:** Highly reliable and scalable. Database performance is isolated and guaranteed. Managed backups and security.
     * **Cons:** More complex setup, costs are distributed across multiple services.
@@ -285,5 +285,5 @@ For production, you can choose between an all-in-one, larger VM or a more robust
 
 * **Change Default Passwords:** Always update admin and database passwords.
 * **Enable Firewall:** Use Azure **Network Security Groups (NSGs)** to restrict access to necessary ports and IP addresses.
-* **Regular Updates:** Periodically run `sudo apt update && sudo apt upgrade -y` and update InsForge.
+* **Regular Updates:** Periodically run `sudo apt update && sudo apt upgrade -y` and update GrowFoundry.
 * **Backup Regularly:** Automate database and configuration backups.

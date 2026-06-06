@@ -1,5 +1,5 @@
 // Type definitions for database schema management
-import { ColumnType, ColumnSchema, ForeignKeySchema } from '@insforge/shared-schemas';
+import { ColumnType, ColumnSchema, ForeignKeySchema } from '@growfoundry/shared-schemas';
 
 // Database metadata format returned by getDatabaseMetadata
 export interface DatabaseMetadata {

@@ -25,7 +25,7 @@ Content-Type: application/json
 
 ## Upload Object with upload strategy
 
-InsForge supports two types of storage backends:
+GrowFoundry supports two types of storage backends:
 1. **Local Storage**: Files are stored on the local filesystem. Use for development or low-volume production.
 2. **S3-Compatible**: Files are stored on S3-compatible object storage. Use for high-volume production.
 
@@ -40,7 +40,7 @@ The steps to upload a file are:
 
 Get the optimal upload strategy (direct or presigned URL) based on storage backend.
 The upload strategy API returns the optimal upload method based on the storage backend:
-- **Local Storage**: Direct upload to InsForge API
+- **Local Storage**: Direct upload to GrowFoundry API
 - **S3-Compatible**: Presigned URL for direct upload to S3
 
 ```
@@ -58,7 +58,7 @@ POST /api/storage/buckets/{bucketName}/upload-strategy
 #### Example
 
 ```bash
-curl -X POST "https://your-app.insforge.app/api/storage/buckets/avatars/upload-strategy" \
+curl -X POST "https://your-app.growfoundry.app/api/storage/buckets/avatars/upload-strategy" \
   -H "Authorization: Bearer your-jwt-token" \
   -H "Content-Type: application/json" \
   -d '{
@@ -127,7 +127,7 @@ POST /api/storage/buckets/{bucketName}/objects/{objectKey}/confirm-upload
 #### Example
 
 ```bash
-curl -X POST "https://your-app.insforge.app/api/storage/buckets/avatars/objects/profile-photo-123.jpg/confirm-upload" \
+curl -X POST "https://your-app.growfoundry.app/api/storage/buckets/avatars/objects/profile-photo-123.jpg/confirm-upload" \
   -H "Authorization: Bearer your-jwt-token" \
   -H "Content-Type: application/json" \
   -d '{
@@ -173,7 +173,7 @@ PUT /api/storage/buckets/{bucketName}/objects/{objectKey}
 ### Example
 
 ```bash
-curl -X PUT "https://your-app.insforge.app/api/storage/buckets/avatars/objects/users/profile.jpg" \
+curl -X PUT "https://your-app.growfoundry.app/api/storage/buckets/avatars/objects/users/profile.jpg" \
   -H "Authorization: Bearer your-jwt-token" \
   -F "file=@/path/to/image.jpg"
 ```
@@ -204,7 +204,7 @@ POST /api/storage/buckets/{bucketName}/objects
 ### Example
 
 ```bash
-curl -X POST "https://your-app.insforge.app/api/storage/buckets/uploads/objects" \
+curl -X POST "https://your-app.growfoundry.app/api/storage/buckets/uploads/objects" \
   -H "Authorization: Bearer your-jwt-token" \
   -F "file=@/path/to/document.pdf"
 ```
@@ -226,7 +226,7 @@ curl -X POST "https://your-app.insforge.app/api/storage/buckets/uploads/objects"
 
 ## Download Object with download strategy
 
-InsForge supports two types of storage backends:
+GrowFoundry supports two types of storage backends:
 1. **Local Storage**: Files are stored on the local filesystem. Use for development or low-volume production.
 2. **S3-Compatible**: Files are stored on S3-compatible object storage. Use for high-volume production.
 
@@ -239,7 +239,7 @@ The steps to download a file are:
 Get the optimal download strategy (direct URL or presigned URL) based on storage backend and bucket visibility.
 
 The download strategy API returns the optimal download method based on the storage backend and bucket visibility:
-- **Local Storage**: Direct download from InsForge API
+- **Local Storage**: Direct download from GrowFoundry API
 - **S3-Compatible**: Presigned URL for S3.
 
 ```
@@ -259,7 +259,7 @@ GET /api/storage/buckets/{bucketName}/download-strategy/objects/{objectKey}
 #### Example
 
 ```bash
-curl "https://your-app.insforge.app/api/storage/buckets/avatars/download-strategy/objects/profile.jpg" \
+curl "https://your-app.growfoundry.app/api/storage/buckets/avatars/download-strategy/objects/profile.jpg" \
   -H "Authorization: Bearer your-jwt-token"
 ```
 
@@ -299,7 +299,7 @@ GET /api/storage/buckets/{bucketName}/objects/{objectKey}
 ### Example
 
 ```bash
-curl "https://your-app.insforge.app/api/storage/buckets/avatars/objects/users/profile.jpg" \
+curl "https://your-app.growfoundry.app/api/storage/buckets/avatars/objects/users/profile.jpg" \
   -H "Authorization: Bearer your-jwt-token" \
   -o profile.jpg
 ```
@@ -321,7 +321,7 @@ DELETE /api/storage/buckets/{bucketName}/objects/{objectKey}
 ### Example
 
 ```bash
-curl -X DELETE "https://your-app.insforge.app/api/storage/buckets/avatars/objects/users/profile.jpg" \
+curl -X DELETE "https://your-app.growfoundry.app/api/storage/buckets/avatars/objects/users/profile.jpg" \
   -H "Authorization: Bearer your-jwt-token"
 ```
 
@@ -356,11 +356,11 @@ GET /api/storage/buckets/{bucketName}/objects
 
 ```bash
 # Filter by prefix
-curl "https://your-app.insforge.app/api/storage/buckets/avatars/objects?prefix=users/&limit=50" \
+curl "https://your-app.growfoundry.app/api/storage/buckets/avatars/objects?prefix=users/&limit=50" \
   -H "Authorization: Bearer your-jwt-token"
 
 # Search by key
-curl "https://your-app.insforge.app/api/storage/buckets/avatars/objects?search=profile" \
+curl "https://your-app.growfoundry.app/api/storage/buckets/avatars/objects?search=profile" \
   -H "Authorization: Bearer your-jwt-token"
 ```
 
@@ -407,7 +407,7 @@ GET /api/storage/buckets
 ### Example
 
 ```bash
-curl "https://your-app.insforge.app/api/storage/buckets" \
+curl "https://your-app.growfoundry.app/api/storage/buckets" \
   -H "Authorization: Bearer admin-jwt-token"
 ```
 
@@ -435,7 +435,7 @@ POST /api/storage/buckets
 ### Example
 
 ```bash
-curl -X POST "https://your-app.insforge.app/api/storage/buckets" \
+curl -X POST "https://your-app.growfoundry.app/api/storage/buckets" \
   -H "Authorization: Bearer admin-jwt-token" \
   -H "Content-Type: application/json" \
   -d '{
@@ -468,7 +468,7 @@ PATCH /api/storage/buckets/{bucketName}
 ### Example
 
 ```bash
-curl -X PATCH "https://your-app.insforge.app/api/storage/buckets/user-uploads" \
+curl -X PATCH "https://your-app.growfoundry.app/api/storage/buckets/user-uploads" \
   -H "Authorization: Bearer admin-jwt-token" \
   -H "Content-Type: application/json" \
   -d '{"isPublic": true}'
@@ -493,7 +493,7 @@ DELETE /api/storage/buckets/{bucketName}
 ### Example
 
 ```bash
-curl -X DELETE "https://your-app.insforge.app/api/storage/buckets/old-uploads" \
+curl -X DELETE "https://your-app.growfoundry.app/api/storage/buckets/old-uploads" \
   -H "Authorization: Bearer admin-jwt-token"
 ```
 

@@ -4,7 +4,7 @@ import type {
   S3AccessKeyWithSecretSchema,
   CreateS3AccessKeyRequest,
   S3GatewayConfigSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { s3AccessKeyService } from '#features/storage/services/s3-access-key.service';
 import { useToast } from '#lib/hooks/useToast';
 

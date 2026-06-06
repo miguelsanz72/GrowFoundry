@@ -9,14 +9,14 @@ import {
   AlertTriangle,
   XCircle,
 } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { useComputeServices } from '#features/compute/hooks/useComputeServices';
 import { ServiceCard } from '#features/compute/components/ServiceCard';
 import { ServiceEvents } from '#features/compute/components/ServiceEvents';
 import { CreateServiceDialog } from '#features/compute/components/CreateServiceDialog';
 import { DeleteServiceDialog } from '#features/compute/components/DeleteServiceDialog';
 import { statusColors, getReachableUrl } from '#features/compute/constants';
-import type { ServiceSchema } from '@insforge/shared-schemas';
+import type { ServiceSchema } from '@growfoundry/shared-schemas';
 
 export default function ComputePage() {
   const {
@@ -297,7 +297,7 @@ export default function ComputePage() {
                       Use the button above, the CLI:
                     </p>
                     <code className="block px-3 py-2 bg-muted text-foreground rounded text-xs font-mono break-all">
-                      npx @insforge/cli compute deploy --name my-api --image nginx:alpine --port 80
+                      npx @growfoundry/cli compute deploy --name my-api --image nginx:alpine --port 80
                     </code>
                   </div>
                   <div>

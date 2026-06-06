@@ -7,13 +7,13 @@ export const BREAKPOINTS = {
 } as const;
 
 export const LOCAL_STORAGE_KEYS = {
-  theme: 'insforge-theme',
+  theme: 'growfoundry-theme',
   selectedLogSource: 'selectedLogSource',
   sqlEditorTabs: 'sql-editor-tabs',
   sqlEditorActiveTab: 'sql-editor-active-tab',
-  databaseTablePreferences: 'insforge.database.tables.preferences.v1',
+  databaseTablePreferences: 'growfoundry.database.tables.preferences.v1',
 } as const;
 
 export const LOCAL_STORAGE_KEY_PREFIXES = {
-  pageSize: 'insforge-page-size',
+  pageSize: 'growfoundry-page-size',
 } as const;

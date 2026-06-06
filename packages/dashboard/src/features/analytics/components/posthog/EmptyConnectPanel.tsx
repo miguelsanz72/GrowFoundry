@@ -1,4 +1,4 @@
-import { Button, CopyButton } from '@insforge/ui';
+import { Button, CopyButton } from '@growfoundry/ui';
 import { useDashboardHost } from '#lib/config/DashboardHostContext';
 import { ANALYTICS_SETUP_PROMPT } from '#features/analytics/lib/constants';
 

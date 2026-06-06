@@ -4,14 +4,14 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a `d_test` variant of the dashboard home that replaces C test's Get-Started + Prompt Stepper flow with an install-first "Install InsForge" client picker and a simplified 4-metric connected dashboard, gated behind the PostHog `dashboard-v4-experiment` feature flag.
+**Goal:** Add a `d_test` variant of the dashboard home that replaces C test's Get-Started + Prompt Stepper flow with an install-first "Install GrowFoundry" client picker and a simplified 4-metric connected dashboard, gated behind the PostHog `dashboard-v4-experiment` feature flag.
 
 > **Post-implementation notes (updated after shipping):**
 > - **Feature flag is `dashboard-v4-experiment`**. After execution, the c_test variant was removed entirely; the flag now resolves to `control` or `d_test` only, and `CTestDashboardPage` / `ConnectDialogV2` were deleted as dead code.
 > - **Section 1 of Install page is "Setup In OpenClaw"** (featured tile = `openclaw`, a real agent — *not* a typo for Claude Code as originally assumed). Claude Code was moved into the Section 2 grid, which now leads with `claude-code` in `CODING_AGENT_GRID_IDS`. The constant is named `FEATURED_OPENCLAW_ID`.
 > - **D Test CLI prompt** now uses a real `uak_…` user API key minted by the cloud control plane on every CLI tab mount (`onRequestUserApiKey` host callback → postMessage `REQUEST_USER_API_KEY`); falls back to `<placeholder>` only when the host doesn't provide the callback (self-hosted preview).
 
-**Architecture:** `DTestDashboardPage` acts as the entry point and picks between three in-page views (`InstallInsForgePage`, `ClientDetailPage`, `DTestConnectedDashboard`) via a URL-backed `view` state plus a session `selectedClient`. Install ↔ Dashboard transitions are two-way: `[X]` on Install persists a per-project dismissal flag and returns to Dashboard; top-nav Connect sets `?view=install` to return to Install. Tile detail pages reuse existing components (`NewCLISection`, `MCPSection` with a new `initialAgentId` prop, `ConnectionStringSectionV2`, `APIKeysSectionV2`) rather than reimplementing them.
+**Architecture:** `DTestDashboardPage` acts as the entry point and picks between three in-page views (`InstallGrowFoundryPage`, `ClientDetailPage`, `DTestConnectedDashboard`) via a URL-backed `view` state plus a session `selectedClient`. Install ↔ Dashboard transitions are two-way: `[X]` on Install persists a per-project dismissal flag and returns to Dashboard; top-nav Connect sets `?view=install` to return to Install. Tile detail pages reuse existing components (`NewCLISection`, `MCPSection` with a new `initialAgentId` prop, `ConnectionStringSectionV2`, `APIKeysSectionV2`) rather than reimplementing them.
 
 **Tech Stack:** React 18, TypeScript, react-router `useSearchParams`, Vite, Tailwind + project CSS tokens, PostHog feature flags. No test framework wired up in `packages/dashboard`; verification is `npm run typecheck` + `npm run lint` + manual dev-server walkthrough.
 
@@ -31,7 +31,7 @@
 | `packages/dashboard/src/features/dashboard/components/dtest/clientRegistry.tsx` | Tile metadata (id, label, icon, kind, `mcpAgentId`) | Create |
 | `packages/dashboard/src/features/dashboard/components/dtest/useDTestView.ts` | URL-backed view state + localStorage dismissal flag + selectedClient | Create |
 | `packages/dashboard/src/features/dashboard/components/dtest/ClientTile.tsx` | Reusable tile with icon, label, Install button | Create |
-| `packages/dashboard/src/features/dashboard/components/dtest/InstallInsForgePage.tsx` | All-Clients page: 3 sections + `[X]` | Create |
+| `packages/dashboard/src/features/dashboard/components/dtest/InstallGrowFoundryPage.tsx` | All-Clients page: 3 sections + `[X]` | Create |
 | `packages/dashboard/src/features/dashboard/components/dtest/ClientDetailPage.tsx` | Detail shell: back button + icon/title + CLI/MCP toggle + content | Create |
 | `packages/dashboard/src/features/dashboard/components/dtest/DTestConnectedDashboard.tsx` | Connected dashboard: header + 4 metric cards | Create |
 | `packages/dashboard/src/features/dashboard/pages/DTestDashboardPage.tsx` | Entry; switches views via `useDTestView` | Create |
@@ -400,7 +400,7 @@ import type { ClientId } from './clientRegistry';
 export type DTestView = 'install' | 'dashboard';
 
 const getDismissKey = (projectId: string | null | undefined) =>
-  `insforge-dtest-install-dismissed-${projectId || 'default'}`;
+  `growfoundry-dtest-install-dismissed-${projectId || 'default'}`;
 
 function readDismissed(key: string): boolean {
   try {
@@ -499,7 +499,7 @@ Expected: clean. Leave changes in the working tree.
 
 ```tsx
 // packages/dashboard/src/features/dashboard/components/dtest/ClientTile.tsx
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { type ReactNode } from 'react';
 
 interface ClientTileProps {
@@ -545,19 +545,19 @@ Expected: clean. Leave changes in the working tree.
 
 ---
 
-## Task 6: Create `InstallInsForgePage`
+## Task 6: Create `InstallGrowFoundryPage`
 
 **Why:** The All-Clients main view. Composes three sections using the registry and `ClientTile`.
 
 **Files:**
-- Create: `packages/dashboard/src/features/dashboard/components/dtest/InstallInsForgePage.tsx`
+- Create: `packages/dashboard/src/features/dashboard/components/dtest/InstallGrowFoundryPage.tsx`
 
 - [ ] **Step 1: Write the page**
 
 ```tsx
-// packages/dashboard/src/features/dashboard/components/dtest/InstallInsForgePage.tsx
+// packages/dashboard/src/features/dashboard/components/dtest/InstallGrowFoundryPage.tsx
 import { X } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { ClientTile } from './ClientTile';
 import {
   CLIENT_ENTRIES,
@@ -567,12 +567,12 @@ import {
   type ClientId,
 } from './clientRegistry';
 
-interface InstallInsForgePageProps {
+interface InstallGrowFoundryPageProps {
   onSelectClient: (id: ClientId) => void;
   onDismiss: () => void;
 }
 
-export function InstallInsForgePage({ onSelectClient, onDismiss }: InstallInsForgePageProps) {
+export function InstallGrowFoundryPage({ onSelectClient, onDismiss }: InstallGrowFoundryPageProps) {
   const featured = CLIENT_ENTRIES[FEATURED_OPENCLAW_ID];
   const gridEntries = CODING_AGENT_GRID_IDS.map((id) => CLIENT_ENTRIES[id]);
   const directEntries = DIRECT_CONNECT_IDS.map((id) => CLIENT_ENTRIES[id]);
@@ -582,7 +582,7 @@ export function InstallInsForgePage({ onSelectClient, onDismiss }: InstallInsFor
       <div className="mx-auto flex w-full max-w-[640px] flex-col gap-6 px-6 pt-16 pb-10">
         {/* Title row */}
         <div className="flex items-center justify-between">
-          <h1 className="text-[28px] font-medium leading-10 text-foreground">Install InsForge</h1>
+          <h1 className="text-[28px] font-medium leading-10 text-foreground">Install GrowFoundry</h1>
           <Button
             type="button"
             size="sm"
@@ -676,7 +676,7 @@ Expected: clean. Leave changes in the working tree.
 // packages/dashboard/src/features/dashboard/components/dtest/ClientDetailPage.tsx
 import { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { NewCLISection } from '../connect/NewCLISection';
 import { MCPSection } from '../connect/MCPSection';
 import { ConnectionStringSectionV2 } from '../connect/ConnectionStringSectionV2';
@@ -820,17 +820,17 @@ Expected: clean. Leave changes in the working tree.
 // packages/dashboard/src/features/dashboard/components/dtest/DTestConnectedDashboard.tsx
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Badge } from '@insforge/ui';
+import { Badge } from '@growfoundry/ui';
 import { Braces, Database, HardDrive, User } from 'lucide-react';
 import { MetricCard } from '../MetricCard';
 import { useMetadata } from '../../../../lib/hooks/useMetadata';
 import { useCloudProjectInfo } from '../../../../lib/hooks/useCloudProjectInfo';
 import { useUsers } from '../../../auth';
-import { isInsForgeCloudProject } from '../../../../lib/utils/utils';
+import { isGrowFoundryCloudProject } from '../../../../lib/utils/utils';
 
 export function DTestConnectedDashboard() {
   const navigate = useNavigate();
-  const isCloudProject = isInsForgeCloudProject();
+  const isCloudProject = isGrowFoundryCloudProject();
   const {
     metadata,
     tables,
@@ -842,8 +842,8 @@ export function DTestConnectedDashboard() {
   const { totalUsers } = useUsers();
 
   const projectName = isCloudProject
-    ? projectInfo.name || 'My InsForge Project'
-    : 'My InsForge Project';
+    ? projectInfo.name || 'My GrowFoundry Project'
+    : 'My GrowFoundry Project';
   const instanceType = projectInfo.instanceType?.toUpperCase();
   const showInstanceTypeBadge = isCloudProject && !!instanceType;
 
@@ -945,7 +945,7 @@ import { Skeleton } from '../../../components';
 import { useMcpUsage } from '../../logs/hooks/useMcpUsage';
 import { useProjectId } from '../../../lib/hooks/useMetadata';
 import { useDTestView } from '../components/dtest/useDTestView';
-import { InstallInsForgePage } from '../components/dtest/InstallInsForgePage';
+import { InstallGrowFoundryPage } from '../components/dtest/InstallGrowFoundryPage';
 import { ClientDetailPage } from '../components/dtest/ClientDetailPage';
 import { DTestConnectedDashboard } from '../components/dtest/DTestConnectedDashboard';
 
@@ -982,7 +982,7 @@ export default function DTestDashboardPage() {
       );
     }
     return (
-      <InstallInsForgePage
+      <InstallGrowFoundryPage
         onSelectClient={(id) => setSelectedClient(id)}
         onDismiss={() => setView('dashboard', { dismiss: true })}
       />
@@ -1106,7 +1106,7 @@ Log in with a dev account. Use the PostHog feature-flag override (add `?__postho
 - [ ] **Step 2: Walk the unconnected flow**
 
 - Account must have zero successful MCP usage records.
-- Visit `/dashboard`. Expect the Install InsForge page.
+- Visit `/dashboard`. Expect the Install GrowFoundry page.
 - "Setup In OpenClaw" section shows OpenClaw tile.
 - "Install in Coding Agent" grid shows 8 tiles: Claude Code / Codex / Antigravity / Cursor / OpenCode / Copilot / Cline / Other Agents.
 - "Direct Connect" section shows Connection String and API Keys tiles.

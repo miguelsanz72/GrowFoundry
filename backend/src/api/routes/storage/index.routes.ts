@@ -11,7 +11,7 @@ import {
   updateBucketRequestSchema,
   updateStorageConfigRequestSchema,
   createS3AccessKeyRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { SocketManager } from '@/infra/socket/socket.manager.js';
 import { DataUpdateResourceType, ServerEvents } from '@/types/socket.js';
 import { AuditService } from '@/services/logs/audit.service.js';

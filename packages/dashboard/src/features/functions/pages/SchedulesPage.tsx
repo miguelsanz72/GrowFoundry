@@ -8,7 +8,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { Skeleton, TableHeader } from '#components';
 import { ScheduleFormDialog } from '#features/functions/components/ScheduleFormDialog';
 import type { ScheduleFormSchema } from '#features/functions/types';

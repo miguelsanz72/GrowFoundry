@@ -11,11 +11,11 @@ import {
   DialogTitle,
   Input,
   Switch,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { useToast } from '#lib/hooks/useToast';
 import { useUsers } from '#features/auth/hooks/useUsers';
 import { cn } from '#lib/utils/utils';
-import { emailSchema } from '@insforge/shared-schemas';
+import { emailSchema } from '@growfoundry/shared-schemas';
 import { z } from 'zod';
 
 interface User {

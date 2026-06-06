@@ -1,18 +1,18 @@
 services:
   postgres:
-    image: ghcr.io/insforge/postgres-all:latest
+    image: ghcr.io/growfoundry/postgres-all:latest
 
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - POSTGRES_DB=${POSTGRES_DB:-insforge}
+      - POSTGRES_DB=${POSTGRES_DB:-growfoundry}
       - ENCRYPTION_KEY=${ENCRYPTION_KEY:-${JWT_SECRET:-dev-secret-please-change-in-production}}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     networks:
-      - insforge-network
+      - growfoundry-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -24,7 +24,7 @@ services:
 
     restart: unless-stopped
     environment:
-      PGRST_DB_URI: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-insforge}
+      PGRST_DB_URI: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-growfoundry}
       PGRST_OPENAPI_SERVER_PROXY_URI: http://localhost:3000
       PGRST_DB_SCHEMA: public
       PGRST_DB_ANON_ROLE: anon
@@ -44,10 +44,10 @@ services:
       retries: 5
       start_period: 10s
     networks:
-      - insforge-network
+      - growfoundry-network
 
-  insforge:
-    image: ghcr.io/insforge/insforge-oss:v1.5.0
+  growfoundry:
+    image: ghcr.io/growfoundry/growfoundry-oss:v1.5.0
 
     working_dir: /app
     depends_on:
@@ -72,10 +72,10 @@ services:
       # PostgreSQL connection
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
-      - POSTGRES_DB=${POSTGRES_DB:-insforge}
+      - POSTGRES_DB=${POSTGRES_DB:-growfoundry}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-insforge}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-growfoundry}
       - POSTGREST_BASE_URL=http://postgrest:3000
       # LLM Model API keys
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
@@ -102,19 +102,19 @@ services:
       - APPLE_CLIENT_ID=${APPLE_CLIENT_ID:-}
       - APPLE_CLIENT_SECRET=${APPLE_CLIENT_SECRET:-}
       # Logs directory
-      - LOGS_DIR=/insforge-logs
+      - LOGS_DIR=/growfoundry-logs
       # Storage directory (for local file storage when S3 is not configured)
-      - STORAGE_DIR=/insforge-storage
+      - STORAGE_DIR=/growfoundry-storage
     restart: unless-stopped
     volumes:
-      - storage-data:/insforge-storage
-      - insforge-logs:/insforge-logs
+      - storage-data:/growfoundry-storage
+      - growfoundry-logs:/growfoundry-logs
     networks:
-      - insforge-network
+      - growfoundry-network
 
   # Deno serverless runtime for edge functions
   deno:
-    image: ghcr.io/insforge/deno-runtime:latest
+    image: ghcr.io/growfoundry/deno-runtime:latest
 
     working_dir: /app
     depends_on:
@@ -129,7 +129,7 @@ services:
       # PostgreSQL connection
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
-      - POSTGRES_DB=${POSTGRES_DB:-insforge}
+      - POSTGRES_DB=${POSTGRES_DB:-growfoundry}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - POSTGREST_BASE_URL=http://postgrest:3000
@@ -148,7 +148,7 @@ services:
       start_period: 15s
     restart: unless-stopped
     networks:
-      - insforge-network
+      - growfoundry-network
 
 volumes:
   postgres-data:
@@ -157,9 +157,9 @@ volumes:
     driver: local
   storage-data:
     driver: local
-  insforge-logs:
+  growfoundry-logs:
     driver: local
 
 networks:
-  insforge-network:
+  growfoundry-network:
     driver: bridge

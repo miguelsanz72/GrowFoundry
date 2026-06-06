@@ -35,7 +35,7 @@ Add a button row next to the service name heading:
 - Buttons are disabled during pending mutations (loading spinners)
 - After delete succeeds, navigate back to list view
 
-Uses: `Button` and `ConfirmDialog` from `@insforge/ui`.
+Uses: `Button` and `ConfirmDialog` from `@growfoundry/ui`.
 
 ### 2. Detail View — Events Panel
 
@@ -57,7 +57,7 @@ New component: `ServiceEvents.tsx`
 >
 > **Real container stdout/stderr is roadmap work**, and when it lands it
 > reuses the freshly-vacated `/logs` URL. Three viable paths, evaluated
-> [in this thread](https://github.com/InsForge/InsForge/pull/1062#discussion):
+> [in this thread](https://github.com/GrowFoundry/GrowFoundry/pull/1062#discussion):
 >
 > | Path | Where flyctl spawns | Token source | Notes |
 > |---|---|---|---|
@@ -79,7 +79,7 @@ For failed services: show a red alert banner above the specs card saying "This s
 
 ### 4. Service Cards — Dropdown Menu
 
-Add a three-dot `DropdownMenu` (from `@insforge/ui`) in the top-right of each card:
+Add a three-dot `DropdownMenu` (from `@growfoundry/ui`) in the top-right of each card:
 
 - Stop (when running)
 - Start (when stopped)
@@ -122,7 +122,7 @@ In both `ServiceCard` and `ComputePage` detail view:
 
 ## Dependencies
 
-All UI components needed already exist in `@insforge/ui`:
+All UI components needed already exist in `@growfoundry/ui`:
 - Button, Dialog, DialogContent, DialogTitle, DialogDescription
 - ConfirmDialog
 - DropdownMenu

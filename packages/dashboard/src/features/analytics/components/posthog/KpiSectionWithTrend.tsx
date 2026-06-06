@@ -9,7 +9,7 @@ import {
   YAxis,
 } from 'recharts';
 import { EmptyState, ErrorState, LoadingState } from '#components';
-import type { PosthogWebOverviewItem } from '@insforge/shared-schemas';
+import type { PosthogWebOverviewItem } from '@growfoundry/shared-schemas';
 import { useTimeframe } from '#features/analytics/context/TimeRangeContext';
 import { useWebOverview } from '#features/analytics/hooks/useWebOverview';
 import { useTrend } from '#features/analytics/hooks/useTrend';

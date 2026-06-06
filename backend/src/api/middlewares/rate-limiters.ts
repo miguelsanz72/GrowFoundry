@@ -2,7 +2,7 @@ import rateLimit from 'express-rate-limit';
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '@/utils/errors.js';
 import logger from '@/utils/logger.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 
 /**
  * Store for tracking per-email cooldowns
@@ -186,7 +186,7 @@ export const verifyOTPLimiter = [verifyOTPRateLimiter];
  * file to the AWS_CONFIG_BUCKET at key `resource-rate-limits.json`:
  *   { "functions": 20, "deployments": 40, "compute": 15 }
  * The file is fetched on startup and refreshed on a periodic timer
- * (default 1 hour; tune via INSFORGE_WRITE_RATE_LIMIT_REFRESH_MS, set to 0
+ * (default 1 hour; tune via GROWFOUNDRY_WRITE_RATE_LIMIT_REFRESH_MS, set to 0
  * for startup-only). Any missing or invalid (non-positive-integer) field
  * falls back to the built-in default.
  *
@@ -198,14 +198,14 @@ export const verifyOTPLimiter = [verifyOTPRateLimiter];
  * same per-IP `deployments` budget.
  *
  * E2E suites that exercise many write endpoints from one IP can opt out by
- * setting `INSFORGE_DISABLE_WRITE_RATE_LIMIT=1`. The check is deliberately
+ * setting `GROWFOUNDRY_DISABLE_WRITE_RATE_LIMIT=1`. The check is deliberately
  * an explicit named flag (not `NODE_ENV`) so unit tests still exercise the
  * limiter and prod can never accidentally bypass via test envs.
  */
 export type WriteLimiterCategory = 'functions' | 'deployments' | 'compute';
 
 function isWriteRateLimitDisabled(): boolean {
-  return process.env.INSFORGE_DISABLE_WRITE_RATE_LIMIT === '1';
+  return process.env.GROWFOUNDRY_DISABLE_WRITE_RATE_LIMIT === '1';
 }
 
 /**
@@ -235,15 +235,15 @@ const currentWriteEndpointLimits: Record<WriteLimiterCategory, number> = {
  * Any missing or invalid (non-positive-integer) field falls back to the default.
  *
  * Self-hosters can pin their own config by setting
- * INSFORGE_WRITE_RATE_LIMIT_CONFIG_URL. Plain HTTPS is used instead of the
+ * GROWFOUNDRY_WRITE_RATE_LIMIT_CONFIG_URL. Plain HTTPS is used instead of the
  * AWS SDK so the fetch works on instances without AWS credentials and never
  * gets rejected because the runtime's signing identity lacks read access to
  * a public bucket.
  */
-const DEFAULT_WRITE_ENDPOINT_LIMITS_URL = 'https://config.insforge.dev/resource-rate-limits.json';
+const DEFAULT_WRITE_ENDPOINT_LIMITS_URL = 'https://config.growfoundry.dev/resource-rate-limits.json';
 
 function getWriteEndpointLimitsUrl(): string {
-  return process.env.INSFORGE_WRITE_RATE_LIMIT_CONFIG_URL || DEFAULT_WRITE_ENDPOINT_LIMITS_URL;
+  return process.env.GROWFOUNDRY_WRITE_RATE_LIMIT_CONFIG_URL || DEFAULT_WRITE_ENDPOINT_LIMITS_URL;
 }
 
 const WRITE_ENDPOINT_LIMITS_FETCH_TIMEOUT_MS = 5_000;
@@ -327,14 +327,14 @@ async function loadWriteEndpointLimitsFromS3(): Promise<void> {
  * lower cadence keeps the per-bucket request volume modest when many
  * self-hosted instances are running.
  *
- * Override via INSFORGE_WRITE_RATE_LIMIT_REFRESH_MS (e.g. `300000` for the
+ * Override via GROWFOUNDRY_WRITE_RATE_LIMIT_REFRESH_MS (e.g. `300000` for the
  * old 5-minute cadence, or `0` to disable periodic refresh and only fetch
  * once at startup).
  */
 const DEFAULT_WRITE_ENDPOINT_LIMITS_REFRESH_MS = 60 * 60 * 1000; // 1 hour
 
 function getWriteEndpointLimitsRefreshMs(): number {
-  const raw = process.env.INSFORGE_WRITE_RATE_LIMIT_REFRESH_MS;
+  const raw = process.env.GROWFOUNDRY_WRITE_RATE_LIMIT_REFRESH_MS;
   if (raw === undefined) {
     return DEFAULT_WRITE_ENDPOINT_LIMITS_REFRESH_MS;
   }
@@ -343,7 +343,7 @@ function getWriteEndpointLimitsRefreshMs(): number {
     return parsed;
   }
   logger.warn(
-    `Ignoring invalid INSFORGE_WRITE_RATE_LIMIT_REFRESH_MS=${JSON.stringify(raw)} ` +
+    `Ignoring invalid GROWFOUNDRY_WRITE_RATE_LIMIT_REFRESH_MS=${JSON.stringify(raw)} ` +
       `(expected non-negative integer); using default ${DEFAULT_WRITE_ENDPOINT_LIMITS_REFRESH_MS}ms`
   );
   return DEFAULT_WRITE_ENDPOINT_LIMITS_REFRESH_MS;

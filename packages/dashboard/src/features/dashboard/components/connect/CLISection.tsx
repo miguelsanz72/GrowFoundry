@@ -1,4 +1,4 @@
-import { CopyButton } from '@insforge/ui';
+import { CopyButton } from '@growfoundry/ui';
 import { CLI_VERIFY_CONNECTION_PROMPT } from './constants';
 import { useProjectId } from '#lib/hooks/useMetadata';
 import { cn } from '#lib/utils/utils';
@@ -9,7 +9,7 @@ interface CLISectionProps {
 
 export function CLISection({ className }: CLISectionProps) {
   const { projectId } = useProjectId();
-  const cliLinkCommand = `npx @insforge/cli link --project-id ${projectId || '<project id>'}`;
+  const cliLinkCommand = `npx @growfoundry/cli link --project-id ${projectId || '<project id>'}`;
 
   return (
     <div className={cn('flex flex-col gap-6', className)}>

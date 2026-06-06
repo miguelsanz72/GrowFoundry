@@ -10,7 +10,7 @@ import type {
   BillingSubject,
   StripePrice as SharedStripePrice,
   StripeProduct as SharedStripeProduct,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export type StripeIdempotencyOperation = 'checkout_session' | 'customer' | 'product' | 'price';
 
@@ -87,7 +87,7 @@ export function buildStripeIdempotencyKey(
     return undefined;
   }
 
-  return `insforge:${environment}:${operation}:${callerKey}`;
+  return `growfoundry:${environment}:${operation}:${callerKey}`;
 }
 
 export function normalizeProductRow(row: StripeProductRow): SharedStripeProduct {

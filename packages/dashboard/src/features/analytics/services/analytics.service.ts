@@ -8,7 +8,7 @@ import type {
   PosthogRetentionResponse,
   PosthogRecordingsResponse,
   PosthogShareTokenResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { apiClient } from '#lib/api/client';
 
 export type Breakdown = 'Page' | 'Country' | 'DeviceType';

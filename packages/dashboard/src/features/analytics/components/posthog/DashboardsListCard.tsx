@@ -1,4 +1,4 @@
-import type { PosthogDashboardsResponse } from '@insforge/shared-schemas';
+import type { PosthogDashboardsResponse } from '@growfoundry/shared-schemas';
 
 export function DashboardsListCard({
   data,

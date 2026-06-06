@@ -1,4 +1,4 @@
-import { CopyButton } from '@insforge/ui';
+import { CopyButton } from '@growfoundry/ui';
 
 function IdCell({ value }: { value: string }) {
   return (

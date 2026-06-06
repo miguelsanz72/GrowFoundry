@@ -12,8 +12,8 @@ import {
   DialogHeader,
   DialogTitle,
   Input,
-} from '@insforge/ui';
-import type { S3AccessKeyWithSecretSchema } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { S3AccessKeyWithSecretSchema } from '@growfoundry/shared-schemas';
 
 interface S3AccessKeyCreateDialogProps {
   open: boolean;

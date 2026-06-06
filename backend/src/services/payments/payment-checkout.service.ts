@@ -17,7 +17,7 @@ import {
   type CheckoutSession,
   type CreateCheckoutSessionRequest,
   type RoleSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const CHECKOUT_SESSION_COLUMNS = `
   id,

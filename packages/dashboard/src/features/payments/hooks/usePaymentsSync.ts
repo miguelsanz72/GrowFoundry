@@ -4,7 +4,7 @@ import type {
   SyncPaymentsEnvironmentResult,
   SyncPaymentsRequest,
   SyncPaymentsResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { paymentsService } from '#features/payments/services/payments.service';
 import { useToast } from '#lib/hooks/useToast';
 

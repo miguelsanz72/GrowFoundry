@@ -4,7 +4,7 @@ import {
   createServiceSchema,
   updateServiceSchema,
   listServicesResponseSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 describe('serviceStatusEnum', () => {
   it('accepts valid statuses', () => {

@@ -1,6 +1,6 @@
-# InsForge Zeabur Template
+# GrowFoundry Zeabur Template
 
-Internal template for one-click InsForge deployment on Zeabur.
+Internal template for one-click GrowFoundry deployment on Zeabur.
 
 ## CLI Authentication
 

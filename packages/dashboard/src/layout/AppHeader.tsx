@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { Avatar, AvatarFallback, Separator, ThemeSelect } from '#components';
 import { cn } from '#lib/utils/utils';
 import { useTheme } from '#lib/contexts/ThemeContext';
@@ -18,8 +18,8 @@ import { getFeatureFlag } from '#lib/analytics/posthog';
 // Import SVG icons
 import DiscordIcon from '#assets/logos/discord.svg?react';
 import GitHubIcon from '#assets/logos/github.svg?react';
-import InsForgeLogoLight from '#assets/logos/insforge_light.svg';
-import InsForgeLogoDark from '#assets/logos/insforge_dark.svg';
+import GrowFoundryLogoLight from '#assets/logos/growfoundry_light.svg';
+import GrowFoundryLogoDark from '#assets/logos/growfoundry_dark.svg';
 
 export default function AppHeader() {
   const { resolvedTheme } = useTheme();
@@ -44,7 +44,7 @@ export default function AppHeader() {
 
   // Fetch GitHub stars
   useEffect(() => {
-    fetch('https://api.github.com/repos/InsForge/InsForge')
+    fetch('https://api.github.com/repos/GrowFoundry/GrowFoundry')
       .then((res) => res.json())
       .then((data) => {
         if (data.stargazers_count !== undefined) {
@@ -95,10 +95,10 @@ export default function AppHeader() {
       <div className="h-12 w-full bg-semantic-2 border-b border-[var(--alpha-8)] z-50 flex items-center justify-between px-6">
         {/* Logo */}
 
-        <a href="https://insforge.dev" target="_blank" rel="noopener noreferrer">
+        <a href="https://growfoundry.dev" target="_blank" rel="noopener noreferrer">
           <img
-            src={resolvedTheme === 'light' ? InsForgeLogoLight : InsForgeLogoDark}
-            alt="Insforge Logo"
+            src={resolvedTheme === 'light' ? GrowFoundryLogoLight : GrowFoundryLogoDark}
+            alt="Growfoundry Logo"
             className="h-7 w-auto"
           />
         </a>
@@ -116,7 +116,7 @@ export default function AppHeader() {
             <DiscordIcon className="h-5 w-5" />
           </a>
           <a
-            href="https://github.com/InsForge/InsForge"
+            href="https://github.com/GrowFoundry/GrowFoundry"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 p-2 text-gray-600 dark:text-zinc-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200"

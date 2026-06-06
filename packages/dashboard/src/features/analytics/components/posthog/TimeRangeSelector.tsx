@@ -1,4 +1,4 @@
-import type { PosthogTimeframe } from '@insforge/shared-schemas';
+import type { PosthogTimeframe } from '@growfoundry/shared-schemas';
 import { ChevronDown } from 'lucide-react';
 import {
   Button,
@@ -6,7 +6,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { useTimeframe, useSetTimeframe } from '#features/analytics/context/TimeRangeContext';
 
 const OPTIONS: Array<{ value: PosthogTimeframe; label: string }> = [

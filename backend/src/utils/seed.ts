@@ -5,7 +5,7 @@ import logger from '@/utils/logger.js';
 import { SecretService } from '@/services/secrets/secret.service.js';
 import { PaymentService } from '@/services/payments/payment.service.js';
 import { OAuthConfigService } from '@/services/auth/oauth-config.service.js';
-import { OAuthProvidersSchema } from '@insforge/shared-schemas';
+import { OAuthProvidersSchema } from '@growfoundry/shared-schemas';
 import { AuthConfigService } from '@/services/auth/auth-config.service.js';
 import { ANON_ID } from '@/utils/constants.js';
 
@@ -213,7 +213,7 @@ export async function seedBackend(): Promise<void> {
   const dbManager = DatabaseManager.getInstance();
 
   try {
-    logger.info(`\n🚀 Insforge Backend Starting...`);
+    logger.info(`\n🚀 Growfoundry Backend Starting...`);
 
     // Seed anonymous user if it doesn't exist. Project admins are env/cloud token sessions.
     await seedAnonUser();
@@ -230,7 +230,7 @@ export async function seedBackend(): Promise<void> {
     logger.info(`✅ Database connected to PostgreSQL`, {
       host: process.env.POSTGRES_HOST || 'localhost',
       port: process.env.POSTGRES_PORT || '5432',
-      database: process.env.POSTGRES_DB || 'insforge',
+      database: process.env.POSTGRES_DB || 'growfoundry',
     });
     // Database connection info is already logged above
 
@@ -248,17 +248,17 @@ export async function seedBackend(): Promise<void> {
 
     // Initialize reserved secrets for edge functions
     if (!isCloudEnvironment()) {
-      // Add INSFORGE_INTERNAL_URL for Deno-to-backend container communication
-      const insforgInternalUrl = 'http://insforge:7130';
-      const existingInternalUrlSecret = await secretService.getSecretByKey('INSFORGE_INTERNAL_URL');
+      // Add GROWFOUNDRY_INTERNAL_URL for Deno-to-backend container communication
+      const insforgInternalUrl = 'http://growfoundry:7130';
+      const existingInternalUrlSecret = await secretService.getSecretByKey('GROWFOUNDRY_INTERNAL_URL');
 
       if (existingInternalUrlSecret === null) {
         await secretService.createSecret({
-          key: 'INSFORGE_INTERNAL_URL',
+          key: 'GROWFOUNDRY_INTERNAL_URL',
           isReserved: true,
           value: insforgInternalUrl,
         });
-        logger.info('✅ INSFORGE_INTERNAL_URL secret initialized');
+        logger.info('✅ GROWFOUNDRY_INTERNAL_URL secret initialized');
       }
     }
 
@@ -277,16 +277,16 @@ export async function seedBackend(): Promise<void> {
       logger.info('✅ ANON_KEY secret initialized');
     }
 
-    // Add INSFORGE_BASE_URL for edge functions to call back to API
-    const existingBaseUrlSecret = await secretService.getSecretByKey('INSFORGE_BASE_URL');
+    // Add GROWFOUNDRY_BASE_URL for edge functions to call back to API
+    const existingBaseUrlSecret = await secretService.getSecretByKey('GROWFOUNDRY_BASE_URL');
 
     if (existingBaseUrlSecret === null) {
       await secretService.createSecret({
-        key: 'INSFORGE_BASE_URL',
+        key: 'GROWFOUNDRY_BASE_URL',
         isReserved: true,
         value: getApiBaseUrl(),
       });
-      logger.info('✅ INSFORGE_BASE_URL secret initialized');
+      logger.info('✅ GROWFOUNDRY_BASE_URL secret initialized');
     }
 
     // Add JWT_SECRET so CLI/SDK can access it via secrets API

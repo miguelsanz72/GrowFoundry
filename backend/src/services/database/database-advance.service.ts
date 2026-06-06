@@ -7,7 +7,7 @@ import {
   type ExportDatabaseJsonData,
   type ImportDatabaseResponse,
   type BulkUpsertResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import logger from '@/utils/logger.js';
 import { checkSqlExecutionGuards, parseSQLStatements } from '@/utils/sql-parser.js';
 import { validateSchemaName, validateTableName } from '@/utils/validations.js';

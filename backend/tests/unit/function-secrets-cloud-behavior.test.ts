@@ -46,21 +46,21 @@ describe('FunctionService cloud secret behavior', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockListSecrets.mockResolvedValue([
-      { key: 'INSFORGE_INTERNAL_URL', isActive: true },
-      { key: 'INSFORGE_BASE_URL', isActive: true },
+      { key: 'GROWFOUNDRY_INTERNAL_URL', isActive: true },
+      { key: 'GROWFOUNDRY_BASE_URL', isActive: true },
     ]);
     mockGetSecretByKey.mockImplementation(async (key: string) => {
-      if (key === 'INSFORGE_INTERNAL_URL') {
-        return 'http://insforge:7130';
+      if (key === 'GROWFOUNDRY_INTERNAL_URL') {
+        return 'http://growfoundry:7130';
       }
-      if (key === 'INSFORGE_BASE_URL') {
+      if (key === 'GROWFOUNDRY_BASE_URL') {
         return 'https://api.example.com';
       }
       return null;
     });
   });
 
-  it('rewrites INSFORGE_INTERNAL_URL to INSFORGE_BASE_URL in cloud', async () => {
+  it('rewrites GROWFOUNDRY_INTERNAL_URL to GROWFOUNDRY_BASE_URL in cloud', async () => {
     mockIsCloudEnvironment.mockReturnValue(true);
 
     const { FunctionService } = await import('../../src/services/functions/function.service.js');
@@ -70,10 +70,10 @@ describe('FunctionService cloud secret behavior', () => {
 
     const secrets = await service.getFunctionSecrets();
 
-    expect(secrets.INSFORGE_INTERNAL_URL).toBe('https://api.example.com');
+    expect(secrets.GROWFOUNDRY_INTERNAL_URL).toBe('https://api.example.com');
   });
 
-  it('preserves INSFORGE_INTERNAL_URL in OSS', async () => {
+  it('preserves GROWFOUNDRY_INTERNAL_URL in OSS', async () => {
     mockIsCloudEnvironment.mockReturnValue(false);
 
     const { FunctionService } = await import('../../src/services/functions/function.service.js');
@@ -83,6 +83,6 @@ describe('FunctionService cloud secret behavior', () => {
 
     const secrets = await service.getFunctionSecrets();
 
-    expect(secrets.INSFORGE_INTERNAL_URL).toBe('http://insforge:7130');
+    expect(secrets.GROWFOUNDRY_INTERNAL_URL).toBe('http://growfoundry:7130');
   });
 });

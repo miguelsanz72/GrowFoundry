@@ -7,7 +7,7 @@ import {
   ERROR_CODES,
   createChannelRequestSchema,
   updateChannelRequestSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const router = Router();
 const channelService = RealtimeChannelService.getInstance();

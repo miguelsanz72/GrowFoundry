@@ -1,15 +1,15 @@
 # Spec: docs/ audit + minimal high-severity fixes (closes #1117)
 
 **Date:** 2026-04-18
-**Author:** Commander worker (insforge/commander/1117)
+**Author:** Commander worker (growfoundry/commander/1117)
 **Tier:** T2
 
 ## Problem
 
-InsForge's `docs/` tree has ~65 non-deprecated `.mdx` pages. Ticket #1117 asks
+GrowFoundry's `docs/` tree has ~65 non-deprecated `.mdx` pages. Ticket #1117 asks
 for a systematic audit of these pages against the newly-vendored Mintlify
-`doc-author` skill (at `.claude/skills/doc-author/`) and the InsForge overlay
-at `.claude/skills/doc-author/INSFORGE.md`. Known-smell categories the ticket
+`doc-author` skill (at `.claude/skills/doc-author/`) and the GrowFoundry overlay
+at `.claude/skills/doc-author/GROWFOUNDRY.md`. Known-smell categories the ticket
 calls out:
 
 - Broken internal links to renamed/removed pages
@@ -18,7 +18,7 @@ calls out:
 - Deprecated APIs referenced from non-deprecated pages
 - Vanilla-markdown where Mintlify components would be idiomatic
   (`> ⚠️` → `<Warning>`, fence groups → `<CodeGroup>`, `1. 2. 3.` → `<Steps>`)
-- Frontmatter gaps per the InsForge overlay (`title`+`description` only;
+- Frontmatter gaps per the GrowFoundry overlay (`title`+`description` only;
   no `<ParamField>`; experimental features get `<Warning>` at top)
 
 ## Goals

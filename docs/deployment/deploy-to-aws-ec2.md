@@ -1,9 +1,9 @@
-# Deploy InsForge to AWS EC2
+# Deploy GrowFoundry to AWS EC2
 
-This guide will walk you through deploying InsForge on an AWS EC2 instance using Docker Compose.
+This guide will walk you through deploying GrowFoundry on an AWS EC2 instance using Docker Compose.
 
 <Note>
-  This cloud walkthrough is community-maintained and can lag the latest InsForge release. The canonical, always-current setup is the `deploy/docker-compose/` directory in the [InsForge repo](https://github.com/InsForge/InsForge).
+  This cloud walkthrough is community-maintained and can lag the latest GrowFoundry release. The canonical, always-current setup is the `deploy/docker-compose/` directory in the [GrowFoundry repo](https://github.com/GrowFoundry/GrowFoundry).
 </Note>
 
 ## 📋 Prerequisites
@@ -21,7 +21,7 @@ This guide will walk you through deploying InsForge on an AWS EC2 instance using
 1. **Log into AWS Console** and navigate to EC2 Dashboard
 2. **Click "Launch Instance"**
 3. **Configure Instance:**
-   - **Name**: `insforge-server` (or your preferred name)
+   - **Name**: `growfoundry-server` (or your preferred name)
    - **AMI**: Ubuntu Server 24.04 LTS (HVM), SSD Volume Type
    - **Instance Type**: `t3.medium` or larger (minimum 2 vCPU, 4 GB RAM)
      - For production: `t3.large` (2 vCPU, 8 GB RAM) recommended
@@ -105,14 +105,14 @@ docker ps
 sudo apt install git -y
 ```
 
-### 4. Deploy InsForge
+### 4. Deploy GrowFoundry
 
 #### 4.1 Clone Repository
 
 ```bash
 cd ~
-git clone https://github.com/insforge/insforge.git
-cd insforge/deploy/docker-compose
+git clone https://github.com/growfoundry/growfoundry.git
+cd growfoundry/deploy/docker-compose
 ```
 
 #### 4.2 Create Environment Configuration
@@ -165,7 +165,7 @@ openssl rand -base64 24
 
 > 💡 **Important**: Save these secrets securely. You'll need them if you ever migrate or restore your instance.
 
-#### 4.3 Start InsForge Services
+#### 4.3 Start GrowFoundry Services
 
 ```bash
 # Pull Docker images and start services
@@ -186,11 +186,11 @@ docker compose ps
 # You should see 4 running services:
 # - postgres
 # - postgrest
-# - insforge
+# - growfoundry
 # - deno
 ```
 
-### 5. Access Your InsForge Instance
+### 5. Access Your GrowFoundry Instance
 
 #### 5.1 Test Backend API
 
@@ -203,7 +203,7 @@ Expected response:
 {
   "status": "ok",
   "version": "2.1.7",
-  "service": "Insforge OSS Backend",
+  "service": "Growfoundry OSS Backend",
   "timestamp": "2025-10-17T..."
 }
 ```
@@ -236,7 +236,7 @@ sudo apt install nginx -y
 Create Nginx configuration:
 
 ```bash
-sudo nano /etc/nginx/sites-available/insforge
+sudo nano /etc/nginx/sites-available/growfoundry
 ```
 
 Add the following configuration:
@@ -282,7 +282,7 @@ server {
 Enable the configuration:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/insforge /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/growfoundry /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -302,7 +302,7 @@ sudo certbot --nginx -d api.yourdomain.com -d app.yourdomain.com
 Update your `.env` file with HTTPS URLs:
 
 ```bash
-cd ~/insforge/deploy/docker-compose
+cd ~/growfoundry/deploy/docker-compose
 nano .env
 ```
 
@@ -328,7 +328,7 @@ docker compose up -d
 docker compose logs -f
 
 # Specific service
-docker compose logs -f insforge
+docker compose logs -f growfoundry
 docker compose logs -f postgres
 docker compose logs -f deno
 ```
@@ -345,26 +345,26 @@ docker compose down
 docker compose restart
 ```
 
-### Update InsForge
+### Update GrowFoundry
 
-InsForge ships prebuilt images, so an update is a pull and restart. Run this from `~/insforge/deploy/docker-compose`:
+GrowFoundry ships prebuilt images, so an update is a pull and restart. Run this from `~/growfoundry/deploy/docker-compose`:
 
 ```bash
-cd ~/insforge/deploy/docker-compose
+cd ~/growfoundry/deploy/docker-compose
 git pull origin main
 docker compose pull && docker compose up -d
 ```
 
 ### Backup Database
 
-Run these from `~/insforge/deploy/docker-compose`:
+Run these from `~/growfoundry/deploy/docker-compose`:
 
 ```bash
 # Create backup
-docker compose exec postgres pg_dump -U postgres insforge > backup_$(date +%Y%m%d_%H%M%S).sql
+docker compose exec postgres pg_dump -U postgres growfoundry > backup_$(date +%Y%m%d_%H%M%S).sql
 
 # Restore from backup
-cat backup_file.sql | docker compose exec -T postgres psql -U postgres -d insforge
+cat backup_file.sql | docker compose exec -T postgres psql -U postgres -d growfoundry
 ```
 
 ### Monitor Resources
@@ -472,8 +472,8 @@ effective_cache_size = 3GB
 
 ## 🆘 Support & Resources
 
-- **Documentation**: [https://docs.insforge.dev](https://docs.insforge.dev)
-- **GitHub Issues**: [https://github.com/insforge/insforge/issues](https://github.com/insforge/insforge/issues)
+- **Documentation**: [https://docs.growfoundry.dev](https://docs.growfoundry.dev)
+- **GitHub Issues**: [https://github.com/growfoundry/growfoundry/issues](https://github.com/growfoundry/growfoundry/issues)
 - **Discord Community**: [https://discord.com/invite/MPxwj5xVvW](https://discord.com/invite/MPxwj5xVvW)
 
 ## 📝 Cost Estimation
@@ -492,6 +492,6 @@ effective_cache_size = 3GB
 
 ---
 
-**Congratulations! 🎉** Your InsForge instance is now running on AWS EC2. You can start building applications by connecting AI agents to your backend platform.
+**Congratulations! 🎉** Your GrowFoundry instance is now running on AWS EC2. You can start building applications by connecting AI agents to your backend platform.
 
 For other production deployment strategies, check out our [deployment guides](./README.md).

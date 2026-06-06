@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { UpdateRealtimeConfigRequest } from '@insforge/shared-schemas';
+import type { UpdateRealtimeConfigRequest } from '@growfoundry/shared-schemas';
 import { realtimeService } from '#features/realtime/services/realtime.service';
 import { useToast } from '#lib/hooks/useToast';
 

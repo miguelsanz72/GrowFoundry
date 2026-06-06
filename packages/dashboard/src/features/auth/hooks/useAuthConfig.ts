@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AuthConfigSchema, UpdateAuthConfigRequest } from '@insforge/shared-schemas';
+import { AuthConfigSchema, UpdateAuthConfigRequest } from '@growfoundry/shared-schemas';
 import { authConfigService } from '#features/auth/services/config.service';
 import { useToast } from '#lib/hooks/useToast';
 

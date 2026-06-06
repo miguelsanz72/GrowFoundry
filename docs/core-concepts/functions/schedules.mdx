@@ -27,7 +27,7 @@ Create via dashboard or SQL:
 select schedules.create_job(
   name       => 'daily-cleanup',
   schedule   => '0 0 * * *',
-  url        => 'https://myapp.functions.insforge.app/cleanup',
+  url        => 'https://myapp.functions.growfoundry.app/cleanup',
   headers    => jsonb_build_object('Authorization', 'Bearer ${{secrets.CRON_TOKEN}}')
 );
 ```

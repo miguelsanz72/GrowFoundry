@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Controller, Control } from 'react-hook-form';
 import { X, Key } from 'lucide-react';
-import { Checkbox, Input } from '@insforge/ui';
+import { Checkbox, Input } from '@growfoundry/ui';
 import { TableFormColumnSchema, TableFormSchema } from '#features/database/schema';
 import { ColumnTypeSelect } from './ColumnTypeSelect';
 

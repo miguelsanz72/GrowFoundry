@@ -105,7 +105,7 @@ export const sendVerificationEmailRequestSchema = z.object({
 /**
  * POST /api/auth/email/verify - Verify email with a 6-digit code
  * Link verification uses GET /api/auth/email/verify-link instead.
- * The link flow redirects with insforge_status / insforge_type query params and does not create a frontend session.
+ * The link flow redirects with growfoundry_status / growfoundry_type query params and does not create a frontend session.
  */
 export const verifyEmailRequestSchema = z.object({
   email: emailSchema,
@@ -136,7 +136,7 @@ export const exchangeResetPasswordTokenRequestSchema = z.object({
  * - Magic link token (from send-reset-password endpoint when method is 'link')
  * - Reset token (from exchange-reset-password-token endpoint after code verification)
  * Both use RESET_PASSWORD purpose and are verified the same way
- * The link flow redirects with token / insforge_status / insforge_type query params.
+ * The link flow redirects with token / growfoundry_status / growfoundry_type query params.
  */
 export const resetPasswordRequestSchema = z.object({
   newPassword: passwordSchema,

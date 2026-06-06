@@ -17,8 +17,8 @@ export default defineConfig({
       '#navigation': path.resolve(dashboardSrcPath, 'navigation'),
       '#router': path.resolve(dashboardSrcPath, 'router'),
       '#types': path.resolve(dashboardSrcPath, 'types'),
-      '@insforge/shared-schemas': path.resolve(currentDir, '../shared-schemas/src'),
-      '@insforge/ui': path.resolve(currentDir, '../ui/src'),
+      '@growfoundry/shared-schemas': path.resolve(currentDir, '../shared-schemas/src'),
+      '@growfoundry/ui': path.resolve(currentDir, '../ui/src'),
     },
   },
 });

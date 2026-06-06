@@ -70,7 +70,7 @@ describe('032_create-custom-migrations migration', () => {
 
 - [ ] **Step 2: Run the migration SQL test to verify it fails**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/backend && npm test -- custom-migrations-table-migration.test.ts`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/backend && npm test -- custom-migrations-table-migration.test.ts`
 Expected: FAIL with a missing file error for `032_create-custom-migrations.sql`
 
 - [ ] **Step 3: Write the migration SQL file**
@@ -109,7 +109,7 @@ END $$;
 
 - [ ] **Step 5: Re-run the migration SQL test**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/backend && npm test -- custom-migrations-table-migration.test.ts`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/backend && npm test -- custom-migrations-table-migration.test.ts`
 Expected: PASS
 
 - [ ] **Step 6: Commit**
@@ -166,7 +166,7 @@ describe('DatabaseMigrationService.createMigration', () => {
 
 - [ ] **Step 2: Run the service tests to verify they fail**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/backend && npm test -- database-migration.service.test.ts`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/backend && npm test -- database-migration.service.test.ts`
 Expected: FAIL because `database-migration.service.ts` does not exist yet
 
 - [ ] **Step 3: Create the service skeleton**
@@ -273,7 +273,7 @@ export interface DatabaseResourceUpdate {
 
 - [ ] **Step 8: Re-run the service tests**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/backend && npm test -- database-migration.service.test.ts`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/backend && npm test -- database-migration.service.test.ts`
 Expected: PASS
 
 - [ ] **Step 9: Commit**
@@ -360,7 +360,7 @@ router.use('/migrations', databaseMigrationsRouter);
 
 - [ ] **Step 5: Run the focused backend tests**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/backend && npm test -- database-migration`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/backend && npm test -- database-migration`
 Expected: PASS
 
 - [ ] **Step 6: Commit**
@@ -418,7 +418,7 @@ export type DatabaseMigrationsResponse = z.infer<typeof databaseMigrationsRespon
 
 - [ ] **Step 4: Build shared schemas**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/packages/shared-schemas && npm run build`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/shared-schemas && npm run build`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
@@ -511,7 +511,7 @@ case 'migration':
 
 - [ ] **Step 5: Run dashboard typecheck**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/packages/dashboard && npm run typecheck`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/dashboard && npm run typecheck`
 Expected: PASS
 
 - [ ] **Step 6: Commit**
@@ -611,7 +611,7 @@ if (error) {
 
 - [ ] **Step 5: Build the dashboard package**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/packages/dashboard && npm run build`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/dashboard && npm run build`
 Expected: PASS
 
 - [ ] **Step 6: Commit**
@@ -632,22 +632,22 @@ git commit -m "feat: add database migrations studio page"
 
 - [ ] **Step 1: Run backend tests**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/backend && npm test`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/backend && npm test`
 Expected: PASS
 
 - [ ] **Step 2: Run backend build**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/backend && npm run build`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/backend && npm run build`
 Expected: PASS
 
 - [ ] **Step 3: Run shared schema build**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/packages/shared-schemas && npm run build`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/shared-schemas && npm run build`
 Expected: PASS
 
 - [ ] **Step 4: Run dashboard typecheck and build**
 
-Run: `cd /Users/lyu/Documents/GitHub/InsForge/packages/dashboard && npm run typecheck && npm run build`
+Run: `cd /Users/lyu/Documents/GitHub/GrowFoundry/packages/dashboard && npm run typecheck && npm run build`
 Expected: PASS
 
 - [ ] **Step 5: Smoke-test the feature manually**

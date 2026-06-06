@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ListEmailTemplatesResponse, UpdateEmailTemplateRequest } from '@insforge/shared-schemas';
+import { ListEmailTemplatesResponse, UpdateEmailTemplateRequest } from '@growfoundry/shared-schemas';
 import { emailTemplateService } from '#features/auth/services/email-template.service';
 import { useToast } from '#lib/hooks/useToast';
 

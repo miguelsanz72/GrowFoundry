@@ -2,11 +2,11 @@
 
 ## Overview
 
-Allow project admins to configure their own SMTP server for email delivery instead of relying on InsForge's cloud backend. Includes customizable email templates with a Source/Preview editor.
+Allow project admins to configure their own SMTP server for email delivery instead of relying on GrowFoundry's cloud backend. Includes customizable email templates with a Source/Preview editor.
 
 ## Motivation
 
-Currently all emails (verification, password reset, raw) route through InsForge's cloud API. Self-hosted users and cloud users who prefer their own mail delivery have no alternative. This feature adds a pluggable SMTP provider and a template editor, following the same UX pattern as Supabase.
+Currently all emails (verification, password reset, raw) route through GrowFoundry's cloud API. Self-hosted users and cloud users who prefer their own mail delivery have no alternative. This feature adds a pluggable SMTP provider and a template editor, following the same UX pattern as Supabase.
 
 ## Architecture
 
@@ -117,7 +117,7 @@ Seeded on migration. Clean, minimal HTML with inline CSS. Example for `email-ver
 
 ### Validation Schemas
 
-New Zod schemas in `@insforge/shared-schemas` (consistent with existing patterns like `updateAuthConfigSchema`):
+New Zod schemas in `@growfoundry/shared-schemas` (consistent with existing patterns like `updateAuthConfigSchema`):
 
 - `upsertSmtpConfigRequestSchema` — validates host, port (number), username, password (optional on update), sender_email (email format), sender_name, min_interval_seconds (positive integer), enabled (boolean)
 - `updateEmailTemplateRequestSchema` — validates subject (non-empty string), body_html (non-empty string)

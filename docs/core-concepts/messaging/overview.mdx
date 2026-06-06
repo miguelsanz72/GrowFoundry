@@ -4,7 +4,7 @@ sidebarTitle: "Overview"
 description: "Send transactional messages from your project. Email today, SMS and push on the roadmap."
 ---
 
-InsForge Messaging sends transactional notifications from your project: receipts, digests, password-reset codes, notification roll-ups, anything you would otherwise wire SendGrid, Postmark, or Twilio in for. Email is the first channel; SMS and push are on the roadmap and will share the same API surface.
+GrowFoundry Messaging sends transactional notifications from your project: receipts, digests, password-reset codes, notification roll-ups, anything you would otherwise wire SendGrid, Postmark, or Twilio in for. Email is the first channel; SMS and push are on the roadmap and will share the same API surface.
 
 <Note>
   **Just sending auth emails?** Magic links, verification codes, and password resets are wired into [Authentication](/core-concepts/authentication/overview) out of the box. You only need this product for transactional messages beyond auth.
@@ -12,11 +12,11 @@ InsForge Messaging sends transactional notifications from your project: receipts
 
 ```mermaid
 graph TB
-    Client[Client Application] --> SDK[InsForge SDK]
+    Client[Client Application] --> SDK[GrowFoundry SDK]
     SDK --> API[Email API]
     API --> Service[EmailService]
     Service --> Decision{SMTP enabled?}
-    Decision -->|No| Cloud[InsForge Cloud]
+    Decision -->|No| Cloud[GrowFoundry Cloud]
     Cloud --> SES[AWS SES]
     Decision -->|Yes| SMTP[Your SMTP server]
     SES --> Inbox[Recipient Inbox]
@@ -57,11 +57,11 @@ Same `emails.send()` shape for email today, with SMS and push to follow when the
 
 ### Managed delivery or bring your own
 
-Send through InsForge Cloud (AWS SES for email today) for zero setup, or plug in your own provider when you need to control deliverability and sender reputation. See [Custom SMTP](/core-concepts/messaging/custom-smtp).
+Send through GrowFoundry Cloud (AWS SES for email today) for zero setup, or plug in your own provider when you need to control deliverability and sender reputation. See [Custom SMTP](/core-concepts/messaging/custom-smtp).
 
 ### Templates
 
-Pick a template by name, pass the variables, and InsForge renders and sends. Templates are editable per project; the four auth templates (`email-verification-*`, `reset-password-*`) ship with sensible defaults.
+Pick a template by name, pass the variables, and GrowFoundry renders and sends. Templates are editable per project; the four auth templates (`email-verification-*`, `reset-password-*`) ship with sensible defaults.
 
 ### Delivery tracking
 

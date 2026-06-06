@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Insforge Payments API
+  title: Growfoundry Payments API
   version: 1.0.0
   description: Stripe payment setup, catalog management, runtime Checkout Sessions, Billing Portal Sessions, and webhook projections
 
@@ -247,7 +247,7 @@ paths:
   /api/payments/{environment}/webhook:
     post:
       summary: Configure Managed Stripe Webhook
-      description: Create or recreate the InsForge-managed Stripe webhook endpoint for one environment.
+      description: Create or recreate the GrowFoundry-managed Stripe webhook endpoint for one environment.
       tags:
         - Admin
       security:
@@ -1803,7 +1803,7 @@ components:
         - successUrl
         - cancelUrl
       additionalProperties: false
-      description: Metadata keys starting with insforge_ are reserved and rejected.
+      description: Metadata keys starting with growfoundry_ are reserved and rejected.
       properties:
         mode:
           $ref: '#/components/schemas/CheckoutMode'

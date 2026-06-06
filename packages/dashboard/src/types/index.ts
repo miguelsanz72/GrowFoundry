@@ -182,4 +182,4 @@ export interface CloudHostingDashboardProps extends DashboardProps {
   useAuthorizationCodeRefresh?: boolean;
 }
 
-export type InsForgeDashboardProps = SelfHostingDashboardProps | CloudHostingDashboardProps;
+export type GrowFoundryDashboardProps = SelfHostingDashboardProps | CloudHostingDashboardProps;

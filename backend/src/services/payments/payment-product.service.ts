@@ -25,7 +25,7 @@ import {
   type ListPaymentProductsResponse,
   type MutatePaymentProductResponse,
   type UpdatePaymentProductRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class PaymentProductService {
   private static instance: PaymentProductService;

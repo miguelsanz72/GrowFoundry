@@ -11,7 +11,7 @@ import ReactDataGrid, {
 import { cn } from '#lib/utils/utils';
 import { DataGridEmptyState } from '#components/DataGridEmptyState';
 import { PaginationControls } from '#components/PaginationControls';
-import { Checkbox } from '@insforge/ui';
+import { Checkbox } from '@growfoundry/ui';
 import { useTheme } from '#lib/contexts/ThemeContext';
 import type { DataGridColumn, DataGridRow, DataGridRowType } from './datagridTypes';
 import SortableHeaderRenderer from './SortableHeader';
@@ -321,7 +321,7 @@ export default function DataGrid<TRow extends DataGridRowType = DataGridRow>({
             onColumnsReorder={onColumnsReorder}
             rowClass={rowClass}
             className={cn(
-              `h-full fill-grid insforge-rdg ${resolvedTheme === 'dark' ? 'rdg-dark' : 'rdg-light'}`,
+              `h-full fill-grid growfoundry-rdg ${resolvedTheme === 'dark' ? 'rdg-dark' : 'rdg-light'}`,
               gridClassName
             )}
             headerRowHeight={headerRowHeight}

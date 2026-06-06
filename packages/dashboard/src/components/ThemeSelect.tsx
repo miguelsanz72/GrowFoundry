@@ -1,6 +1,6 @@
 import { Sun, Moon, Monitor } from 'lucide-react';
 import { useTheme } from '#lib/contexts/ThemeContext';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@insforge/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@growfoundry/ui';
 
 export function ThemeSelect() {
   const { theme, resolvedTheme, setTheme } = useTheme();

@@ -1,6 +1,6 @@
 // Additional types that are backend-specific or internal
 
-import { ChatCompletionRequest } from '@insforge/shared-schemas';
+import { ChatCompletionRequest } from '@growfoundry/shared-schemas';
 
 export type ChatCompletionOptions = Omit<ChatCompletionRequest, 'stream' | 'messages'>;
 

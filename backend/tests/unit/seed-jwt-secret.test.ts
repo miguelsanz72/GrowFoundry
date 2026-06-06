@@ -94,7 +94,7 @@ describe('seedBackend secret initialization', () => {
     process.env.JWT_SECRET = 'jwt-secret';
   });
 
-  it('seeds INSFORGE_INTERNAL_URL in OSS environments', async () => {
+  it('seeds GROWFOUNDRY_INTERNAL_URL in OSS environments', async () => {
     mockIsCloudEnvironment.mockReturnValue(false);
     mockGetSecretByKey.mockResolvedValue(null);
 
@@ -103,13 +103,13 @@ describe('seedBackend secret initialization', () => {
     await seedBackend();
 
     expect(mockCreateSecret).toHaveBeenCalledWith({
-      key: 'INSFORGE_INTERNAL_URL',
+      key: 'GROWFOUNDRY_INTERNAL_URL',
       isReserved: true,
-      value: 'http://insforge:7130',
+      value: 'http://growfoundry:7130',
     });
   });
 
-  it('skips INSFORGE_INTERNAL_URL in cloud but still seeds JWT_SECRET when missing', async () => {
+  it('skips GROWFOUNDRY_INTERNAL_URL in cloud but still seeds JWT_SECRET when missing', async () => {
     mockIsCloudEnvironment.mockReturnValue(true);
     mockGetSecretByKey.mockImplementation(async (key: string) => {
       if (key === 'JWT_SECRET') {
@@ -123,7 +123,7 @@ describe('seedBackend secret initialization', () => {
     await seedBackend();
 
     expect(mockCreateSecret).not.toHaveBeenCalledWith(
-      expect.objectContaining({ key: 'INSFORGE_INTERNAL_URL' })
+      expect.objectContaining({ key: 'GROWFOUNDRY_INTERNAL_URL' })
     );
     expect(mockCreateSecret).toHaveBeenCalledWith({
       key: 'JWT_SECRET',

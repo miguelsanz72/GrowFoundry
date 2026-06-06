@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import RefreshIcon from '#assets/icons/refresh.svg?react';
-import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@insforge/ui';
+import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@growfoundry/ui';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   DataGrid,
@@ -11,7 +11,7 @@ import {
   type DataGridRowType,
 } from '#components';
 import { formatTime } from '#lib/utils/utils';
-import type { DatabaseMigrationsResponse } from '@insforge/shared-schemas';
+import type { DatabaseMigrationsResponse } from '@growfoundry/shared-schemas';
 import { DatabaseStudioSidebarPanel } from '#features/database/components/DatabaseSidebar';
 import { SQLCellButton, SQLModal } from '#features/database/components/SQLModal';
 import { useMigrations } from '#features/database/hooks/useMigrations';

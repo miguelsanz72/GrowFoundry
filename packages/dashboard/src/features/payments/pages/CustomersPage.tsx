@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { SortColumn } from 'react-data-grid';
 import { AlertCircle, Mail } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
-import type { PaymentCustomerListItem } from '@insforge/shared-schemas';
+import type { PaymentCustomerListItem } from '@growfoundry/shared-schemas';
 import MastercardLogo from '#assets/logos/mastercard.svg?react';
 import VisaLogo from '#assets/logos/visa.svg?react';
 import {

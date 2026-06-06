@@ -15,7 +15,7 @@ import {
   exchangeAdminSessionRequestSchema,
   type CreateAdminSessionResponse,
   type GetCurrentAdminSessionResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import logger from '@/utils/logger.js';
 
 const router = Router();

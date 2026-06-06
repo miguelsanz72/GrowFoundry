@@ -1,5 +1,5 @@
 import { jsonSchema } from '#lib/utils/schemaValidations';
-import { ColumnSchema, ColumnType, type DatabaseSchemaInfo } from '@insforge/shared-schemas';
+import { ColumnSchema, ColumnType, type DatabaseSchemaInfo } from '@growfoundry/shared-schemas';
 import { z } from 'zod';
 
 export const DEFAULT_DATABASE_SCHEMA = 'public' as const;

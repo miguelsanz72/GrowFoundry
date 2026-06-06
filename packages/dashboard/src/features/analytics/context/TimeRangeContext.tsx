@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
-import type { PosthogTimeframe } from '@insforge/shared-schemas';
+import type { PosthogTimeframe } from '@growfoundry/shared-schemas';
 
 interface TimeRangeContextValue {
   timeframe: PosthogTimeframe;

@@ -21,7 +21,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { useRealtimeConfig } from '#features/realtime/hooks/useRealtimeConfig';
 
 interface RealtimeSettingsMenuDialogProps {

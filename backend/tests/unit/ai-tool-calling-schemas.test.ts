@@ -7,7 +7,7 @@ import {
   chatMessageSchema,
   chatCompletionRequestSchema,
   chatCompletionResponseSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 describe('Tool Calling Schemas', () => {
   describe('toolFunctionSchema', () => {

@@ -1,7 +1,7 @@
 import { ConvertedValue } from '#components/datagrid/datagridTypes';
 import { DEFAULT_DATABASE_SCHEMA } from '#features/database/helpers';
 import { apiClient } from '#lib/api/client';
-import { BulkUpsertResponse } from '@insforge/shared-schemas';
+import { BulkUpsertResponse } from '@growfoundry/shared-schemas';
 import { convertToCSV } from '#lib/utils/csv';
 
 interface AdminRecordListResponse {

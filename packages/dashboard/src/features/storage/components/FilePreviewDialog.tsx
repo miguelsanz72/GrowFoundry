@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Download, ExternalLink } from 'lucide-react';
-import { Button, Dialog, DialogContent, DialogDescription, DialogTitle } from '@insforge/ui';
+import { Button, Dialog, DialogContent, DialogDescription, DialogTitle } from '@growfoundry/ui';
 import { LoadingState, TypeBadge } from '#components';
 import { useStorageObjects } from '#features/storage/hooks/useStorageObjects';
-import { StorageFileSchema } from '@insforge/shared-schemas';
+import { StorageFileSchema } from '@growfoundry/shared-schemas';
 
 interface FilePreviewDialogProps {
   open: boolean;

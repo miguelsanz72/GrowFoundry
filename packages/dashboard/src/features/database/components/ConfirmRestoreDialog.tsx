@@ -9,7 +9,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 
 interface ConfirmRestoreDialogProps {
   open: boolean;

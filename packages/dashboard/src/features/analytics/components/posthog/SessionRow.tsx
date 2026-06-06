@@ -1,5 +1,5 @@
 import { formatDistance } from 'date-fns';
-import type { PosthogRecordingItem } from '@insforge/shared-schemas';
+import type { PosthogRecordingItem } from '@growfoundry/shared-schemas';
 import { formatDuration, truncateId } from '#features/analytics/lib/format';
 
 interface SessionRowProps {

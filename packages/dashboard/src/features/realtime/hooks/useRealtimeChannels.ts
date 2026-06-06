@@ -5,7 +5,7 @@ import {
   type RealtimeChannel,
 } from '#features/realtime/services/realtime.service';
 import { useToast } from '#lib/hooks/useToast';
-import type { CreateChannelRequest, UpdateChannelRequest } from '@insforge/shared-schemas';
+import type { CreateChannelRequest, UpdateChannelRequest } from '@growfoundry/shared-schemas';
 
 export function useRealtimeChannels() {
   const queryClient = useQueryClient();

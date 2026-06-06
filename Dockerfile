@@ -106,13 +106,13 @@ WORKDIR /app
 # Default STORAGE_DIR and LOGS_DIR so every containerised deployment
 # (docker run, Compose, Zeabur, Render, etc.) writes to the well-known
 # mount points. Compose and PaaS env vars override these when set.
-ENV STORAGE_DIR=/insforge-storage
-ENV LOGS_DIR=/insforge-logs
+ENV STORAGE_DIR=/growfoundry-storage
+ENV LOGS_DIR=/growfoundry-logs
 ENV MAX_JSON_BODY_SIZE=100mb
 ENV MAX_URLENCODED_BODY_SIZE=10mb
 
-RUN mkdir -p /data /insforge-storage /insforge-logs && \
-    chown node:node /data /insforge-storage /insforge-logs
+RUN mkdir -p /data /growfoundry-storage /growfoundry-logs && \
+    chown node:node /data /growfoundry-storage /growfoundry-logs
 
 # tsx is a devDependency but required at runtime for migrate:bootstrap
 RUN npm install -g "tsx@^4.7.1" && npm cache clean --force
@@ -165,8 +165,8 @@ COPY --from=deno-bin /bin/deno /usr/local/bin/deno
 WORKDIR /app
 
 # Default mount points (same as runner stage — see comments there)
-ENV STORAGE_DIR=/insforge-storage
-ENV LOGS_DIR=/insforge-logs
+ENV STORAGE_DIR=/growfoundry-storage
+ENV LOGS_DIR=/growfoundry-logs
 ENV MAX_JSON_BODY_SIZE=100mb
 ENV MAX_URLENCODED_BODY_SIZE=10mb
 
@@ -177,4 +177,4 @@ ENV MAX_URLENCODED_BODY_SIZE=10mb
 # npm install on root-owned bind mounts (e.g. in CI).
 RUN mkdir -p /app/node_modules /app/backend/node_modules /app/frontend/node_modules \
              /app/shared-schemas/node_modules /app/ui/node_modules \
-             /insforge-storage /insforge-logs
+             /growfoundry-storage /growfoundry-logs

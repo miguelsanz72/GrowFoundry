@@ -9,12 +9,12 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { Label } from '#components';
 import { useTables } from '#features/database/hooks/useTables';
 import { UseFormReturn } from 'react-hook-form';
 import { TableFormSchema, TableFormForeignKeySchema } from '#features/database/schema';
-import { ColumnSchema, OnDeleteActionSchema, OnUpdateActionSchema } from '@insforge/shared-schemas';
+import { ColumnSchema, OnDeleteActionSchema, OnUpdateActionSchema } from '@growfoundry/shared-schemas';
 import { cn } from '#lib/utils/utils';
 import { AUTH_USERS_TABLE } from '#features/database/constants';
 import { parseDatabaseTableReference } from '#features/database/helpers';

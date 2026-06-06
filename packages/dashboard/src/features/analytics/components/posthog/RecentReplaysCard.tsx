@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { PosthogRecordingItem } from '@insforge/shared-schemas';
+import type { PosthogRecordingItem } from '@growfoundry/shared-schemas';
 import { EmptyState, ErrorState, LoadingState } from '#components';
 import { formatDuration, formatRelativeTime, truncateId } from '#features/analytics/lib/format';
 import { ReplayModal } from './ReplayModal';

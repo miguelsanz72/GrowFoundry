@@ -3,7 +3,7 @@ import axios from 'axios';
 import { z } from 'zod';
 import { appConfig } from '@/infra/config/app.config.js';
 import { AppError } from '@/utils/errors.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import { DatabaseProvider, DatabaseConnectionInfo, DatabasePasswordInfo } from './base.provider.js';
 
 /**
@@ -29,7 +29,7 @@ const DatabasePasswordInfoSchema = z.object({
 });
 
 /**
- * Cloud database provider for fetching database connection info via Insforge cloud backend
+ * Cloud database provider for fetching database connection info via Growfoundry cloud backend
  */
 export class CloudDatabaseProvider implements DatabaseProvider {
   private static instance: CloudDatabaseProvider;

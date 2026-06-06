@@ -187,7 +187,7 @@ export async function createApp() {
     res.json({
       status: 'ok',
       version,
-      service: 'Insforge OSS Backend',
+      service: 'Growfoundry OSS Backend',
       timestamp: new Date().toISOString(),
     });
   });
@@ -276,7 +276,7 @@ export async function createApp() {
     }
   });
 
-  // Redirect root to dashboard login (only for non-insforge cloud environments)
+  // Redirect root to dashboard login (only for non-growfoundry cloud environments)
   if (!isCloudEnvironment()) {
     app.get('/', (_req: Request, res: Response) => {
       res.redirect('/dashboard/login');

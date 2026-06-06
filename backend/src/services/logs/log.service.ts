@@ -8,7 +8,7 @@ import {
   LogStatsSchema,
   getBuildLogsResponseSchema,
   type GetBuildLogsResponseSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { isCloudEnvironment } from '@/utils/environment.js';
 import { DenoSubhostingProvider } from '@/providers/functions/deno-subhosting.provider.js';
 import { FunctionService } from '@/services/functions/function.service.js';

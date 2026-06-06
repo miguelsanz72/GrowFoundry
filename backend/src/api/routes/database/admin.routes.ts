@@ -11,7 +11,7 @@ import {
   adminTableRecordsDeleteQuerySchema,
   adminTableRecordsListQuerySchema,
   type AdminTableRecordsSortClause,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { AdminRecordService } from '@/services/database/admin-record.service.js';
 import {
   buildQualifiedTableKey,

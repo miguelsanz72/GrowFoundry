@@ -1,4 +1,4 @@
-import { Pagination } from '@insforge/ui';
+import { Pagination } from '@growfoundry/ui';
 
 export interface PaginationControlsProps {
   className?: string;

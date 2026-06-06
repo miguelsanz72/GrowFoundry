@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { ChevronRight } from 'lucide-react';
 import RefreshIcon from '#assets/icons/refresh.svg?react';
-import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@insforge/ui';
+import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@growfoundry/ui';
 import { Skeleton, PaginationControls, TableHeader } from '#components';
 import { useRealtimeMessages } from '#features/realtime/hooks/useRealtimeMessages';
 import { MessageRow } from '#features/realtime/components/MessageRow';

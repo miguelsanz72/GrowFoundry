@@ -1,6 +1,6 @@
 import { Settings } from 'lucide-react';
-import { Button } from '@insforge/ui';
-import type { StripeEnvironment } from '@insforge/shared-schemas';
+import { Button } from '@growfoundry/ui';
+import type { StripeEnvironment } from '@growfoundry/shared-schemas';
 import StripeWordmark from '#assets/logos/stripe-wordmark.svg';
 
 const STRIPE_KEY_NAMES: Record<StripeEnvironment, string> = {

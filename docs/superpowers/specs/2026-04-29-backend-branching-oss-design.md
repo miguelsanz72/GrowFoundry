@@ -2,8 +2,8 @@
 
 **Date:** 2026-04-29
 **Status:** Draft
-**Source PRD:** [insforge-cloud-backend Backend-Branching.md](../../../../insforge-cloud-backend/Backend-Branching.md)
-**Cloud-backend spec:** [2026-04-29-backend-branching-cloud-design.md](../../../../insforge-cloud-backend/docs/superpowers/specs/2026-04-29-backend-branching-cloud-design.md)
+**Source PRD:** [growfoundry-cloud-backend Backend-Branching.md](../../../../growfoundry-cloud-backend/Backend-Branching.md)
+**Cloud-backend spec:** [2026-04-29-backend-branching-cloud-design.md](../../../../growfoundry-cloud-backend/docs/superpowers/specs/2026-04-29-backend-branching-cloud-design.md)
 
 This spec covers the **OSS slice** of backend branching v1: read-only fallback from a branch project's storage to its parent project's S3 directory.
 
@@ -94,7 +94,7 @@ For `mode='schema-only'` branches, `storage.objects` is truncated by the cloud-b
 
 - `parentAppKey` set but parent's directory was deleted (branch outlived parent — shouldn't happen given lifecycle cascade): primary 404 + parent 404 → final 404. Same as today.
 - Parent exists but specific key missing on parent too: same 404. No new error path.
-- IAM error reading parent path (cross-prefix permission denied): non-404 errors are propagated by the read helpers (`tryHeadObject`, `tryGetObjectStream`, `tryGetObject`); only true 404s are treated as not-found and trigger parent fallback. The public `getObject` wraps `withFallback` and surfaces any error as `null` to preserve the prior service-layer contract, but parent fallback is no longer triggered by transient/IAM failures. The IAM role for the EC2 already has access to the entire `insforge-storage` bucket per the existing single-bucket model; no permissions change required.
+- IAM error reading parent path (cross-prefix permission denied): non-404 errors are propagated by the read helpers (`tryHeadObject`, `tryGetObjectStream`, `tryGetObject`); only true 404s are treated as not-found and trigger parent fallback. The public `getObject` wraps `withFallback` and surfaces any error as `null` to preserve the prior service-layer contract, but parent fallback is no longer triggered by transient/IAM failures. The IAM role for the EC2 already has access to the entire `growfoundry-storage` bucket per the existing single-bucket model; no permissions change required.
 
 ### Compatibility
 

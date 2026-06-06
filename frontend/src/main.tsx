@@ -1,4 +1,4 @@
-import '@insforge/dashboard/styles.css';
+import '@growfoundry/dashboard/styles.css';
 import './styles.css';
 
 import React from 'react';

@@ -6,7 +6,7 @@
 
 **Architecture:** Incremental additions to the existing ComputePage + ServiceCard components. All API methods and mutations already exist in hooks/services. We're just wiring UI to existing plumbing. No backend changes.
 
-**Tech Stack:** React, TypeScript, @insforge/ui (Radix-based), @tanstack/react-query, lucide-react icons
+**Tech Stack:** React, TypeScript, @growfoundry/ui (Radix-based), @tanstack/react-query, lucide-react icons
 
 **Spec:** `docs/superpowers/specs/2026-04-07-compute-dashboard-ux-design.md`
 
@@ -33,7 +33,7 @@
 - [ ] **Step 1: Add `getReachableUrl` helper and region labels**
 
 ```ts
-import type { ServiceSchema, ServiceStatus } from '@insforge/shared-schemas';
+import type { ServiceSchema, ServiceStatus } from '@growfoundry/shared-schemas';
 
 export const statusColors: Record<ServiceStatus, string> = {
   running: 'bg-green-500',
@@ -122,7 +122,7 @@ git commit -m "feat(compute/ui): add useServiceLogs hook"
 
 ```tsx
 import { RefreshCw } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { useServiceLogs } from '../hooks/useComputeServices';
 
 interface ServiceLogsProps {
@@ -203,9 +203,9 @@ import {
   SelectValue,
   SelectContent,
   SelectItem,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { CPU_TIERS, MEMORY_OPTIONS, REGIONS } from '../constants';
-import type { CreateServiceRequest } from '@insforge/shared-schemas';
+import type { CreateServiceRequest } from '@growfoundry/shared-schemas';
 
 interface CreateServiceDialogProps {
   open: boolean;
@@ -391,8 +391,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from '@insforge/ui';
-import type { ServiceSchema } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { ServiceSchema } from '@growfoundry/shared-schemas';
 import { statusColors, getReachableUrl } from '../constants';
 
 interface ServiceCardProps {
@@ -502,13 +502,13 @@ git commit -m "feat(compute/ui): add dropdown actions and fix endpoint URL on Se
 ```tsx
 import { useState } from 'react';
 import { Loader2, ArrowLeft, Plus, Play, Square, Trash2, AlertTriangle } from 'lucide-react';
-import { Button, ConfirmDialog } from '@insforge/ui';
+import { Button, ConfirmDialog } from '@growfoundry/ui';
 import { useComputeServices } from '../hooks/useComputeServices';
 import { ServiceCard } from '../components/ServiceCard';
 import { ServiceLogs } from '../components/ServiceLogs';
 import { CreateServiceDialog } from '../components/CreateServiceDialog';
 import { statusColors, getReachableUrl } from '../constants';
-import type { ServiceSchema } from '@insforge/shared-schemas';
+import type { ServiceSchema } from '@growfoundry/shared-schemas';
 
 export default function ComputePage() {
   const { services, isLoading, create, remove, stop, start, isCreating } = useComputeServices();
@@ -707,7 +707,7 @@ export default function ComputePage() {
                 <p className="text-xs text-muted-foreground mb-4">
                   Create a service using the button above or the CLI:{' '}
                   <code className="px-1.5 py-0.5 bg-muted rounded text-xs">
-                    insforge compute create --name my-api --image nginx:alpine
+                    growfoundry compute create --name my-api --image nginx:alpine
                   </code>
                 </p>
               </div>

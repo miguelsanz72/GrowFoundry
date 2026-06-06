@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import {
   DataGridEmptyState,
   SelectionClearButton,
@@ -16,7 +16,7 @@ import {
 } from '#components';
 import { UsersDataGrid, UserFormDialog } from '#features/auth/components';
 import { SortColumn } from 'react-data-grid';
-import { UserSchema } from '@insforge/shared-schemas';
+import { UserSchema } from '@growfoundry/shared-schemas';
 import { useToast } from '#lib/hooks/useToast';
 import { useUsers } from '#features/auth/hooks/useUsers';
 import { usePageSize } from '#lib/hooks/usePageSize';

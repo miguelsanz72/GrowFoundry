@@ -4,7 +4,7 @@ import {
   ClearAuditLogsResponse,
   GetAuditLogsRequest,
   GetAuditLogStatsResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class AuditService {
   async getAuditLogs({

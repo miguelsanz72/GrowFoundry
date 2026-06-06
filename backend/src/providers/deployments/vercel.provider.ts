@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import type { Readable } from 'stream';
 import { isCloudEnvironment } from '@/utils/environment.js';
 import { AppError, UpstreamError } from '@/utils/errors.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import { SecretService } from '@/services/secrets/secret.service.js';
 import logger from '@/utils/logger.js';
 import { appConfig } from '@/infra/config/app.config.js';
@@ -759,7 +759,7 @@ export class VercelProvider {
    */
   async getCustomDomainUrl(): Promise<string | null> {
     const slug = await this.getSlug();
-    return slug ? `https://${slug}.insforge.site` : null;
+    return slug ? `https://${slug}.growfoundry.site` : null;
   }
 
   // ============================================================================

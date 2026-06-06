@@ -1,4 +1,4 @@
-import { SearchInput } from '@insforge/ui';
+import { SearchInput } from '@growfoundry/ui';
 import { cn } from '#lib/utils/utils';
 
 interface TableHeaderProps {

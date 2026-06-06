@@ -28,7 +28,7 @@ docs/**
 !docs/agent-docs/**
 !docs/sdks/**
 !docs/snippets/**
-!docs/insforge-instructions-sdk.md
+!docs/growfoundry-instructions-sdk.md
 tests/
 *.test.ts
 *.test.tsx

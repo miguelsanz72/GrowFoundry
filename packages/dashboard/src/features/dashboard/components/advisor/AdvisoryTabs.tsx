@@ -1,4 +1,4 @@
-import { Badge } from '@insforge/ui';
+import { Badge } from '@growfoundry/ui';
 import type { DashboardAdvisorCategory } from '#types';
 
 export type AdvisoryTabValue = 'all' | DashboardAdvisorCategory;

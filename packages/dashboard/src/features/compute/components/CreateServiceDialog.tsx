@@ -14,9 +14,9 @@ import {
   SelectValue,
   SelectContent,
   SelectItem,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import { CPU_TIERS, MEMORY_OPTIONS, REGIONS } from '#features/compute/constants';
-import type { CreateServiceRequest } from '@insforge/shared-schemas';
+import type { CreateServiceRequest } from '@growfoundry/shared-schemas';
 
 interface CreateServiceDialogProps {
   open: boolean;

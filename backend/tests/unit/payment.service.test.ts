@@ -210,7 +210,7 @@ describe('PaymentService', () => {
       id: 'cus_123',
       object: 'customer',
       email: 'buyer@example.com',
-      metadata: { insforge_subject_type: 'team', insforge_subject_id: 'team_123' },
+      metadata: { growfoundry_subject_type: 'team', growfoundry_subject_id: 'team_123' },
     });
     mockProvider.listCustomers.mockResolvedValue([]);
     mockProvider.createCustomerPortalSession.mockResolvedValue({
@@ -368,11 +368,11 @@ describe('PaymentService', () => {
         'customer.subscription.resumed',
       ],
       metadata: {
-        managed_by: 'insforge',
-        insforge_webhook: 'stripe_payments',
-        insforge_environment: 'test',
-        insforge_endpoint_path: '/api/webhooks/stripe/test',
-        insforge_endpoint_url: 'http://localhost:7130/api/webhooks/stripe/test',
+        managed_by: 'growfoundry',
+        growfoundry_webhook: 'stripe_payments',
+        growfoundry_environment: 'test',
+        growfoundry_endpoint_path: '/api/webhooks/stripe/test',
+        growfoundry_endpoint_url: 'http://localhost:7130/api/webhooks/stripe/test',
       },
     });
     expect(mockEncrypt).toHaveBeenCalledWith('whsec_new');
@@ -453,7 +453,7 @@ describe('PaymentService', () => {
     expect(mockProvider.listSubscriptions).toHaveBeenCalledTimes(1);
   });
 
-  it('recreates existing InsForge-managed Stripe webhooks even when the stored endpoint URL is stale', async () => {
+  it('recreates existing GrowFoundry-managed Stripe webhooks even when the stored endpoint URL is stale', async () => {
     const mockClient = {
       query: vi.fn().mockResolvedValue({ rows: [] }),
       release: vi.fn(),
@@ -469,9 +469,9 @@ describe('PaymentService', () => {
         object: 'webhook_endpoint',
         url: 'https://old.example.com/api/webhooks/stripe/test',
         metadata: {
-          managed_by: 'insforge',
-          insforge_webhook: 'stripe_payments',
-          insforge_environment: 'test',
+          managed_by: 'growfoundry',
+          growfoundry_webhook: 'stripe_payments',
+          growfoundry_environment: 'test',
         },
       },
       {
@@ -479,9 +479,9 @@ describe('PaymentService', () => {
         object: 'webhook_endpoint',
         url: 'https://old.example.com/api/webhooks/stripe/live',
         metadata: {
-          managed_by: 'insforge',
-          insforge_webhook: 'stripe_payments',
-          insforge_environment: 'live',
+          managed_by: 'growfoundry',
+          growfoundry_webhook: 'stripe_payments',
+          growfoundry_environment: 'live',
         },
       },
       {
@@ -1305,7 +1305,7 @@ describe('PaymentService', () => {
       name: 'New Product',
       active: true,
       metadata: { tier: 'new' },
-      idempotencyKey: 'insforge:live:product:agent-product-123',
+      idempotencyKey: 'growfoundry:live:product:agent-product-123',
     });
     expect(mockGetSecretByKey).toHaveBeenCalledWith('STRIPE_LIVE_SECRET_KEY');
     expect(mockMirrorClient.query).toHaveBeenCalledWith(
@@ -1500,7 +1500,7 @@ describe('PaymentService', () => {
       currency: 'usd',
       unitAmount: 2000,
       recurring: { interval: 'month', intervalCount: 1 },
-      idempotencyKey: 'insforge:test:price:agent-price-123',
+      idempotencyKey: 'growfoundry:test:price:agent-price-123',
     });
     expect(mockProvider.updatePrice).toHaveBeenCalledWith('price_123', {
       active: false,
@@ -1713,12 +1713,12 @@ describe('PaymentService', () => {
       clientReferenceId: expect.any(String),
       metadata: {
         plan: 'pro',
-        insforge_checkout_mode: 'subscription',
-        insforge_subject_type: 'team',
-        insforge_subject_id: 'team_123',
-        insforge_checkout_session_id: expect.any(String),
+        growfoundry_checkout_mode: 'subscription',
+        growfoundry_subject_type: 'team',
+        growfoundry_subject_id: 'team_123',
+        growfoundry_checkout_session_id: expect.any(String),
       },
-      idempotencyKey: 'insforge:test:checkout_session:checkout-123',
+      idempotencyKey: 'growfoundry:test:checkout_session:checkout-123',
     });
   });
 
@@ -1783,9 +1783,9 @@ describe('PaymentService', () => {
         'https://example.com/success',
         'https://example.com/cancel',
         JSON.stringify({
-          insforge_checkout_mode: 'subscription',
-          insforge_subject_type: 'team',
-          insforge_subject_id: 'team_123',
+          growfoundry_checkout_mode: 'subscription',
+          growfoundry_subject_type: 'team',
+          growfoundry_subject_id: 'team_123',
         }),
       ]
     );
@@ -1865,12 +1865,12 @@ describe('PaymentService', () => {
       customerEmail: 'buyer@example.com',
       clientReferenceId: existingCheckoutSessionRow.id,
       metadata: {
-        insforge_checkout_mode: 'subscription',
-        insforge_subject_type: 'team',
-        insforge_subject_id: 'team_123',
-        insforge_checkout_session_id: existingCheckoutSessionRow.id,
+        growfoundry_checkout_mode: 'subscription',
+        growfoundry_subject_type: 'team',
+        growfoundry_subject_id: 'team_123',
+        growfoundry_checkout_session_id: existingCheckoutSessionRow.id,
       },
-      idempotencyKey: 'insforge:test:checkout_session:checkout-123',
+      idempotencyKey: 'growfoundry:test:checkout_session:checkout-123',
     });
     expect(mockPool.query).toHaveBeenCalledWith(
       expect.stringMatching(/UPDATE payments\.checkout_sessions/i),
@@ -1928,9 +1928,9 @@ describe('PaymentService', () => {
         'https://example.com/success',
         'https://example.com/cancel',
         JSON.stringify({
-          insforge_checkout_mode: 'subscription',
-          insforge_subject_type: 'team',
-          insforge_subject_id: 'team_123',
+          growfoundry_checkout_mode: 'subscription',
+          growfoundry_subject_type: 'team',
+          growfoundry_subject_id: 'team_123',
         }),
       ]
     );
@@ -1979,13 +1979,13 @@ describe('PaymentService', () => {
         customerId: 'cus_existing',
         customerEmail: null,
         metadata: {
-          insforge_checkout_mode: 'payment',
-          insforge_subject_type: 'organization',
-          insforge_subject_id: 'org_123',
-          insforge_checkout_session_id: expect.any(String),
+          growfoundry_checkout_mode: 'payment',
+          growfoundry_subject_type: 'organization',
+          growfoundry_subject_id: 'org_123',
+          growfoundry_checkout_session_id: expect.any(String),
         },
         clientReferenceId: expect.any(String),
-        idempotencyKey: expect.stringMatching(/^insforge:test:checkout_session:/),
+        idempotencyKey: expect.stringMatching(/^growfoundry:test:checkout_session:/),
       })
     );
   });
@@ -2031,10 +2031,10 @@ describe('PaymentService', () => {
         customerEmail: 'buyer@example.com',
         customerCreation: 'always',
         metadata: {
-          insforge_checkout_mode: 'payment',
-          insforge_subject_type: 'organization',
-          insforge_subject_id: 'org_123',
-          insforge_checkout_session_id: expect.any(String),
+          growfoundry_checkout_mode: 'payment',
+          growfoundry_subject_type: 'organization',
+          growfoundry_subject_id: 'org_123',
+          growfoundry_checkout_session_id: expect.any(String),
         },
       })
     );
@@ -2081,10 +2081,10 @@ describe('PaymentService', () => {
       customerEmail: 'anon@example.com',
       clientReferenceId: expect.any(String),
       metadata: {
-        insforge_checkout_mode: 'payment',
-        insforge_checkout_session_id: expect.any(String),
+        growfoundry_checkout_mode: 'payment',
+        growfoundry_checkout_session_id: expect.any(String),
       },
-      idempotencyKey: expect.stringMatching(/^insforge:test:checkout_session:/),
+      idempotencyKey: expect.stringMatching(/^growfoundry:test:checkout_session:/),
     });
     expect(mockPool.query).not.toHaveBeenCalledWith(
       expect.stringMatching(/payments\.stripe_customer_mappings/i),
@@ -2092,7 +2092,7 @@ describe('PaymentService', () => {
     );
   });
 
-  it('rejects caller-controlled InsForge checkout metadata before creating Stripe checkout', async () => {
+  it('rejects caller-controlled GrowFoundry checkout metadata before creating Stripe checkout', async () => {
     const mockClient = {
       query: vi.fn().mockResolvedValue({ rows: [] }),
       release: vi.fn(),
@@ -2109,13 +2109,13 @@ describe('PaymentService', () => {
           cancelUrl: 'https://example.com/cancel',
           customerEmail: 'anon@example.com',
           metadata: {
-            insforge_subject_type: 'team',
-            insforge_subject_id: 'team_victim',
+            growfoundry_subject_type: 'team',
+            growfoundry_subject_id: 'team_victim',
           },
         },
         anonCheckoutUser
       )
-    ).rejects.toThrow(/reserved for InsForge/i);
+    ).rejects.toThrow(/reserved for GrowFoundry/i);
 
     expect(mockProvider.createCheckoutSession).not.toHaveBeenCalled();
     expect(mockProvider.createCustomer).not.toHaveBeenCalled();
@@ -2390,8 +2390,8 @@ describe('PaymentService', () => {
           payment_intent: 'pi_123',
           subscription: null,
           metadata: {
-            insforge_subject_type: 'team',
-            insforge_subject_id: 'team_123',
+            growfoundry_subject_type: 'team',
+            growfoundry_subject_id: 'team_123',
           },
         },
       },
@@ -2512,8 +2512,8 @@ describe('PaymentService', () => {
           payment_intent: 'pi_postprocess_123',
           subscription: null,
           metadata: {
-            insforge_subject_type: 'team',
-            insforge_subject_id: 'team_123',
+            growfoundry_subject_type: 'team',
+            growfoundry_subject_id: 'team_123',
           },
         },
       },
@@ -2668,8 +2668,8 @@ describe('PaymentService', () => {
           payment_intent: 'pi_delayed_123',
           subscription: null,
           metadata: {
-            insforge_subject_type: 'team',
-            insforge_subject_id: 'team_123',
+            growfoundry_subject_type: 'team',
+            growfoundry_subject_id: 'team_123',
           },
         },
       },
@@ -2761,8 +2761,8 @@ describe('PaymentService', () => {
           payment_intent: null,
           subscription: null,
           metadata: {
-            insforge_subject_type: 'team',
-            insforge_subject_id: 'team_123',
+            growfoundry_subject_type: 'team',
+            growfoundry_subject_id: 'team_123',
           },
         },
       },
@@ -2866,8 +2866,8 @@ describe('PaymentService', () => {
           payment_intent: 'pi_async_123',
           subscription: null,
           metadata: {
-            insforge_subject_type: 'team',
-            insforge_subject_id: 'team_123',
+            growfoundry_subject_type: 'team',
+            growfoundry_subject_id: 'team_123',
           },
         },
       },
@@ -2976,8 +2976,8 @@ describe('PaymentService', () => {
             subscription_details: {
               subscription: 'sub_123',
               metadata: {
-                insforge_subject_type: 'organization',
-                insforge_subject_id: 'org_123',
+                growfoundry_subject_type: 'organization',
+                growfoundry_subject_id: 'org_123',
               },
             },
           },
@@ -3092,7 +3092,7 @@ describe('PaymentService', () => {
     );
   });
 
-  it('ignores PaymentIntent webhooks that are not InsForge one-time checkout payments', async () => {
+  it('ignores PaymentIntent webhooks that are not GrowFoundry one-time checkout payments', async () => {
     mockGetSecretByKey
       .mockResolvedValueOnce('whsec_test_123')
       .mockResolvedValueOnce('sk_test_1234567890');
@@ -3176,7 +3176,7 @@ describe('PaymentService', () => {
     );
   });
 
-  it('records InsForge one-time PaymentIntent webhooks with non-refund uniqueness', async () => {
+  it('records GrowFoundry one-time PaymentIntent webhooks with non-refund uniqueness', async () => {
     mockGetSecretByKey
       .mockResolvedValueOnce('whsec_test_123')
       .mockResolvedValueOnce('sk_test_1234567890');
@@ -3195,9 +3195,9 @@ describe('PaymentService', () => {
           customer: 'cus_123',
           latest_charge: 'ch_123',
           metadata: {
-            insforge_checkout_mode: 'payment',
-            insforge_subject_type: 'team',
-            insforge_subject_id: 'team_123',
+            growfoundry_checkout_mode: 'payment',
+            growfoundry_subject_type: 'team',
+            growfoundry_subject_id: 'team_123',
           },
           receipt_email: 'buyer@example.com',
           description: 'One-time checkout',
@@ -3447,9 +3447,9 @@ describe('PaymentService', () => {
       receipt_email: 'early@example.com',
       created: 1777334400,
       metadata: {
-        insforge_checkout_mode: 'payment',
-        insforge_subject_type: 'team',
-        insforge_subject_id: 'team_early_123',
+        growfoundry_checkout_mode: 'payment',
+        growfoundry_subject_type: 'team',
+        growfoundry_subject_id: 'team_early_123',
       },
     } as unknown as StripePaymentIntent);
     mockProvider.retrieveCharge.mockResolvedValueOnce({
@@ -3646,8 +3646,8 @@ describe('PaymentService', () => {
         subscription_details: {
           subscription: 'sub_early_123',
           metadata: {
-            insforge_subject_type: 'organization',
-            insforge_subject_id: 'org_early_123',
+            growfoundry_subject_type: 'organization',
+            growfoundry_subject_id: 'org_early_123',
           },
         },
       },
@@ -3794,8 +3794,8 @@ describe('PaymentService', () => {
           trial_end: null,
           latest_invoice: 'in_123',
           metadata: {
-            insforge_subject_type: 'organization',
-            insforge_subject_id: 'org_123',
+            growfoundry_subject_type: 'organization',
+            growfoundry_subject_id: 'org_123',
           },
           items: {
             data: [
@@ -3973,7 +3973,7 @@ describe('PaymentService', () => {
     expect(mockProvider.listCustomers).toHaveBeenCalledTimes(1);
     expect(mockProvider.listSubscriptionItems).toHaveBeenCalledWith('sub_existing');
     expect(mockLogger.warn).not.toHaveBeenCalledWith(
-      'Stripe subscription projection is missing InsForge billing subject',
+      'Stripe subscription projection is missing GrowFoundry billing subject',
       expect.any(Object)
     );
     expect(mockClient.query).toHaveBeenCalledWith(

@@ -14,17 +14,17 @@ import {
   DialogTitle,
   Input,
   Switch,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import WarningIcon from '#assets/icons/warning.svg';
 import {
   oAuthConfigSchema,
   OAuthConfigSchema,
   OAuthProvidersSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { type OAuthProviderInfo } from '#features/auth/helpers';
 import { SecretInput } from './SecretInput';
 import { useOAuthConfig } from '#features/auth/hooks/useOAuthConfig';
-import { getBackendUrl, isInsForgeCloudProject } from '#lib/utils/utils';
+import { getBackendUrl, isGrowFoundryCloudProject } from '#lib/utils/utils';
 
 const getCallbackUrl = (provider?: string) => {
   // Use backend API URL for OAuth callback
@@ -82,7 +82,7 @@ export function OAuthConfigDialog({
     'apple',
   ] satisfies readonly OAuthProvidersSchema[];
   const isSharedKeysAvailable =
-    isInsForgeCloudProject() && provider?.id && sharedKeyProviders.includes(provider.id);
+    isGrowFoundryCloudProject() && provider?.id && sharedKeyProviders.includes(provider.id);
 
   // Use useFormState hook for better reactivity
   const { isDirty } = useFormState({
@@ -240,8 +240,8 @@ export function OAuthConfigDialog({
                   /* Shared Keys Enabled */
                   <div className="space-y-6">
                     <p className="text-sm text-zinc-500 dark:text-neutral-400">
-                      Shared keys are created by the InsForge team for development. It helps you get
-                      started, but will show a InsForge logo and name on the OAuth screen.
+                      Shared keys are created by the GrowFoundry team for development. It helps you get
+                      started, but will show a GrowFoundry logo and name on the OAuth screen.
                     </p>
 
                     <div className="flex items-center gap-3">

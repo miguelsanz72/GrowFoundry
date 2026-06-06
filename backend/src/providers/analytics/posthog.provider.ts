@@ -24,7 +24,7 @@ import {
   type PosthogRetentionResponse,
   type PosthogRecordingsResponse,
   type PosthogShareTokenResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class PostHogProvider {
   private static instance: PostHogProvider;
@@ -42,7 +42,7 @@ export class PostHogProvider {
 
   private throwUnsupported(): never {
     throw new AppError(
-      'PostHog integration is only available on Insforge Cloud, not in self-hosted mode.',
+      'PostHog integration is only available on Growfoundry Cloud, not in self-hosted mode.',
       501,
       ERROR_CODES.ANALYTICS_UNAVAILABLE
     );

@@ -7,7 +7,7 @@ import {
   ColumnSchema,
   GetTableSchemaResponse,
   UpdateTableSchemaRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export function useTables(schemaName: string = DEFAULT_DATABASE_SCHEMA) {
   const queryClient = useQueryClient();

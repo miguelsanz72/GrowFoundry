@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { advanceService } from '#features/database/services/advance.service';
-import { RawSQLResponse } from '@insforge/shared-schemas';
+import { RawSQLResponse } from '@growfoundry/shared-schemas';
 import { useToast } from '#lib/hooks/useToast';
 
 interface UseRawSQLOptions {

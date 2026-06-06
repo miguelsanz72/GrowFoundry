@@ -37,7 +37,7 @@ module.exports = async function (request) {
   }
 
   const client = createClient({
-    baseUrl: Deno.env.get('INSFORGE_INTERNAL_URL') || 'http://insforge:7130',
+    baseUrl: Deno.env.get('GROWFOUNDRY_INTERNAL_URL') || 'http://growfoundry:7130',
     edgeFunctionToken: userToken,
   });
 

@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AlertCircle, Plus, X, Link, MoveRight } from 'lucide-react';
-import { Button, Input } from '@insforge/ui';
+import { Button, Input } from '@growfoundry/ui';
 import { Alert, AlertDescription } from '#components';
 import { tableService } from '#features/database/services/table.service';
 import {
@@ -15,7 +15,7 @@ import {
 import { useToast } from '#lib/hooks/useToast';
 import { TableFormColumn } from './TableFormColumn';
 import { ForeignKeyPopover } from './ForeignKeyPopover';
-import { ColumnType, TableSchema, UpdateTableSchemaRequest } from '@insforge/shared-schemas';
+import { ColumnType, TableSchema, UpdateTableSchemaRequest } from '@growfoundry/shared-schemas';
 import { parseDatabaseTableReference, SYSTEM_FIELDS } from '#features/database/helpers';
 import { databaseTableQueryKeys } from '#features/database/queryKeys';
 

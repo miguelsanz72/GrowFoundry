@@ -1,5 +1,5 @@
-import { InsForgeDashboard } from '@insforge/dashboard';
+import { GrowFoundryDashboard } from '@growfoundry/dashboard';
 
 export function SelfHostingDashboard() {
-  return <InsForgeDashboard mode="self-hosting" />;
+  return <GrowFoundryDashboard mode="self-hosting" />;
 }

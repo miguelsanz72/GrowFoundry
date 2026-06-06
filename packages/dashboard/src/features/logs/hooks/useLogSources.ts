@@ -8,7 +8,7 @@ import {
   setLocalStorageItem,
 } from '#lib/utils/local-storage';
 import { logService } from '#features/logs/services/log.service';
-import type { LogSourceSchema } from '@insforge/shared-schemas';
+import type { LogSourceSchema } from '@growfoundry/shared-schemas';
 
 export function useLogSources() {
   const [selectedSource, setSelectedSource] = useState<string | null>(() => {

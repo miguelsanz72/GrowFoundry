@@ -84,7 +84,7 @@ describe('TokenManager refresh CSRF tokens', () => {
       {
         sub: userId,
         type: 'refresh',
-        iss: 'insforge',
+        iss: 'growfoundry',
       },
       process.env.JWT_SECRET ?? '',
       {
@@ -101,7 +101,7 @@ describe('TokenManager refresh CSRF tokens', () => {
       {
         sub: userId,
         type: 'refresh',
-        iss: 'insforge',
+        iss: 'growfoundry',
         csrfNonce: 'nonce',
       },
       process.env.JWT_SECRET ?? '',
@@ -120,7 +120,7 @@ describe('TokenManager refresh CSRF tokens', () => {
 
     expect(payload.role).toBe('anon');
     expect(payload.sub).toBe('12345678-1234-5678-90ab-cdef12345678');
-    expect(payload.email).toBe('anon@insforge.com');
+    expect(payload.email).toBe('anon@growfoundry.com');
   });
 
   it('generates PostgREST admin tokens without a fake admin subject', () => {

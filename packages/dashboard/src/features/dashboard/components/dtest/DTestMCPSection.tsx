@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { CopyButton } from '@insforge/ui';
+import { CopyButton } from '@growfoundry/ui';
 import {
   MCP_AGENTS,
   GenerateInstallCommand,
@@ -17,11 +17,11 @@ function buildMcpDeeplink(agentId: string, apiKey: string, appUrl: string): stri
   const configString = JSON.stringify(config);
   if (agentId === 'cursor') {
     const base64Config = btoa(configString);
-    return `cursor://anysphere.cursor-deeplink/mcp/install?name=insforge&config=${encodeURIComponent(base64Config)}`;
+    return `cursor://anysphere.cursor-deeplink/mcp/install?name=growfoundry&config=${encodeURIComponent(base64Config)}`;
   }
   if (agentId === 'qoder') {
     const base64Config = btoa(encodeURIComponent(configString));
-    return `qoder://aicoding.aicoding-deeplink/mcp/add?name=insforge&config=${encodeURIComponent(base64Config)}`;
+    return `qoder://aicoding.aicoding-deeplink/mcp/add?name=growfoundry&config=${encodeURIComponent(base64Config)}`;
   }
   return null;
 }
@@ -57,9 +57,9 @@ interface DTestMCPSectionProps {
 
 function buildQuickStartPrompt(agent: MCPAgent, installBody: string) {
   if (agent.id === 'mcp') {
-    return `I'm using InsForge as my backend platform. Please add the following MCP configuration to enable the InsForge MCP server:\n\n${installBody}\n\nThen ${MCP_VERIFY_CONNECTION_PROMPT.replace(/^I'm using InsForge as my backend platform, /i, '')}`;
+    return `I'm using GrowFoundry as my backend platform. Please add the following MCP configuration to enable the GrowFoundry MCP server:\n\n${installBody}\n\nThen ${MCP_VERIFY_CONNECTION_PROMPT.replace(/^I'm using GrowFoundry as my backend platform, /i, '')}`;
   }
-  return `I'm using InsForge as my backend platform. Please run this command to install the InsForge MCP server:\n\n${installBody}\n\nThen ${MCP_VERIFY_CONNECTION_PROMPT.replace(/^I'm using InsForge as my backend platform, /i, '')}`;
+  return `I'm using GrowFoundry as my backend platform. Please run this command to install the GrowFoundry MCP server:\n\n${installBody}\n\nThen ${MCP_VERIFY_CONNECTION_PROMPT.replace(/^I'm using GrowFoundry as my backend platform, /i, '')}`;
 }
 
 export function DTestMCPSection({
@@ -98,7 +98,7 @@ export function DTestMCPSection({
     return (
       <div className={cn('flex flex-col gap-3', className)}>
         <section className="flex flex-col rounded border border-[var(--alpha-8)] bg-card p-6">
-          <Step number={1} title="Install InsForge MCP" description="Install in one click">
+          <Step number={1} title="Install GrowFoundry MCP" description="Install in one click">
             <InstallDeeplinkButton agent={agent} deeplink={deeplink} />
           </Step>
           <Step
@@ -118,7 +118,7 @@ export function DTestMCPSection({
     <div className={cn('flex flex-col gap-3', className)}>
       {!hideQuickStartPrompt && (
         <QuickStartPromptCard
-          subtitle={`Paste this into ${agent.displayName} to setup InsForge MCP`}
+          subtitle={`Paste this into ${agent.displayName} to setup GrowFoundry MCP`}
           prompt={quickStartPrompt}
         />
       )}
@@ -132,11 +132,11 @@ export function DTestMCPSection({
         <div className="flex flex-col">
           <Step
             number={1}
-            title={isMcpJson ? 'Add MCP Configuration' : 'Install InsForge MCP'}
+            title={isMcpJson ? 'Add MCP Configuration' : 'Install GrowFoundry MCP'}
             description={
               isMcpJson
                 ? 'Add this configuration to your MCP settings.'
-                : 'Run the following command in terminal to install InsForge MCP Server'
+                : 'Run the following command in terminal to install GrowFoundry MCP Server'
             }
           >
             <CodeBlock

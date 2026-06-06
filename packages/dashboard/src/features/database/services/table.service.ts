@@ -6,7 +6,7 @@ import {
   GetTableSchemaResponse,
   UpdateTableSchemaRequest,
   UpdateTableSchemaResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class TableService {
   async listTables(

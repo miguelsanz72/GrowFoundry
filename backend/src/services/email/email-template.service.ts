@@ -6,7 +6,7 @@ import {
   ERROR_CODES,
   type EmailTemplateSchema,
   type UpdateEmailTemplateRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 /**
  * Normalize a pg timestamp value to an ISO string

@@ -20,7 +20,7 @@ import type {
   ListSubscriptionsRequest,
   ListSubscriptionsResponse,
   SyncPaymentsSubscriptionsSummary,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export interface SubscriptionProjectionResult {
   synced: boolean;

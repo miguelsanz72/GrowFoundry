@@ -10,7 +10,7 @@ import { ServerEvents } from '@/types/socket.js';
 import { UsageService } from '@/services/usage/usage.service.js';
 import { successResponse } from '@/utils/response.js';
 import { AppError } from '@/utils/errors.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 
 export const usageRouter = Router();
 const usageService = UsageService.getInstance();

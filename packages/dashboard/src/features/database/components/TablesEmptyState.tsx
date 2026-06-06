@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { DatabaseTemplate } from '#features/database/templates';
 import { TemplateCard } from './TemplateCard';
 

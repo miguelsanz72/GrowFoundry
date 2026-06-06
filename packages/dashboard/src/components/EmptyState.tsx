@@ -1,5 +1,5 @@
 import { LucideIcon } from 'lucide-react';
-import { Button } from '@insforge/ui';
+import { Button } from '@growfoundry/ui';
 import { cn } from '#lib/utils/utils';
 
 interface EmptyStateProps {

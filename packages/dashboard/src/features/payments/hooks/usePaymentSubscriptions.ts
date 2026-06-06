@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import type { StripeEnvironment } from '@insforge/shared-schemas';
+import type { StripeEnvironment } from '@growfoundry/shared-schemas';
 import { paymentsService } from '#features/payments/services/payments.service';
 
 const SUBSCRIPTIONS_LIMIT = 100;

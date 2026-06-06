@@ -1,4 +1,4 @@
-import { ColumnType } from '@insforge/shared-schemas';
+import { ColumnType } from '@growfoundry/shared-schemas';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { z } from 'zod';
@@ -156,9 +156,9 @@ export function isEmptyValue(value: unknown): boolean {
   return value === null || value === undefined;
 }
 
-export const isInsForgeCloudProject = () => {
+export const isGrowFoundryCloudProject = () => {
   try {
-    return new URL(getDashboardBackendUrl()).hostname.endsWith('.insforge.app');
+    return new URL(getDashboardBackendUrl()).hostname.endsWith('.growfoundry.app');
   } catch {
     return false;
   }

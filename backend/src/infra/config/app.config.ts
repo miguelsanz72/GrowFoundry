@@ -117,9 +117,9 @@ export function loadConfig(): AppConfig {
       logLevel: process.env.LOG_LEVEL || 'info',
     },
     cloud: {
-      storageBucket: process.env.AWS_S3_BUCKET || 'insforge-test-bucket',
-      instanceProfile: process.env.AWS_INSTANCE_PROFILE_NAME || 'insforge-instance-profile',
-      apiHost: process.env.CLOUD_API_HOST || 'https://api.insforge.dev',
+      storageBucket: process.env.AWS_S3_BUCKET || 'growfoundry-test-bucket',
+      instanceProfile: process.env.AWS_INSTANCE_PROFILE_NAME || 'growfoundry-instance-profile',
+      apiHost: process.env.CLOUD_API_HOST || 'https://api.growfoundry.dev',
       projectId: process.env.PROJECT_ID || undefined,
       appKey: process.env.APP_KEY || 'default-app-key',
       cloudFrontUrl: process.env.AWS_CLOUDFRONT_URL || undefined,
@@ -129,7 +129,7 @@ export function loadConfig(): AppConfig {
     denoSubhosting: {
       token: process.env.DENO_SUBHOSTING_TOKEN || '',
       organizationId: process.env.DENO_SUBHOSTING_ORG_ID || '',
-      domain: 'functions.insforge.app',
+      domain: 'functions.growfoundry.app',
     },
     fly: {
       apiToken: process.env.FLY_API_TOKEN || '',
@@ -150,7 +150,7 @@ export function loadConfig(): AppConfig {
     database: {
       host: process.env.POSTGRES_HOST || 'localhost',
       port: parseEnvInt(process.env.POSTGRES_PORT, 5432),
-      name: process.env.POSTGRES_DB || 'insforge',
+      name: process.env.POSTGRES_DB || 'growfoundry',
       user: process.env.POSTGRES_USER || 'postgres',
       password: process.env.POSTGRES_PASSWORD || 'postgres',
       dir: process.env.DATABASE_DIR || path.join(__dirname, '../../data'),
@@ -166,13 +166,13 @@ export function loadConfig(): AppConfig {
       appKey: process.env.APP_KEY || 'local',
       parentAppKey: process.env.PARENT_APP_KEY?.trim() || undefined,
       awsRegion: process.env.AWS_REGION || 'us-east-2',
-      storageDir: process.env.STORAGE_DIR || path.resolve(process.cwd(), 'insforge-storage'),
+      storageDir: process.env.STORAGE_DIR || path.resolve(process.cwd(), 'growfoundry-storage'),
       s3AccessKeyId: process.env.S3_ACCESS_KEY_ID || undefined,
       s3SecretAccessKey: process.env.S3_SECRET_ACCESS_KEY || undefined,
       awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID || undefined,
       awsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || undefined,
       s3EndpointUrl: process.env.S3_ENDPOINT_URL || undefined,
-      awsConfigBucket: process.env.AWS_CONFIG_BUCKET || 'insforge-config',
+      awsConfigBucket: process.env.AWS_CONFIG_BUCKET || 'growfoundry-config',
       awsConfigRegion: process.env.AWS_CONFIG_REGION || 'us-east-2',
     },
     functions: {

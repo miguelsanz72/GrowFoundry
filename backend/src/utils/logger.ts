@@ -17,7 +17,7 @@ export const logger = winston.createLogger({
   transports: [
     new winston.transports.Console(),
     new winston.transports.File({
-      filename: path.join(logsDir, 'insforge.logs.jsonl'),
+      filename: path.join(logsDir, 'growfoundry.logs.jsonl'),
       format: winston.format.printf((info) => {
         const { timestamp, level, message, ...metadata } = info;
         return JSON.stringify({

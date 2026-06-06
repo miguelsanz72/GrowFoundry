@@ -20,7 +20,7 @@ import {
   type ListPaymentPricesResponse,
   type MutatePaymentPriceResponse,
   type UpdatePaymentPriceRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class PaymentPriceService {
   private static instance: PaymentPriceService;

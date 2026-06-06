@@ -14,7 +14,7 @@ import {
   listPaymentHistoryQuerySchema,
   listSubscriptionsQuerySchema,
   paymentEnvironmentParamsSchema,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 const router = Router();
 const environmentRouter = Router({ mergeParams: true });

@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { ColumnType, type AuthConfigSchema } from '@insforge/shared-schemas';
+import { ColumnType, type AuthConfigSchema } from '@growfoundry/shared-schemas';
 
 /**
  * Generates a user-friendly error message listing all password requirements

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { CopyButton } from '@insforge/ui';
+import { CopyButton } from '@growfoundry/ui';
 import { useProjectId } from '#lib/hooks/useMetadata';
 import { cn } from '#lib/utils/utils';
 
@@ -11,7 +11,7 @@ export function DTestInstallCliSection({ className }: DTestInstallCliSectionProp
   const { projectId } = useProjectId();
 
   const command = useMemo(
-    () => `npx @insforge/cli link --project-id ${projectId ?? '<project-id>'}`,
+    () => `npx @growfoundry/cli link --project-id ${projectId ?? '<project-id>'}`,
     [projectId]
   );
   const canCopy = Boolean(projectId);
@@ -23,7 +23,7 @@ export function DTestInstallCliSection({ className }: DTestInstallCliSectionProp
         className
       )}
     >
-      <h2 className="text-base font-medium leading-7 text-foreground">Use InsForge with CLI</h2>
+      <h2 className="text-base font-medium leading-7 text-foreground">Use GrowFoundry with CLI</h2>
 
       <div className="flex flex-col gap-2 rounded border border-[var(--alpha-8)] bg-semantic-1 p-3">
         <div className="flex items-center justify-between">

@@ -7,7 +7,7 @@ import {
   ERROR_CODES,
   type AuthConfigSchema,
   type UpdateAuthConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { URL } from 'url';
 
 export class AuthConfigService {

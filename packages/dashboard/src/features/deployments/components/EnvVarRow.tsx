@@ -10,8 +10,8 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@insforge/ui';
-import type { DeploymentEnvVar } from '@insforge/shared-schemas';
+} from '@growfoundry/ui';
+import type { DeploymentEnvVar } from '@growfoundry/shared-schemas';
 import { cn, formatTime } from '#lib/utils/utils';
 import { deploymentsService } from '#features/deployments/services/deployments.service';
 

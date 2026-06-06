@@ -4,7 +4,7 @@ import type {
   CreateCustomOAuthConfigRequest,
   UpdateCustomOAuthConfigRequest,
   ListCustomOAuthConfigsResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { useToast } from '#lib/hooks/useToast';
 import { customOAuthConfigService } from '#features/auth/services/custom-oauth-config.service';
 

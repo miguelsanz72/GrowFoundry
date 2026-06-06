@@ -6,7 +6,7 @@ import { useProjectId } from '#lib/hooks/useMetadata';
 import { useDashboardHost, useDashboardProject } from '#lib/config/DashboardHostContext';
 
 const getConnectTipKey = (projectId: string | null | undefined) =>
-  `insforge-dtest-connect-tip-dismissed-${projectId || 'default'}`;
+  `growfoundry-dtest-connect-tip-dismissed-${projectId || 'default'}`;
 
 function readConnectTipDismissed(key: string): boolean {
   try {

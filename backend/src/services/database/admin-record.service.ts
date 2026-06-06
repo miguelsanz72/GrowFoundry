@@ -1,6 +1,6 @@
 import { AppError } from '@/utils/errors.js';
 import { DatabaseManager } from '@/infra/database/database.manager.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import type { PoolClient } from 'pg';
 import type { DatabaseRecord } from '@/types/database.js';
 import { TEXT_LIKE_DATA_TYPES } from '@/utils/constants.js';

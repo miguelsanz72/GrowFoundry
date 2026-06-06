@@ -19,7 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from '#components';
-import { Button, Input } from '@insforge/ui';
+import { Button, Input } from '@growfoundry/ui';
 import { useAuth } from '#lib/contexts/AuthContext';
 import { loginFormSchema, LoginForm } from '#lib/utils/schemaValidations';
 
@@ -69,7 +69,7 @@ export default function LoginPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-lg mb-4">
             <Lock className="h-8 w-8 text-[rgb(var(--inverse))]" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">Insforge Admin</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">Growfoundry Admin</h1>
           <p className="text-sm text-muted-foreground mt-2">Sign in to access your dashboard</p>
         </div>
 
@@ -150,7 +150,7 @@ export default function LoginPage() {
         {/* Footer */}
         <div className="mt-8 text-center">
           <p className="text-xs text-muted-foreground">
-            Insforge - Self-hosted Backend as a Service
+            Growfoundry - Self-hosted Backend as a Service
           </p>
         </div>
       </div>

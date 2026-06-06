@@ -8,8 +8,8 @@ frontmatter containing at minimum `name` and `description`.
 
 | Skill | Entry point | Purpose |
 |---|---|---|
-| `insforge-dev` | `insforge-dev/SKILL.md` | Maintainers working in this monorepo (backend, dashboard, UI, shared schemas, docs). |
-| `doc-author` | `doc-author/SKILL.md` | Writing and maintaining `docs/*.mdx` pages. **Vendored from [mintlify/docs](https://github.com/mintlify/docs) — see upstream SHA in the attribution block.** InsForge-specific conventions live next to it in [`doc-author/INSFORGE.md`](doc-author/INSFORGE.md). |
+| `growfoundry-dev` | `growfoundry-dev/SKILL.md` | Maintainers working in this monorepo (backend, dashboard, UI, shared schemas, docs). |
+| `doc-author` | `doc-author/SKILL.md` | Writing and maintaining `docs/*.mdx` pages. **Vendored from [mintlify/docs](https://github.com/mintlify/docs) — see upstream SHA in the attribution block.** GrowFoundry-specific conventions live next to it in [`doc-author/GROWFOUNDRY.md`](doc-author/GROWFOUNDRY.md). |
 
 ## Adding a new skill
 
@@ -29,5 +29,5 @@ scripts/update-mintlify-skill.sh
 The script re-downloads the upstream file, updates the commit SHA in the
 attribution header, and fails loudly if Mintlify's license has changed from MIT
 — in which case the vendoring posture needs review before committing. Do not
-hand-edit `doc-author/SKILL.md`; put InsForge-specific overrides in
-`doc-author/INSFORGE.md` instead.
+hand-edit `doc-author/SKILL.md`; put GrowFoundry-specific overrides in
+`doc-author/GROWFOUNDRY.md` instead.

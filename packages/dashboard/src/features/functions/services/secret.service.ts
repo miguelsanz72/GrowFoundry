@@ -6,7 +6,7 @@ import {
   ListSecretsResponse,
   DeleteSecretResponse,
   GetSecretValueResponse,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 
 export class SecretService {
   async listSecrets(): Promise<SecretSchema[]> {

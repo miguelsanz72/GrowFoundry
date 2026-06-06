@@ -1,5 +1,5 @@
 import { apiClient } from '#lib/api/client';
-import { AIModelSchema, AIOverview, OpenRouterKey } from '@insforge/shared-schemas';
+import { AIModelSchema, AIOverview, OpenRouterKey } from '@growfoundry/shared-schemas';
 
 export type AIProvider = 'openrouter';
 

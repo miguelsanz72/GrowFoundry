@@ -9,13 +9,13 @@ import {
   DialogHeader,
   DialogTitle,
   Input,
-} from '@insforge/ui';
+} from '@growfoundry/ui';
 import {
   oAuthProvidersSchema,
   type CreateCustomOAuthConfigRequest,
   type CustomOAuthConfigSchema,
   type UpdateCustomOAuthConfigRequest,
-} from '@insforge/shared-schemas';
+} from '@growfoundry/shared-schemas';
 import { SecretInput } from './SecretInput';
 import { useCustomOAuthConfig } from '#features/auth/hooks/useCustomOAuthConfig';
 import { getBackendUrl } from '#lib/utils/utils';

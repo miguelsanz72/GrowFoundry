@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@insforge/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@growfoundry/ui';
 import type { BooleanCellEditorProps } from './types';
 import { cn } from '#lib/utils/utils';
 

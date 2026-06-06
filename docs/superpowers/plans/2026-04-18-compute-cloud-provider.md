@@ -5,16 +5,16 @@
 **Goal:** Add a cloud-mode path for OSS compute services where the cloud backend holds a single Fly.io token, creates Fly apps/machines on behalf of projects, and stores the project↔Fly mapping so per-project usage can be queried later (usage-tracking implementation deferred per spec §6).
 
 **Architecture:** Two-repo change.
-- **OSS** (`insforge-compute-cloud-provider` worktree, branch `feat/compute-cloud-provider`): adds a `CloudComputeProvider` that proxies the existing `ComputeProvider` interface to cloud backend over JWT-signed HTTPS. A factory in `ComputeServicesService` selects `FlyProvider` (own token, existing) or `CloudComputeProvider` (cloud-mode) based on env.
-- **Cloud** (`insforge-cloud-backend-compute-services` worktree, branch `feat/compute-services`): adds a `compute_services` table, a `FlyClient` (thin Machines API wrapper), a `compute.service.ts` (DB ownership + Fly orchestration with `metadata.project_id` tagging), and routes mounted under `/projects/v1/:projectId/compute/*` (matching existing cloud auth conventions).
+- **OSS** (`growfoundry-compute-cloud-provider` worktree, branch `feat/compute-cloud-provider`): adds a `CloudComputeProvider` that proxies the existing `ComputeProvider` interface to cloud backend over JWT-signed HTTPS. A factory in `ComputeServicesService` selects `FlyProvider` (own token, existing) or `CloudComputeProvider` (cloud-mode) based on env.
+- **Cloud** (`growfoundry-cloud-backend-compute-services` worktree, branch `feat/compute-services`): adds a `compute_services` table, a `FlyClient` (thin Machines API wrapper), a `compute.service.ts` (DB ownership + Fly orchestration with `metadata.project_id` tagging), and routes mounted under `/projects/v1/:projectId/compute/*` (matching existing cloud auth conventions).
 
 **Tech Stack:** TypeScript 5.x, Node 22, Express, vitest (OSS), jest (cloud), pg (cloud direct SQL), `jsonwebtoken`, native `fetch`, Fly Machines API (`https://api.machines.dev/v1`).
 
 **Spec:** `docs/superpowers/specs/2026-04-18-compute-cloud-provider-design.md`
 
 **Worktrees:**
-- OSS: `/Users/gary/projects/insforge-repo/insforge-compute-cloud-provider`
-- Cloud: `/Users/gary/projects/insforge-repo/insforge-cloud-backend-compute-services`
+- OSS: `/Users/gary/projects/growfoundry-repo/growfoundry-compute-cloud-provider`
+- Cloud: `/Users/gary/projects/growfoundry-repo/growfoundry-cloud-backend-compute-services`
 
 ---
 
@@ -26,7 +26,7 @@ Do cloud first (Tasks 1–8), OSS second (Tasks 9–12). The OSS provider's test
 
 ## File Structure
 
-### Cloud worktree (`insforge-cloud-backend-compute-services`)
+### Cloud worktree (`growfoundry-cloud-backend-compute-services`)
 
 | Path | Responsibility |
 |---|---|
@@ -44,7 +44,7 @@ Do cloud first (Tasks 1–8), OSS second (Tasks 9–12). The OSS provider's test
 | `src/container.ts` (modify) | Wire ComputeService DI |
 | `.env.example` (modify) | Document `FLY_API_TOKEN`, `FLY_ORG`, `COMPUTE_DOMAIN` |
 
-### OSS worktree (`insforge-compute-cloud-provider`)
+### OSS worktree (`growfoundry-compute-cloud-provider`)
 
 | Path | Responsibility |
 |---|---|
@@ -61,7 +61,7 @@ Do cloud first (Tasks 1–8), OSS second (Tasks 9–12). The OSS provider's test
 
 ## CLOUD WORKTREE TASKS
 
-> **Working directory for tasks 1–8:** `/Users/gary/projects/insforge-repo/insforge-cloud-backend-compute-services`
+> **Working directory for tasks 1–8:** `/Users/gary/projects/growfoundry-repo/growfoundry-cloud-backend-compute-services`
 
 ### Task 1: Database migration
 
@@ -390,7 +390,7 @@ Append to `src/services/compute/fly-client.test.ts`:
         memory: 256,
         envVars: { K: 'V' },
         region: 'iad',
-        metadata: { project_id: 'p-1', insforge_service_id: 's-1' },
+        metadata: { project_id: 'p-1', growfoundry_service_id: 's-1' },
       });
 
       expect(result).toEqual({ machineId: 'machine-123' });
@@ -401,7 +401,7 @@ Append to `src/services/compute/fly-client.test.ts`:
       expect(body.config.image).toBe('flyio/hellofly:latest');
       expect(body.config.guest).toEqual({ cpu_kind: 'shared', cpus: 1, memory_mb: 256 });
       expect(body.config.env).toEqual({ K: 'V' });
-      expect(body.config.metadata).toEqual({ project_id: 'p-1', insforge_service_id: 's-1' });
+      expect(body.config.metadata).toEqual({ project_id: 'p-1', growfoundry_service_id: 's-1' });
       expect(body.config.services[0].internal_port).toBe(8080);
     });
   });
@@ -727,7 +727,7 @@ In `src/config/app.config.ts`, add inside the `appConfig` export object (alphabe
   compute: {
     flyToken: process.env.FLY_API_TOKEN || '',
     flyOrg: process.env.FLY_ORG || '',
-    domain: process.env.COMPUTE_DOMAIN || 'compute.insforge.dev',
+    domain: process.env.COMPUTE_DOMAIN || 'compute.growfoundry.dev',
   },
 ```
 
@@ -737,12 +737,12 @@ Append to `.env.example`:
 
 ```dotenv
 # ─── Compute Services ─────────────────────────────────────────────────
-# Cloud-mode compute provider for InsForge projects.
+# Cloud-mode compute provider for GrowFoundry projects.
 # Token must be a Fly.io org-scoped token: `fly tokens create org`.
 # Token is shared across ALL projects — protect carefully.
 FLY_API_TOKEN=
 FLY_ORG=
-COMPUTE_DOMAIN=compute.insforge.dev
+COMPUTE_DOMAIN=compute.growfoundry.dev
 ```
 
 - [ ] **Step 4: Verify compile**
@@ -823,8 +823,8 @@ For each method below, follow the cycle: **(1) write the failing test → (2) ru
   - On Fly failure: DELETE row + rethrow.
 
 - [ ] **Step 2: launchMachine**
-  - Test: must find row by `fly_app_name`, must inject `metadata.project_id` and `metadata.insforge_service_id`. Cross-project access returns null.
-  - Impl: scope-check via SELECT; call `fly.launchMachine({...params, metadata: {project_id, insforge_service_id}})`; UPDATE row with machine_id + status.
+  - Test: must find row by `fly_app_name`, must inject `metadata.project_id` and `metadata.growfoundry_service_id`. Cross-project access returns null.
+  - Impl: scope-check via SELECT; call `fly.launchMachine({...params, metadata: {project_id, growfoundry_service_id}})`; UPDATE row with machine_id + status.
 
 - [ ] **Step 3: startMachine + stopMachine**
   - Test: scope-check, call Fly, update row status.
@@ -950,7 +950,7 @@ export class ComputeService {
     if (!row) return null;
     const { machineId } = await this.fly.launchMachine({
       ...params,
-      metadata: { project_id: projectId, insforge_service_id: row.id },
+      metadata: { project_id: projectId, growfoundry_service_id: row.id },
     });
     await this.pool.query(
       `UPDATE compute_services
@@ -1201,7 +1201,7 @@ maybe('ComputeService [live]', () => {
       image: 'flyio/hellofly:latest',
       port: 8080, cpu: 'shared-1x', memory: 256,
       envVars: { TEST: 'live' }, region: 'iad',
-      metadata: {}, // service injects project_id + insforge_service_id
+      metadata: {}, // service injects project_id + growfoundry_service_id
     });
     machineId = launched!.machineId;
 
@@ -1414,7 +1414,7 @@ Create `backend/src/providers/compute/cloud.provider.ts`:
 import jwt from 'jsonwebtoken';
 import { config } from '@/infra/config/app.config.js';
 import { AppError } from '@/api/middlewares/error.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import type {
   ComputeProvider,
   LaunchMachineParams,
@@ -1635,7 +1635,7 @@ In `packages/shared-schemas/src/error-codes.schema.ts`, add the codes to `errorC
 In `.env.example`, locate the `# ─── Compute Services (Fly.io) ──` section. Append:
 
 ```dotenv
-# Cloud-mode compute: route compute service operations through the InsForge
+# Cloud-mode compute: route compute service operations through the GrowFoundry
 # cloud backend instead of calling Fly directly. Self-host users with their
 # own FLY_API_TOKEN should leave this unset.
 CLOUD_COMPUTE_ENABLED=false
@@ -1727,7 +1727,7 @@ In `backend/src/services/compute/services.service.ts`:
 import { CloudComputeProvider } from '@/providers/compute/cloud.provider.js';
 import type { ComputeProvider } from '@/providers/compute/compute.provider.js';
 import { AppError } from '@/api/middlewares/error.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 ```
 
 (b) Add the exported factory above the class:
@@ -1791,10 +1791,10 @@ from the current branch."
 
 After all 12 tasks:
 
-- [ ] **Cloud worktree:** `cd /Users/gary/projects/insforge-repo/insforge-cloud-backend-compute-services && npx jest src/services/compute src/test/compute` — all green.
-- [ ] **OSS worktree:** `cd /Users/gary/projects/insforge-repo/insforge-compute-cloud-provider && cd backend && npx vitest run tests/unit/compute/` — all green.
-- [ ] **Cloud worktree typecheck:** `cd /Users/gary/projects/insforge-repo/insforge-cloud-backend-compute-services && npx tsc --noEmit` — no errors.
-- [ ] **OSS worktree typecheck:** `cd /Users/gary/projects/insforge-repo/insforge-compute-cloud-provider && npm run typecheck` — no errors.
+- [ ] **Cloud worktree:** `cd /Users/gary/projects/growfoundry-repo/growfoundry-cloud-backend-compute-services && npx jest src/services/compute src/test/compute` — all green.
+- [ ] **OSS worktree:** `cd /Users/gary/projects/growfoundry-repo/growfoundry-compute-cloud-provider && cd backend && npx vitest run tests/unit/compute/` — all green.
+- [ ] **Cloud worktree typecheck:** `cd /Users/gary/projects/growfoundry-repo/growfoundry-cloud-backend-compute-services && npx tsc --noEmit` — no errors.
+- [ ] **OSS worktree typecheck:** `cd /Users/gary/projects/growfoundry-repo/growfoundry-compute-cloud-provider && npm run typecheck` — no errors.
 - [ ] **Live integration test (manual):** in the cloud worktree with `FLY_API_TOKEN` + `FLY_ORG` + `DATABASE_URL` set, run `npx jest src/test/compute/compute.live.integration.test.ts`. Should create → cycle → destroy a real Fly machine.
 - [ ] **End-to-end manual smoke** (after both PRs merged): in an OSS instance with `CLOUD_COMPUTE_ENABLED=true` + a valid cloud `PROJECT_ID`, hit `POST /api/compute/services` and verify the service appears in the cloud DB row.
 

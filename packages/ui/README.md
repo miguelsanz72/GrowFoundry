@@ -1,11 +1,11 @@
-# @insforge/ui
+# @growfoundry/ui
 
-Shared React UI components, design tokens, and Tailwind preset used across InsForge apps.
+Shared React UI components, design tokens, and Tailwind preset used across GrowFoundry apps.
 
 ## Installation
 
 ```bash
-npm install @insforge/ui
+npm install @growfoundry/ui
 ```
 
 Required peer dependencies:
@@ -19,17 +19,17 @@ npm install react react-dom tailwindcss
 1. Import styles once in your app entry CSS:
 
 ```css
-@import '@insforge/ui/styles.css';
+@import '@growfoundry/ui/styles.css';
 ```
 
-2. Add the InsForge Tailwind preset:
+2. Add the GrowFoundry Tailwind preset:
 
 ```js
-import insforgeTailwindPreset from '@insforge/ui/tailwind-preset';
+import growfoundryTailwindPreset from '@growfoundry/ui/tailwind-preset';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  presets: [insforgeTailwindPreset],
+  presets: [growfoundryTailwindPreset],
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
 };
 ```
@@ -37,7 +37,7 @@ export default {
 3. Use components:
 
 ```tsx
-import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, Input } from '@insforge/ui';
+import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, Input } from '@growfoundry/ui';
 
 export function Example() {
   return (
@@ -58,7 +58,7 @@ export function Example() {
 
 - Components: `Button`, `Badge`, `Checkbox`, `CopyButton`, `Dialog`, `DropdownMenu`, `Input`, `InputField`, `MenuDialog`, `Pagination`, `SearchInput`, `Select`, `Switch`, `Tabs`, `Tooltip`, `CodeBlock`
 - Utilities: `cn`
-- Styling entrypoints: `@insforge/ui/styles.css`, `@insforge/ui/tailwind-preset`
+- Styling entrypoints: `@growfoundry/ui/styles.css`, `@growfoundry/ui/tailwind-preset`
 
 ## Theming
 

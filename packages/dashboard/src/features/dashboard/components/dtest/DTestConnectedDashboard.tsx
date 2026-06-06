@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Badge } from '@insforge/ui';
+import { Badge } from '@growfoundry/ui';
 import { Braces, Database, Download, HardDrive, User } from 'lucide-react';
 import { MetricCard } from '#features/dashboard/components/MetricCard';
 import { useMetadata } from '#lib/hooks/useMetadata';
 import { useCloudProjectInfo } from '#lib/hooks/useCloudProjectInfo';
 import { useUsers } from '#features/auth';
-import { isInsForgeCloudProject } from '#lib/utils/utils';
+import { isGrowFoundryCloudProject } from '#lib/utils/utils';
 import { useMcpUsage } from '#features/logs/hooks/useMcpUsage';
 import { useAdvisorLatest } from '#features/dashboard/hooks/useAdvisor';
 import { useLastBackup } from '#features/dashboard/hooks/useLastBackup';
@@ -45,7 +45,7 @@ const STATUS_BADGE_CLASS =
 
 export function DTestConnectedDashboard() {
   const navigate = useNavigate();
-  const isCloudProject = isInsForgeCloudProject();
+  const isCloudProject = isGrowFoundryCloudProject();
   const isCloudHostingMode = useIsCloudHostingMode();
   const {
     metadata,
@@ -63,8 +63,8 @@ export function DTestConnectedDashboard() {
   const advisorLatest = useAdvisorLatest();
 
   const projectName = isCloudProject
-    ? projectInfo.name || 'My InsForge Project'
-    : 'My InsForge Project';
+    ? projectInfo.name || 'My GrowFoundry Project'
+    : 'My GrowFoundry Project';
   const instanceType = projectInfo.instanceType?.toUpperCase();
   const showInstanceTypeBadge = isCloudProject && !!instanceType;
 
@@ -140,7 +140,7 @@ export function DTestConnectedDashboard() {
               className="flex items-center gap-1 rounded bg-emerald-300 p-2 text-sm font-medium leading-5 text-black transition-colors hover:bg-emerald-400"
             >
               <Download className="h-5 w-5" aria-hidden="true" />
-              <span className="px-1">Install InsForge</span>
+              <span className="px-1">Install GrowFoundry</span>
             </button>
           </section>
         )}

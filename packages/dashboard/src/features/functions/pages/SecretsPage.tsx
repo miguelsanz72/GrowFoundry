@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Button, ConfirmDialog, Input } from '@insforge/ui';
+import { Button, ConfirmDialog, Input } from '@growfoundry/ui';
 import { Skeleton, TableHeader } from '#components';
 import { SecretRow } from '#features/functions/components/SecretRow';
 import SecretEmptyState from '#features/functions/components/SecretEmptyState';

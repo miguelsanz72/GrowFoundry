@@ -5,7 +5,7 @@ import {
   type DeploymentSchema,
 } from '#features/deployments/services/deployments.service';
 import { useToast } from '#lib/hooks/useToast';
-import type { StartDeploymentRequest } from '@insforge/shared-schemas';
+import type { StartDeploymentRequest } from '@growfoundry/shared-schemas';
 
 export function useDeployments() {
   const queryClient = useQueryClient();

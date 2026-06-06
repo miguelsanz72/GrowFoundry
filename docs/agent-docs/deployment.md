@@ -1,8 +1,8 @@
-# InsForge Deployment - Agent Documentation
+# GrowFoundry Deployment - Agent Documentation
 
 ## Overview
 
-Deploy frontend applications to InsForge with the `create-deployment` MCP tool. The tool uploads the source directory through InsForge's direct deployment flow, starts a Vercel-backed production build, and records the result in `deployments.runs`.
+Deploy frontend applications to GrowFoundry with the `create-deployment` MCP tool. The tool uploads the source directory through GrowFoundry's direct deployment flow, starts a Vercel-backed production build, and records the result in `deployments.runs`.
 
 Use the source directory, not a pre-built artifact directory. The backend validates the manifest, streams each file to the provider, verifies file size and SHA-1 digest, then starts the deployment after all files are uploaded.
 
@@ -34,11 +34,11 @@ Example:
   },
   "envVars": [
     {
-      "key": "VITE_INSFORGE_BASE_URL",
-      "value": "https://your-project.region.insforge.app"
+      "key": "VITE_GROWFOUNDRY_BASE_URL",
+      "value": "https://your-project.region.growfoundry.app"
     },
     {
-      "key": "VITE_INSFORGE_ANON_KEY",
+      "key": "VITE_GROWFOUNDRY_ANON_KEY",
       "value": "your-anon-key"
     }
   ],
@@ -116,7 +116,7 @@ FROM deployments.runs
 WHERE id = '<deployment-id>';
 ```
 
-The Dashboard may show a friendlier domain when a custom `.insforge.site` slug or user-owned domain is configured.
+The Dashboard may show a friendlier domain when a custom `.growfoundry.site` slug or user-owned domain is configured.
 
 ## Environment Variables
 

@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { secretService } from '#features/functions/services/secret.service';
-import type { SecretSchema, CreateSecretRequest } from '@insforge/shared-schemas';
+import type { SecretSchema, CreateSecretRequest } from '@growfoundry/shared-schemas';
 import { useToast } from '#lib/hooks/useToast';
 import { useConfirm } from '#lib/hooks/useConfirm';
 

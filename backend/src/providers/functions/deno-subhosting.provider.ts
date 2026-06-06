@@ -1,5 +1,5 @@
 import { AppError, UpstreamError } from '@/utils/errors.js';
-import { ERROR_CODES } from '@insforge/shared-schemas';
+import { ERROR_CODES } from '@growfoundry/shared-schemas';
 import { appConfig } from '@/infra/config/app.config.js';
 import logger from '@/utils/logger.js';
 import { z } from 'zod';
@@ -14,11 +14,11 @@ const execFileAsync = promisify(execFile);
 
 // Ambient declaration for the Deno isolate IPC dispatch binding.
 // This global is intentionally set on globalThis inside each generated
-// Deno router script so the InsForge host can reach into the isolate
+// Deno router script so the GrowFoundry host can reach into the isolate
 // for in-process function invocation. Typing it here prevents any
 // TypeScript code in this module from resorting to `(globalThis as any)`.
 declare global {
-  var __insforge_dispatch__: ((req: Request) => Promise<Response>) | undefined;
+  var __growfoundry_dispatch__: ((req: Request) => Promise<Response>) | undefined;
 }
 
 const DENO_SUBHOSTING_API_BASE = 'https://api.deno.com/v1';
@@ -377,7 +377,7 @@ export class DenoSubhostingProvider {
     }
 
     const transformed = this.transformUserCode(userCode, slug);
-    const tempDir = await mkdtemp(join(tmpdir(), 'insforge-deno-check-'));
+    const tempDir = await mkdtemp(join(tmpdir(), 'growfoundry-deno-check-'));
 
     try {
       await writeFile(
@@ -814,7 +814,7 @@ export class DenoSubhostingProvider {
    *    module.exports = async function(req) { return new Response("Hello"); }
    *
    * 2. Deno-native (export default) - used as-is, user imports directly:
-   *    import { createClient } from 'npm:@insforge/sdk';
+   *    import { createClient } from 'npm:@growfoundry/sdk';
    *    export default async function(req: Request) { return new Response("Hello"); }
    */
   private transformUserCode(userCode: string, slug: string): string {
@@ -837,10 +837,10 @@ export class DenoSubhostingProvider {
   private convertLegacyFormat(userCode: string, slug: string): string {
     return `// Function: ${slug} (legacy format)
 // createClient is injected and available in scope
-import { createClient } from 'npm:@insforge/sdk';
+import { createClient } from 'npm:@growfoundry/sdk';
 
 declare global {
-  var __insforge_dispatch__: (req: Request) => Promise<Response>;
+  var __growfoundry_dispatch__: (req: Request) => Promise<Response>;
 }
 
 const _legacyModule: { exports: unknown } = { exports: {} };
@@ -850,7 +850,7 @@ ${userCode}
 
 export default _legacyModule.exports as (req: Request) => Promise<Response>;
 
-globalThis.__insforge_dispatch__ = (req: Request) => (_legacyModule.exports as (req: Request) => Promise<Response>)(req);
+globalThis.__growfoundry_dispatch__ = (req: Request) => (_legacyModule.exports as (req: Request) => Promise<Response>)(req);
 `;
   }
 
@@ -863,7 +863,7 @@ globalThis.__insforge_dispatch__ = (req: Request) => (_legacyModule.exports as (
       return `
 // Auto-generated router (no functions)
 declare global {
-  var __insforge_dispatch__: (req: Request) => Promise<Response>;
+  var __growfoundry_dispatch__: (req: Request) => Promise<Response>;
 }
 export {};
 
@@ -874,7 +874,7 @@ const dispatch = async (req: Request): Promise<Response> => {
   if (pathname === "/health" || pathname === "/") {
     return new Response(JSON.stringify({
       status: "ok",
-      type: "insforge-functions",
+      type: "growfoundry-functions",
       functions: [],
       timestamp: new Date().toISOString(),
     }), {
@@ -890,7 +890,7 @@ const dispatch = async (req: Request): Promise<Response> => {
   });
 };
 
-globalThis.__insforge_dispatch__ = dispatch;
+globalThis.__growfoundry_dispatch__ = dispatch;
 
 Deno.serve(dispatch);
 `;
@@ -908,7 +908,7 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 ${imports}
 
 declare global {
-  var __insforge_dispatch__: (req: Request) => Promise<Response>;
+  var __growfoundry_dispatch__: (req: Request) => Promise<Response>;
 }
 
 const routes: Record<string, (req: Request) => Promise<Response>> = {
@@ -940,7 +940,7 @@ const dispatch = async (req: Request): Promise<Response> => {
     if (pathname === "/health" || pathname === "/") {
       return new Response(JSON.stringify({
         status: "ok",
-        type: "insforge-functions",
+        type: "growfoundry-functions",
         functions: Object.keys(routes),
         timestamp: new Date().toISOString(),
       }), {
@@ -979,7 +979,7 @@ const dispatch = async (req: Request): Promise<Response> => {
       const response = await handler(funcReq);
       const duration = Date.now() - startTime;
 
-      // Structured JSON log — matches InsForge backend log format:
+      // Structured JSON log — matches GrowFoundry backend log format:
       // { timestamp, slug, method, status, duration }. Captured by the
       // Deno Subhosting platform from stdout and surfaced as app logs.
       console.log(JSON.stringify({
@@ -1004,8 +1004,8 @@ const dispatch = async (req: Request): Promise<Response> => {
   });
 };
 
-// __insforge_dispatch__ bridges the isolate boundary for in-process dispatch.
-globalThis.__insforge_dispatch__ = dispatch;
+// __growfoundry_dispatch__ bridges the isolate boundary for in-process dispatch.
+globalThis.__growfoundry_dispatch__ = dispatch;
 
 Deno.serve(dispatch);
 `;
